@@ -1,0 +1,52 @@
+{
+  "name": "profitpal",
+  "version": "1.0.0",
+  "description": "Empower ebay sellers with new product ideas",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run build && npm run git-commit && npm run git-push",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdfanning/ProfitPal.git"
+  },
+  "author": "Eric Fanning",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericdfanning/ProfitPal/issues"
+  },
+  "homepage": "https://github.com/ericdfanning/ProfitPal#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babelify": "^7.3.0",
+    "body-parser": "^1.17.2",
+    "browserify-middleware": "^7.1.0",
+    "cron": "^1.2.1",
+    "ebay-api": "^1.13.7",
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "mongoose": "^4.11.9",
+    "mpromise": "^0.5.5",
+    "nodemon": "^1.11.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-modal": "^2.2.4",
+    "soap": "^0.20.0",
+    "underscore-node": "^0.1.2",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
