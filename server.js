@@ -8,6 +8,7 @@ var axios = require('axios');
 var _ = require('underscore-node');
 var Promise = require('mpromise');
 var helpers = require('./helpers');
+var cors = require('cors');
 const APP_ID = require('./server/ebay.config').APP_ID
 
 
@@ -27,11 +28,7 @@ app.use('/style.css', function(req, res) {
 
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
 
 // app.get('/bundle.js');
 

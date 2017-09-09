@@ -25,6 +25,7 @@
     "babelify": "^7.3.0",
     "body-parser": "^1.17.2",
     "browserify-middleware": "^7.1.0",
+    "cors": "^2.8.4",
     "cron": "^1.2.1",
     "ebay-api": "^1.13.7",
     "express": "^4.15.4",
