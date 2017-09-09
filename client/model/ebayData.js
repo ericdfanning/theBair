@@ -6,7 +6,7 @@ export const getData = function(cb) {
 
   $.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:8000/getStuff',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
     success: (data) => {
       console.log('its done')
       cb(null, data)
