@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+mongoose.Promise = Promise
 mongoose.connect('mongodb://localhost/profitPal');
 
 var currentSchema = new Schema({
