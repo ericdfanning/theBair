@@ -23,7 +23,7 @@ export const gatherData = function(cb, category) {
 
   $.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:8000/gather',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
     success: (data) => {
       console.log('its done')
       cb(null, data)
