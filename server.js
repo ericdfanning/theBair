@@ -15,7 +15,7 @@ var Current = require('./schema').Current
 var Category = require('./schema').Category
 var ItemIds = require('./schema').ItemIds
 
-var port = 3302
+var port = 8000
 app.set('port', port);
 app.listen(app.get('port'), function() {
   console.log('Listening on port: ', port)
