@@ -191,14 +191,15 @@ app.get('/getStuff', function(req, res) {
             if (err) {
               console.log('Major creation fail');
             } 
-            console.log('saved current object', data)
+            console.log('********* FINISHED *********')
+            // console.log('saved current object', data)
           });
 
           res.status(200)
           res.end()
         })
         .catch(function(error) {
-          console.log('error in promise', error)
+          // console.log('error in promise', error)
           res.status(404)
           res.end()
         })

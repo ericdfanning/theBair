@@ -18,14 +18,12 @@ var unique = (array, newBatch) => {
 }
 
 function combineAvgs(current, old) {
-	// console.log('AVERAGES OBJECTS ', current, '############', old)
 	if (!old) {
 		return current
 	} else {
 		for (var key in old) {
 			if (current[key] && current[key] >=0) {
-			// console.log('333333333333333333333333333', key, old[key])
-				current[key] += 1
+				current[key] += old[key]
 			} else {
 				// console.log('DOESNT EXIST', key, old[key])
 				current[key] = old[key]
@@ -45,7 +43,9 @@ function combineAll(current, old) {
 	  for (var i = 1; i < old.length; i++) {
 	    for (var key in old[i].brands) {
 	  	  if (newObj[key]) {
-	  	  	newObj[key].val += 1;
+	  	  	// console.log('aleardy exists', newObj[key].val, old[i].brands[key].val)
+	  	  	newObj[key].val += old[i].brands[key].val;
+	  	  	// console.log('ADDED TOGETHER', newObj[key].val)
 	  	  	newObj[key].price.push(old[i].brands[key].price[0], old[i].brands[key].price[1])
 	  	  	var arr = newObj[key].price.slice()
 	  	  	arr.sort(function (a, b) {
@@ -57,7 +57,9 @@ function combineAll(current, old) {
 	  				arr.unshift(0)
 	  			}
 	  			newObj[key].price.push(arr[0], arr[arr.length - 1])
-
+	  			if (newObj[key].name === 'LULAROE') {
+	  			  console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
+	  			}
 	  			combineAvgs(newObj[key].avgs, old[i].brands[key].avgs)
 	  			// newObj[key].avg = Object.assign({}, combineAvgs(newObj[key].avgs, old[i].brands[key].avgs))
 	  	  } else {
