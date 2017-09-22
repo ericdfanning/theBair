@@ -10,6 +10,8 @@ var Category = require('../schema').Category
 var ItemIds = require('../schema').ItemIds
 var Current = require('../schema').Current
 
+var dressesCache = require('../cache/dresses');
+
 var categories = {
   11450: 'Clothing & Accessories',
   15724: 'Womens clothing',
@@ -41,7 +43,7 @@ var dressesGetter = () => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 17; i > 14; i--) {
+	    for (var i = 64; i > 62; i--) {
 	      console.log('@@@@@@@@@@@@', i)
 	      data.push(await axios.get(url + i));
 	    }
@@ -152,9 +154,21 @@ var dressesGetter = () => {
 	        //sort by value and put in an local array for quick access
 	        var sortedBrands = helpers.sortObj(brands)
 	        dataReady.dresses = sortedBrands
+
+	        // create cache for front end
+	        var data = []
+	        for (let i = 0; i < sortedBrands.length; i++) {
+	        	data.push(sortedBrands[i])
+	        	// create pagination in 50 item increments
+	        	if (i % 50 === 0 || i === sortedBrands.length - 1) {
+	            dressesCache.push(data)
+	            data = []
+	          }
+	        }
+
 	        var newCurrentObj = new Current({
 	          category: categories['dresses'],
-	          info: sortedBrands,
+	          info: dressesCache,
 	          created: new Date()
 	        })
 
@@ -165,6 +179,7 @@ var dressesGetter = () => {
 	          console.log('********* FINISHED *********')
 	          // console.log('saved current object', data)
 	        });
+
 
 	      })
 	      .catch(function(error) {

@@ -10,8 +10,9 @@ var axios = require('axios');
 var Promise = require('mpromise');
 var helpers = require('./helpers');
 var cors = require('cors');
-var cron = require('./cronScan.js')
-var dressesGetter = require('./api_calls/dresses.js')
+var cron = require('./cronScan.js');
+var dressesGetter = require('./api_calls/dresses.js');
+var dressesCache = require('./cache/dresses.js');
 
 var Current = require('./schema').Current
 
@@ -45,29 +46,10 @@ app.get('/getStuff', function(req, res) {
   res.end()
 })
 
-app.post('/gather', function(req, res) {
-
-  var query = Current.find({category: categories['dresses']}, function(err, currentBrands) {
-    if (err) {
-      res.status(404);
-      res.end();
-    }
-  })
-  var promise = query.exec();
-  promise.then(function (current) {
-    
-    var data = []
-    var start = (req.body.page * 50) - 50
-    var end = req.body.page * 50 <= current.length - 1 ? req.body.page * 50: current.length - 1
-    console.log('end is', end)
-    for (let i = start; i < end; i++) {
-      data.push(current[current.length - 1].info[i])
-    }
-
-    console.log('************* REQUESTED THE DATA *******************', data)
-    res.status(200)
-    res.send(data)
-  })
+app.post('/dresses', function(req, res) {
+  var dataObj = {data: dressesCache[req.body.page], pageCount: dressesCache.length}
+  res.status(200)
+  res.send(dataObj)
 })
 
 

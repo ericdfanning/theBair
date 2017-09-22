@@ -19,14 +19,14 @@ export const getData = function(cb) {
 
 export const gatherData = function(pageObj, cb, category) {
 // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
-console.log(pageObj)
+
   $.ajax({
     method: 'POST',
-    url: 'http://127.0.0.1:3302/gather',
+    url: 'http://127.0.0.1:3302/dresses',
     data: JSON.stringify(pageObj),
     contentType: 'application/json',
     success: (data) => {
-      console.log('gathering data is done inside of ajax call success')
+      console.log('gathering data is done inside of ajax call success', data)
       cb(null, data)
     }, 
     error: (err) => {
