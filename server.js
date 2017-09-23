@@ -16,7 +16,7 @@ var dressesCache = require('./cache/dresses.js');
 
 var Current = require('./schema').Current
 
-var port = 3302
+var port = 8000
 app.set('port', port);
 app.listen(app.get('port'), function() {
   console.log('Listening on port: ', port)

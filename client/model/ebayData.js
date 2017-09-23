@@ -21,7 +21,7 @@ export const gatherData = function(pageObj, cb, category) {
 
   $.ajax({
     method: 'POST',
-    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/dresses': 'http://127.0.0.1:8000/dresses',
     data: JSON.stringify(pageObj),
     contentType: 'application/json',
     success: (data) => {
