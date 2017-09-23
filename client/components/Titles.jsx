@@ -18,8 +18,8 @@ const customStyles = {
   }
 };
 
-var topCount = 0;
-var topBrand  = '';
+let topBrand = '';
+let topCount = 0;
 
 export default class Titles extends Component {
 
@@ -29,7 +29,10 @@ export default class Titles extends Component {
 		this.state = {
 		  modalIsOpen: false,
 		  itemClicked: {},
-		  averageData: ''
+		  averageData: '',
+		  topBrand: '',
+		  page: 1
+
 		}
 
 		this.renderItem = this.renderItem.bind(this)
@@ -61,11 +64,7 @@ export default class Titles extends Component {
 	}
 
 
-	renderItem(brand) {
-		if (brand.val > this.state.topCount) {
-			topBrand= brand.name + ' with ' + brand.val + ' sold';
-			topCount = brand.val
-		} 
+	renderItem(brand, i, last) {
 
 		return (
 			<tr onClick={this.openModal.bind(this, brand)} >
@@ -92,13 +91,12 @@ export default class Titles extends Component {
 	render() {
 		return (
 			<table className="table table-hover">
-			  <thead>
-			    <tr>
-			      <th> {this.props.data && this.props.data.length} different brands | Top Brand is: {this.state.topBrand}</th>
-			    </tr>
-			  </thead>
+
 			  <tbody>
-			  {this.props.data && this.props.data.map(this.renderItem)}
+			  {this.props.data && this.props.data.map((brand, i) => {
+			  	  return this.renderItem(brand, i)
+			    }
+			  )}
 			  </tbody>
 
 			  <Modal

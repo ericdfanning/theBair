@@ -1,12 +1,12 @@
 import $ from 'jquery';
 
 export const getData = function(cb) {
-
+  
   $.ajax({
     method: 'GET',
     url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
     success: (data) => {
-      console.log('its done')
+      console.log('back from the server inside of ebay ajax call success')
       cb(null, data)
     }, 
     error: (err) => {
@@ -17,13 +17,15 @@ export const getData = function(cb) {
 
 }
 
-export const gatherData = function(cb, category) {
+export const gatherData = function(pageObj, cb, category) {
 
   $.ajax({
-    method: 'GET',
+    method: 'POST',
     url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
+    data: JSON.stringify(pageObj),
+    contentType: 'application/json',
     success: (data) => {
-      console.log('its done')
+      console.log('gathering data is done inside of ajax call success', data)
       cb(null, data)
     }, 
     error: (err) => {

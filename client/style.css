@@ -1,0 +1,11 @@
+.pageButton {
+	cursor: pointer;
+	color: black;
+	margin: 3px;
+}
+
+.mainHeader {
+	width: 100%;
+	text-align: center;
+	margin: 15px;
+}

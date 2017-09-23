@@ -1,5 +1,8 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
+var dressesGetter = require('./api_calls/dresses.js')
+var express = require('express');
+var app = express();
 
 (function() {
   /*
@@ -10,37 +13,44 @@ const Category = require('./schema').Category;
     * them of their unearthed capsule.
    */
   const scan = () => {
+    let today = new Date();
+  console.log('CRON JOB RAN AT ', today.toString(), '**************')
+  dressesGetter()
     Category.find({})
-      .exec((err, capsules) => {
+      .exec((err, catCalls) => {
         if (err) console.error(`ERROR: ${err}`);
-        else if (!capsules) console.log(`Could not retrieve capsules`);
+        else if (!catCalls) console.log(`Could not retrieve catCalls`);
         else {
-console.log('CRON JOB RAN ************** ')
-          for (let capsule of capsules) {
+          console.log('Category length is', catCalls.length, 'oldest one ', catCalls[0].created.getDate())
+          for (let catCall of catCalls) {
+
             let today = new Date();
-            if (today >= capsule.created) {
+            var compared = today.getDate()
 
-            capsule.remove(function(err) {
-              if (err) {
-                return console.log(err);
-              }
-              let today = new Date();
+            if(today.getDate() <= catCall.created.getDate()) {
+              compared = today.getDate() + 31
+            }
 
-              console.log('Category Object Deleted', today);
-            });
+            if ((compared - catCall.created.getDate()) >= 14) {
+              catCall.remove(function(err) {
+                if (err) {
+                  return console.log(err);
+                }
 
+                console.log('Category Object Deleted');
+              });
             }
           }
         }
       });
   }
 
-  // this will run 7 days a week at 8 AM PST
+  // this will run 7 days a week at 2 AM PST
   // if the server ever dies, it will simply restart with the server,
   // so at most one day will be lost, and any capsules that should have been
   // unearthed will simply be unearthed on the next day
   let job = new CronJob({
-    cronTime: '* * * * * *',
+    cronTime: '00 00 06 1-31 1-12 0-6',
     onTick: scan,
     start: true,
     timeZone: 'America/Los_Angeles'
