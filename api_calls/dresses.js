@@ -43,7 +43,7 @@ var dressesGetter = () => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 64; i > 62; i--) {
+	    for (var i = 66; i > 64; i--) {
 	      console.log('@@@@@@@@@@@@', i)
 	      data.push(await axios.get(url + i));
 	    }
@@ -156,12 +156,14 @@ var dressesGetter = () => {
 	        dataReady.dresses = sortedBrands
 
 	        // create cache for front end
+	        dressesCache.brandsCount = sortedBrands.length
+	        dressesCache.brands = []
 	        var data = []
 	        for (let i = 0; i < sortedBrands.length; i++) {
 	        	data.push(sortedBrands[i])
 	        	// create pagination in 50 item increments
-	        	if (i % 50 === 0 || i === sortedBrands.length - 1) {
-	            dressesCache.push(data)
+	        	if ((i % 50 === 0 && i !== 0) || i === sortedBrands.length - 1) {
+	            dressesCache.brands.push(data)
 	            data = []
 	          }
 	        }

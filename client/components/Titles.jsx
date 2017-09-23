@@ -91,11 +91,7 @@ export default class Titles extends Component {
 	render() {
 		return (
 			<table className="table table-hover">
-			  <thead>
-			    <tr>
-			      <th> {this.props.data && this.props.data.length} different brands</th>
-			    </tr>
-			  </thead>
+
 			  <tbody>
 			  {this.props.data && this.props.data.map((brand, i) => {
 			  	  return this.renderItem(brand, i)

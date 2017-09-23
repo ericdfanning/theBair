@@ -22445,8 +22445,14 @@ var App = function (_React$Component) {
 
     _this.state = {
       data: [],
+      brandsCount: '',
       showSidebar: false,
-      pageCount: 0
+      pageCount: 0,
+      pageNumTags: [],
+      pageNumTagIndex: 0,
+      page: 0,
+      morePages: true,
+      lessPages: false
     };
     return _this;
   }
@@ -22456,19 +22462,41 @@ var App = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      Ebay.gatherData({ page: 1 }, function (err, res) {
+      Ebay.gatherData({ page: 0 }, function (err, res) {
         _this2.setState({
-          data: res.data
+          data: res.data,
+          pageCount: res.pageCount,
+          brandsCount: res.brandsCount
+        }, function () {
+          _this2.createPageButtons();
         });
       });
     }
   }, {
     key: 'callAjax',
     value: function callAjax() {
-
       Ebay.getData(function (err, res) {
         console.log('I just finished running');
       });
+    }
+  }, {
+    key: 'increasePageRange',
+    value: function increasePageRange() {
+
+      if (this.state.pageNumTagIndex >= this.state.pageNumTags.length - 2) {
+        this.setState({ morePages: false, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
+      } else {
+        this.setState({ lessPages: true, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
+      }
+    }
+  }, {
+    key: 'decreasePageRange',
+    value: function decreasePageRange() {
+      if (this.state.pageNumTagIndex <= 1) {
+        this.setState({ lessPages: false, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
+      } else {
+        this.setState({ morePages: true, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
+      }
     }
   }, {
     key: 'gatherData',
@@ -22479,50 +22507,64 @@ var App = function (_React$Component) {
         _this3.setState({
           data: res.data,
           pageCount: res.pageCount
-        }, function () {
-          console.log('page count is ', _this3.state.pageCount);
         });
       });
     }
   }, {
-    key: 'renderPageButtons',
-    value: function renderPageButtons() {
+    key: 'createPageButtons',
+    value: function createPageButtons() {
+      var tags = [];
       var buttons = [];
       for (var i = 0; i < this.state.pageCount; i++) {
-        buttons.push(_react2.default.createElement(
-          'a',
-          { ref: 'value', name: i, href: '#', onClick: this.gatherData.bind(this, i) },
+        if (i % 10 === 0 && i !== 0 || i === this.state.pageCount - 1) {
+          tags.push(buttons);
+          buttons = [];
+        }
+        var tag = _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.gatherData.bind(this, i) },
           ' ',
           i + 1,
           ' '
-        ));
+        );
+        buttons.push(tag);
       }
+
+      this.setState({ pageNumTags: tags.slice() });
+    }
+  }, {
+    key: 'renderPageButtons',
+    value: function renderPageButtons() {
 
       return _react2.default.createElement(
         'div',
-        { style: { width: "50%", textAlign: "center", overflow: "ellipsis" } },
-        buttons.map(function (v) {
+        null,
+        ' Pages',
+        this.state.lessPages && _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.decreasePageRange.bind(this) },
+          ' ',
+          '<<',
+          ' '
+        ),
+        this.state.pageNumTags[this.state.pageNumTagIndex].map(function (v) {
           return v;
-        })
+        }),
+        this.state.morePages && _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.increasePageRange.bind(this) },
+          ' ',
+          '>>',
+          ' '
+        )
       );
     }
-
-    // showSide() {
-    // 	console.log('clicked')
-    // 	if (this.state.showSidebar) {
-    // 	  this.setState({showSidebar: !this.state.showSidebar, size: "col-12-lg"})
-    // 	} else {
-    // 		this.setState({showSidebar: !this.state.showSidebar, size: "col-9-lg"})
-    // 	}
-    // } <button onClick={this.showSide.bind(this)}> show sidebar </button>
-
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        'Make ajax call',
         _react2.default.createElement(
           'button',
           { className: 'btn btn-secondary', onClick: this.callAjax.bind(this) },
@@ -22538,11 +22580,24 @@ var App = function (_React$Component) {
           { className: 'container' },
           _react2.default.createElement(
             'div',
-            { classsName: 'row' },
-            _react2.default.createElement(
+            { className: 'row' },
+            this.state.pageNumTags.length !== 0 && _react2.default.createElement(
               'div',
-              { style: { border: "100%", textAlign: "center", overflow: "ellipsis" }, className: 'col-xm-12' },
-              this.state.pageCount > 0 && this.renderPageButtons()
+              { className: 'col-xm-12 mainHeader' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xm-12' },
+                ' ',
+                this.state.brandsCount,
+                ' different brands '
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xm-12' },
+                ' ',
+                this.renderPageButtons(),
+                ' '
+              )
             )
           )
         ),
@@ -22958,21 +23013,6 @@ var Titles = function (_Component) {
 			return _react2.default.createElement(
 				'table',
 				{ className: 'table table-hover' },
-				_react2.default.createElement(
-					'thead',
-					null,
-					_react2.default.createElement(
-						'tr',
-						null,
-						_react2.default.createElement(
-							'th',
-							null,
-							' ',
-							this.props.data && this.props.data.length,
-							' different brands'
-						)
-					)
-				),
 				_react2.default.createElement(
 					'tbody',
 					null,

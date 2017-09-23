@@ -47,7 +47,7 @@ app.get('/getStuff', function(req, res) {
 })
 
 app.post('/dresses', function(req, res) {
-  var dataObj = {data: dressesCache[req.body.page], pageCount: dressesCache.length}
+  var dataObj = {data: dressesCache.brands[req.body.page], pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount}
   res.status(200)
   res.send(dataObj)
 })

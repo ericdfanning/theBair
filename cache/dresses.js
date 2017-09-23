@@ -1,3 +1,6 @@
-let dresses = []
+let dresses = {
+	brands: [],
+	brandsCount: Number
+}
 
 module.exports = dresses
