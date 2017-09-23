@@ -23977,7 +23977,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -23991,10 +23991,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getData = exports.getData = function getData(cb) {
-  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
+
   _jquery2.default.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:3302/getStuff',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff' : 'http://127.0.0.1:8000/getStuff',
     success: function success(data) {
       console.log('back from the server inside of ebay ajax call success');
       cb(null, data);
@@ -24007,11 +24007,10 @@ var getData = exports.getData = function getData(cb) {
 };
 
 var gatherData = exports.gatherData = function gatherData(pageObj, cb, category) {
-  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
 
   _jquery2.default.ajax({
     method: 'POST',
-    url: 'http://127.0.0.1:3302/dresses',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather' : 'http://127.0.0.1:8000/gather',
     data: JSON.stringify(pageObj),
     contentType: 'application/json',
     success: function success(data) {
@@ -24034,6 +24033,7 @@ var gatherData = exports.gatherData = function gatherData(pageObj, cb, category)
 //   $('.spinner img').fadeOut('fast');
 //   $('form input[type=submit]').attr('disabled', null);
 // }
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 201 */

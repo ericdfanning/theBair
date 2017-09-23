@@ -1,10 +1,10 @@
 import $ from 'jquery';
 
 export const getData = function(cb) {
-// process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
+  
   $.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:3302/getStuff',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
     success: (data) => {
       console.log('back from the server inside of ebay ajax call success')
       cb(null, data)
@@ -18,11 +18,10 @@ export const getData = function(cb) {
 }
 
 export const gatherData = function(pageObj, cb, category) {
-// process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
 
   $.ajax({
     method: 'POST',
-    url: 'http://127.0.0.1:3302/dresses',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/gather': 'http://127.0.0.1:8000/gather',
     data: JSON.stringify(pageObj),
     contentType: 'application/json',
     success: (data) => {
