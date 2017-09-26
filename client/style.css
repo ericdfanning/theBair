@@ -1,11 +1,33 @@
+.brandsInfo {
+	font-family: "Courier New";
+}
+
 .pageButton {
 	cursor: pointer;
 	color: black;
 	margin: 3px;
 }
 
-.mainHeader {
+.paginationAndBrandCount {
 	width: 100%;
 	text-align: center;
 	margin: 15px;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+
+	
+
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+
 }

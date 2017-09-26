@@ -66,6 +66,10 @@ export default class Titles extends Component {
 
 	renderItem(brand, i, last) {
 
+		var lowPrice = brand.price[0].toString().split('').slice(-2).includes('.') ? brand.price[0] + '0': brand.price[0]
+		var highPrice = brand.price[1].toString().split('').slice(-2).includes('.') ? brand.price[1] + '0': brand.price[1]
+		var price = brand.val !== 1 ? '$' + lowPrice + ' - ' + '$' + highPrice: '$' + highPrice
+
 		return (
 			<tr onClick={this.openModal.bind(this, brand)} >
 			  <td>Brand: 
@@ -81,7 +85,7 @@ export default class Titles extends Component {
 			  </td>
 			  <td>
 			  	  Price Range:
-			  	<h3> {brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1]: '$' + brand.price[1]}</h3>
+			  	<h3> {price}</h3>
 			  	
 			  	</td>
 			</tr>
@@ -92,7 +96,7 @@ export default class Titles extends Component {
 		return (
 			<table className="table table-hover">
 
-			  <tbody>
+			  <tbody className="brandsInfo">
 			  {this.props.data && this.props.data.map((brand, i) => {
 			  	  return this.renderItem(brand, i)
 			    }
@@ -105,7 +109,7 @@ export default class Titles extends Component {
 			    style={customStyles}
 			    contentLabel="Payment Modal"
 			  > 
-			   <div>
+			   <div className="brandsInfo">
 			     <h4>Name: {this.state.itemClicked.name}</h4>
 			     <h4>Number Sold: {this.state.itemClicked.val}</h4>
 			     <h5>Sold between: {this.state.itemClicked.endTime}</h5>

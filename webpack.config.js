@@ -1,12 +1,12 @@
 var path = require('path');
 const webpack = require('webpack');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/client/index.html',
   filename: 'index.html',
   inject: 'body'
 })
-// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 module.exports = {
   // devtool: 'cheap-module-source-map',
@@ -29,5 +29,11 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [
+  HtmlWebpackPluginConfig,
+  new HardSourceWebpackPlugin({
+    cacheDirectory: 'node_modules/.cache/hard-source/[confighash]',
+    recordsPath: 'node_modules/.cache/hard-source/[confighash]/records.json',
+    configHash: require('node-object-hash')({sort: false}).hash,
+  })],
 };
