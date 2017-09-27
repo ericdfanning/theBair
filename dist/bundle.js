@@ -27490,13 +27490,44 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
-	function App() {
+	function App(props) {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this.state = {
+			dresses: [],
+			currentData: [],
+			brandsCount: '',
+			showSidebar: false,
+			pageCount: 0,
+			pageNumTags: [],
+			pageNumTagIndex: 0,
+			page: 0,
+			morePages: true,
+			lessPages: false
+		};
+		return _this;
 	}
 
 	_createClass(App, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var _this2 = this;
+
+			console.log('componentWillMount is mounting');
+			Ebay.gatherData('dresses', function (err, res) {
+				_this2.setState({
+					dresses: res.dresses.data,
+					firstSetDresses: res.dresses.data[0],
+					dressesPageCount: res.pageCount,
+					brandsCount: res.brandsCount
+				}, function () {
+					_this2.createPageButtons();
+				});
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
