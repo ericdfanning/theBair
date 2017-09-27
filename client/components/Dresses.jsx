@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Title from './Titles.jsx';
 import Main from './Main.jsx';
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom'
 import * as Ebay from '../model/ebayData.js';
+import { bindActionCreators } from 'redux';
+import { getDresses } from '../actions/womensFashion/dresses.js';
 
 class Dresses extends React.Component {
 	constructor(props) {
@@ -24,6 +27,7 @@ class Dresses extends React.Component {
 	}
 
 	componentWillMount() {
+    this.props.getDresses()
     console.log('componentWillMount is mounting')
     Ebay.gatherData('dresses', (err, res) => {
       this.setState({
@@ -104,6 +108,10 @@ class Dresses extends React.Component {
 			<div>
 			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
 			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
+          <select name="userType">
+            <option value="landlord">Landlord</option>
+            <option value="tenant">Tenant</option>
+          </select>
           <div className="container-fluid">
             <div className="row col-12"> 
               {this.state.pageNumTags.length !== 0 && 
@@ -122,5 +130,15 @@ class Dresses extends React.Component {
 	}
 }
 
-export default Dresses;
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({getDresses}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dresses)
 
