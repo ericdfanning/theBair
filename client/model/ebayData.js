@@ -21,7 +21,7 @@ export const gatherData = function(category, cb) {
  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/dresses': 
   $.ajax({
     method: 'GET',
-    url: `http://127.0.0.1:8000/${category}`,
+    url: `http://127.0.0.1:8000/gather`,
     success: (data) => {
       console.log('gathering data is done inside of ajax call success', data)
       cb(null, data)

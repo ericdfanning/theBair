@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-// import { bindActionCreators } from 'redux';
+import Details from './Details.jsx';
+
 const customStyles = {
   content : {
     top             : '50%',
@@ -31,32 +32,52 @@ export default class Titles extends Component {
 		  itemClicked: {},
 		  averageData: '',
 		  topBrand: '',
-		  page: 1
+		  page: 1,
+		  mobile: false,
+		  mobileDetails: false
 
 		}
 
 		this.renderItem = this.renderItem.bind(this)
 	}
 
-	openModal(item) {
-		console.log('item', item)
-	  this.setState({
-	  	modalIsOpen: true, itemClicked: item
-	  }, () => {
-	  	var keysArr = Object.keys(this.state.itemClicked.avgs)
-	  	var avgs = this.state.itemClicked.avgs
-	  	var div = (
-	  		<div>
-	  			{keysArr.map(v => {
-	  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "5%"}}>{avgs[v]}<span style={{marginLeft: "25%"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
-	  			})}
-	  		</div>
-	  	)
-	  	this.setState({
-	  		averageData: div
-	  	})
-	  });
+	componentDidMount() {
+		var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    var mobile = false
+    if (x < 481) {
+    	mobile = true
+    }
+		this.setState({mobile: mobile})
+	}
 
+	openModal(item) {
+		  	var keysArr = Object.keys(item.avgs)
+		  	var avgs = item.avgs
+		  	var div = (
+		  		<div>
+		  			{keysArr.map(v => {
+		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "5%"}}>{avgs[v]}<span style={{marginLeft: "25%"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+		  			})}
+		  		</div>
+		  	)
+		!this.state.mobile ?
+		  	this.setState({
+		  		averageData: div,
+		  		itemClicked: item,
+		  		modalIsOpen: true,
+		  	})
+	  :
+		  this.setState({
+		  	averageData: div,
+		  	itemClicked: item,
+		  	mobileDetails: true
+		  })
+	  
 	}
 
 	closeModal() {
@@ -71,58 +92,66 @@ export default class Titles extends Component {
 		var price = brand.val !== 1 ? '$' + lowPrice + ' - ' + '$' + highPrice: '$' + highPrice
 
 		return (
-			<tr onClick={this.openModal.bind(this, brand)} >
-			  <td>Brand: 
+      <div className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
+			  <div className="col-md-4 col-sm-6 col-8">Brand: 
 			  	<h3>{brand.name}</h3> 
-			  </td>
-			  <td>
+			  </div>
+			  <div className="col-md-2 col-sm-6 col-4">
 			  		Occurance: 
 			  	<h3> {brand.val} </h3>
-			  </td>
-			  <td>
+			  </div>
+			  <div className="col-md-3 col-sm-6 col-6">
 			  	  Sold Since:
 			  	<h3>{brand.endTime}</h3>
-			  </td>
-			  <td>
+			  </div>
+			  <div className="col-md-3 col-sm-6 col-6">
 			  	  Price Range:
-			  	<h3> {price}</h3>
+			  	<h3 className="detailPrice"> {price}</h3>
 			  	
-			  	</td>
-			</tr>
+			  </div>
+			</div>
 	  )
+	}
+
+	toggleDetails() {
+		this.setState({mobileDetails: !this.state.mobileDetails})
 	}
 
 	render() {
 		return (
-			<table className="table table-hover">
-
-			  <tbody className="brandsInfo">
+			<div >
+			{this.state.mobileDetails ?
+				<Details itemClicked={this.state.itemClicked} averageData={this.state.averageData} toggle={this.toggleDetails.bind(this)}/>
+				: 
+				<div>
+			  <div className="brandsInfo container-fluid">
 			  {this.props.data && this.props.data.map((brand, i) => {
 			  	  return this.renderItem(brand, i)
 			    }
 			  )}
-			  </tbody>
+			  </div>
+				  <Modal
+				    isOpen={this.state.modalIsOpen}
+				    onRequestClose={this.closeModal.bind(this)}
+				    style={customStyles}
+				    contentLabel="Payment Modal"
+				  > 
+				   <div className="brandsInfo">
+				     <h4>Name: {this.state.itemClicked.name}</h4>
+				     <h4>Number Sold: {this.state.itemClicked.val}</h4>
+				     <h5>Sold between: {this.state.itemClicked.endTime}</h5>
+				     {this.state.itemClicked.price &&
+				       <h5>Price Range: ${this.state.itemClicked.price[0]} - ${this.state.itemClicked.price[1]}</h5>
+				     }
+				     <div>
+				      {this.state.averageData}
+				     </div>
+				   </div>
 
-			  <Modal
-			    isOpen={this.state.modalIsOpen}
-			    onRequestClose={this.closeModal.bind(this)}
-			    style={customStyles}
-			    contentLabel="Payment Modal"
-			  > 
-			   <div className="brandsInfo">
-			     <h4>Name: {this.state.itemClicked.name}</h4>
-			     <h4>Number Sold: {this.state.itemClicked.val}</h4>
-			     <h5>Sold between: {this.state.itemClicked.endTime}</h5>
-			     {this.state.itemClicked.price &&
-			       <h5>Price Range: ${this.state.itemClicked.price[0]} - ${this.state.itemClicked.price[1]}</h5>
-			     }
-			     <div>
-			      {this.state.averageData}
-			     </div>
-			   </div>
-
-			  </Modal>
-			</table>
+				  </Modal>
+				  </div>
+			  }
+			</div>
 		)
 	}
 }

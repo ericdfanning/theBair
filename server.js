@@ -46,7 +46,7 @@ app.get('/getStuff', function(req, res) {
   res.end()
 })
 
-app.get('/dresses', function(req, res) {
+app.get('/gather', function(req, res) {
   var dataObj = {data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount}
   res.status(200)
   res.send(dataObj)

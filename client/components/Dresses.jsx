@@ -104,20 +104,19 @@ class Dresses extends React.Component {
 			<div>
 			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
 			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
-          <Link to="/dresses">Dresses</Link>
-          <div className="container">
-            <div className="row"> 
+          <div className="container-fluid">
+            <div className="row col-12"> 
               {this.state.pageNumTags.length !== 0 && 
-                <div className="col-xm-12 paginationAndBrandCount">
-                  <div className="col-xm-12"> {this.state.brandsCount} different brands </div>   
+                <div className="paginationAndBrandCount">
+                  <div className="col-12"> {this.state.brandsCount} different brands </div>   
 
-                  <div className="col-xm-12"> {this.renderPageButtons()} </div>
+                  <div className="col-12"> {this.renderPageButtons()} </div>
                 </div>
               }
             </div>
           </div>
+          
           <Title data={this.state.currentData}/>
-			    
 			</div>
 		)
 	}

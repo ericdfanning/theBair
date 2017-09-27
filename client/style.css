@@ -1,33 +1,285 @@
 .brandsInfo {
-	font-family: "Courier New";
+	font-family: "Open Sans", sans-serif;
 }
 
-.pageButton {
-	cursor: pointer;
-	color: black;
-	margin: 3px;
+.headerLinks {
+	font-family: "Open Sans", sans-serif;
 }
 
-.paginationAndBrandCount {
-	width: 100%;
-	text-align: center;
-	margin: 15px;
+.mainBody {
+	background-color: #FEFEFE;
 }
-
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
 
-	
+	.paginationAndBrandCount {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 10px;
+	}
 
+	.pageButton {
+		cursor: pointer;
+		color: black;
+		margin: 3px;
+	}
+
+	.dataRows {
+		border: 1px solid lightgray;
+		border-radius: 7px;
+	}
+
+	.searchBar {
+		width: 85%;
+		border: 1px solid lightgray;
+		border-radius: 5px;
+		margin-left: 10px !important;
+		margin-right: 25px !important;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+
+	.navbarMain {
+		width: 100%;
+		text-align: right;
+		background-color: #444F66;
+		border-bottom: 3px solid #657CA9;
+	}
+
+	.navbarButton {
+		font-size: 18px;
+		font-style: italic;
+		color: white !important;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.detailPrice {
+		font-size: 22px;
+	}
+
+	.detailsBackBtn {
+		float: right;
+	}
 }
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
 
+	.paginationAndBrandCount {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 20px;
+	}
+
+	.pageButton {
+		cursor: pointer;
+		color: black;
+		margin: 3px;
+	}
+
+	.dataRows {
+		border: 1px solid lightgray;
+		border-radius: 7px;
+	}
+
+	.searchBar {
+		width: 85%;
+		border: 1px solid #657CA9;
+		border-radius: 5px;
+		margin-left: 10px !important;
+		margin-right: 25px !important;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+
+	.navbarMain {
+		width: 100%;
+		text-align: right;
+		background-color: #444F66;
+		border-bottom: 3px solid #657CA9;
+	}
+
+	.navbarButton {
+		font-size: 18px;
+		font-style: italic;
+		color: white !important;
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+	.detailPrice {
+		font-size: 22px;
+	}
+
+	.detailsBackBtn {
+		float: right;
+	}
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 
+	.paginationAndBrandCount {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.pageButton {
+		cursor: pointer;
+		color: black;
+		margin: 3px;
+	}
+
+	.row {
+		border: none;
+	}
+
+	.searchBar {
+		width: 20%;
+		float: right;
+		margin-left: 10px !important;
+		margin-right: 20px !important;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border-radius: 2px solid #657CA9;
+	}
+
+  .navbarMain {
+  	width: 100%;
+  	text-align: right;
+  	height: 50px;
+  	background-color: #444F66;
+  	border-bottom: 3px solid #657CA9;
+  }
+
+	.navbarButton {
+		font-size: 22px;
+		font-style: italic;
+		color: white !important;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.detailPrice {
+		font-size: 26px;
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+	.paginationAndBrandCount {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 25px;
+	}
+
+	.pageButton {
+		cursor: pointer;
+		color: black;
+		margin: 3px;
+	}
+
+	.row {
+		border: none;
+	}
+
+	.searchBar {
+		width: 20%;
+		float: right;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border-radius: 2px solid #657CA9;
+		background-color: #FEFEFE;
+	}
+
+	.navbarMain {
+		width: 100%;
+		text-align: right;
+		height: 50px;
+		background-color: #444F66;
+		border-bottom: 3px solid #657CA9;
+	}
+
+	.navbarButton {
+		font-size: 25px;
+		font-style: italic;
+		color: white !important;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.detailPrice {
+		font-size: 26px;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+	.paginationAndBrandCount {
+		width: 100%;
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		font-size: 30px;
+	}
+
+	.pageButton {
+		cursor: pointer;
+		color: black;
+		margin: 3px;
+	}
+
+	.row {
+		border: none;
+	}
+
+	.searchBar {
+		width: 20%;
+		float: right;
+		margin-left: 10px;
+		margin-right: 10px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		border-radius: 1px solid #657CA9;
+		background-color: #FEFEFE;
+	}
+
+  .navbarMain {
+  	width: 100%;
+  	text-align: right;
+  	height: 50px;
+  	background-color: #444F66;
+  	border-bottom: 3px solid #657CA9;
+  }
+
+	.navbarButton {
+		font-size: 25px;
+		font-style: italic;
+		color: white !important;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+
+	.detailPrice {
+		font-size: 26px;
+	}
 
 }
+
+
