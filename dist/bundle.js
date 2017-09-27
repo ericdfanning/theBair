@@ -39006,6 +39006,11 @@ var Navbar = function (_React$Component) {
 			this.setState({ mobile: mobile });
 		}
 	}, {
+		key: 'findItem',
+		value: function findItem() {
+			var input = document.getElementById('searchBar').value;
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -39024,7 +39029,7 @@ var Navbar = function (_React$Component) {
 						{ to: '/accessories', className: 'navbarButton' },
 						'Accessories'
 					),
-					_react2.default.createElement('input', { className: 'searchBar', type: 'text', name: 'input', placeholder: 'Search by brand' })
+					_react2.default.createElement('input', { id: 'searchBar', className: 'searchBar', type: 'text', name: 'input', placeholder: 'SEARCH CURRENTLY DISABLED', onKeyPress: this.findItem.bind(this) })
 				) : _react2.default.createElement(
 					'div',
 					{ className: 'container-fluid' },
@@ -39049,7 +39054,7 @@ var Navbar = function (_React$Component) {
 								'Accessories'
 							)
 						),
-						_react2.default.createElement('input', { className: 'scol-12 searchBar', type: 'text', name: 'input', placeholder: 'Search by brand' })
+						_react2.default.createElement('input', { className: 'scol-12 searchBar', type: 'text', name: 'input', placeholder: 'SEARCH CURRENTLY DISABLED' })
 					)
 				)
 			);

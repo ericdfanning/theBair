@@ -24,6 +24,10 @@ class Navbar extends React.Component {
 		this.setState({mobile: mobile})
 	}
 
+	findItem() {
+		let input = document.getElementById('searchBar').value
+	}
+
 	render () {
 		return (
 			<div className="navbarMain">
@@ -31,7 +35,7 @@ class Navbar extends React.Component {
 				<div className="navbarMain">
 					<Link to="/dresses" className="navbarButton">Dresses</Link>
 					<Link to="/accessories" className="navbarButton">Accessories</Link>
-					<input className="searchBar" type="text" name="input" placeholder="Search by brand" />
+					<input id="searchBar" className="searchBar" type="text" name="input" placeholder="SEARCH CURRENTLY DISABLED" onKeyPress={this.findItem.bind(this)}/>
 				</div>
 				:
 				<div className="container-fluid">
@@ -42,7 +46,7 @@ class Navbar extends React.Component {
 					  <div className="col-12">
 					    <Link to="/accessories" className="navbarButton">Accessories</Link>
 					  </div>
-						<input className="scol-12 searchBar" type="text" name="input" placeholder="Search by brand" />
+						<input className="scol-12 searchBar" type="text" name="input" placeholder="SEARCH CURRENTLY DISABLED" />
 					</div>
 				</div>
 			}
