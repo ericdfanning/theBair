@@ -61,7 +61,7 @@ export default class Titles extends Component {
 		  	var div = (
 		  		<div>
 		  			{keysArr.map(v => {
-		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "5%"}}>{avgs[v]}<span style={{marginLeft: "25%"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
 		  			})}
 		  		</div>
 		  	)
@@ -87,9 +87,9 @@ export default class Titles extends Component {
 
 	renderItem(brand, i, last) {
 
-		var lowPrice = brand.price[0].toString().split('').slice(-2).includes('.') ? brand.price[0] + '0': brand.price[0]
-		var highPrice = brand.price[1].toString().split('').slice(-2).includes('.') ? brand.price[1] + '0': brand.price[1]
-		var price = brand.val !== 1 ? '$' + lowPrice + ' - ' + '$' + highPrice: '$' + highPrice
+		brand.price[0] = brand.price[0].toString().split('').slice(-2).includes('.') ? brand.price[0] + '0': brand.price[0]
+		brand.price[1] = brand.price[1].toString().split('').slice(-2).includes('.') ? brand.price[1] + '0': brand.price[1]
+		var price = brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1]: '$' + brand.price[1]
 
 		return (
       <div className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
@@ -137,11 +137,11 @@ export default class Titles extends Component {
 				    contentLabel="Payment Modal"
 				  > 
 				   <div className="brandsInfo">
-				     <h4>Name: {this.state.itemClicked.name}</h4>
-				     <h4>Number Sold: {this.state.itemClicked.val}</h4>
-				     <h5>Sold between: {this.state.itemClicked.endTime}</h5>
+				     <h4 style={{paddingLeft: "20px"}}>Name: {this.state.itemClicked.name}</h4>
+				     <h4 style={{paddingLeft: "20px"}}>Number Sold: {this.state.itemClicked.val}</h4>
+				     <h5 style={{paddingLeft: "20px"}}>Sold between: {this.state.itemClicked.endTime}</h5>
 				     {this.state.itemClicked.price &&
-				       <h5>Price Range: ${this.state.itemClicked.price[0]} - ${this.state.itemClicked.price[1]}</h5>
+				       <h5 style={{paddingLeft: "20px"}}>Price Range: ${this.state.itemClicked.price[0]} - ${this.state.itemClicked.price[1]}</h5>
 				     }
 				     <div>
 				      {this.state.averageData}
