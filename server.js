@@ -46,11 +46,17 @@ app.get('/getStuff', function(req, res) {
   res.end()
 })
 
-app.post('/dresses', function(req, res) {
-  var dataObj = {data: dressesCache.brands[req.body.page], pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount}
+app.get('/gather', function(req, res) {
+  var dataObj = {data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount}
   res.status(200)
   res.send(dataObj)
 })
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './dist/index.html'))
+})
+
 
 
 
