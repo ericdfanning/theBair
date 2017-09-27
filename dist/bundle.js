@@ -11801,11 +11801,11 @@ var Titles = function (_Component) {
 						{ style: { width: "100%", borderBottom: "1px solid lightgray" } },
 						_react2.default.createElement(
 							'h5',
-							{ style: { paddingLeft: "5%" } },
+							{ style: { paddingLeft: "20px" } },
 							avgs[v],
 							_react2.default.createElement(
 								'span',
-								{ style: { marginLeft: "25%" } },
+								{ style: { float: "right", marginRight: "20px" } },
 								'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)
 							)
 						)
@@ -11831,9 +11831,9 @@ var Titles = function (_Component) {
 		key: 'renderItem',
 		value: function renderItem(brand, i, last) {
 
-			var lowPrice = brand.price[0].toString().split('').slice(-2).includes('.') ? brand.price[0] + '0' : brand.price[0];
-			var highPrice = brand.price[1].toString().split('').slice(-2).includes('.') ? brand.price[1] + '0' : brand.price[1];
-			var price = brand.val !== 1 ? '$' + lowPrice + ' - ' + '$' + highPrice : '$' + highPrice;
+			brand.price[0] = brand.price[0].toString().split('').slice(-2).includes('.') ? brand.price[0] + '0' : brand.price[0];
+			brand.price[1] = brand.price[1].toString().split('').slice(-2).includes('.') ? brand.price[1] + '0' : brand.price[1];
+			var price = brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1] : '$' + brand.price[1];
 
 			return _react2.default.createElement(
 				'div',
@@ -11919,25 +11919,25 @@ var Titles = function (_Component) {
 							{ className: 'brandsInfo' },
 							_react2.default.createElement(
 								'h4',
-								null,
+								{ style: { paddingLeft: "20px" } },
 								'Name: ',
 								this.state.itemClicked.name
 							),
 							_react2.default.createElement(
 								'h4',
-								null,
+								{ style: { paddingLeft: "20px" } },
 								'Number Sold: ',
 								this.state.itemClicked.val
 							),
 							_react2.default.createElement(
 								'h5',
-								null,
+								{ style: { paddingLeft: "20px" } },
 								'Sold between: ',
 								this.state.itemClicked.endTime
 							),
 							this.state.itemClicked.price && _react2.default.createElement(
 								'h5',
-								null,
+								{ style: { paddingLeft: "20px" } },
 								'Price Range: $',
 								this.state.itemClicked.price[0],
 								' - $',
@@ -39133,25 +39133,25 @@ var Titles = function (_Component) {
 					),
 					_react2.default.createElement(
 						'h4',
-						null,
+						{ style: { paddingLeft: "20px" } },
 						'Name: ',
 						this.props.itemClicked.name
 					),
 					_react2.default.createElement(
 						'h4',
-						null,
+						{ style: { paddingLeft: "20px" } },
 						'Number Sold: ',
 						this.props.itemClicked.val
 					),
 					_react2.default.createElement(
 						'h5',
-						null,
+						{ style: { paddingLeft: "20px" } },
 						'Sold between: ',
 						this.props.itemClicked.endTime
 					),
 					this.props.itemClicked.price && _react2.default.createElement(
 						'h5',
-						null,
+						{ style: { paddingLeft: "20px" } },
 						'Price Range: $',
 						this.props.itemClicked.price[0],
 						' - $',
