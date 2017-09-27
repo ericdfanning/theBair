@@ -12,7 +12,9 @@ var helpers = require('./helpers');
 var cors = require('cors');
 var cron = require('./cronScan.js');
 var dressesGetter = require('./api_calls/dresses.js');
+var accessoriesGetter = require('./api_calls/accessories.js');
 var dressesCache = require('./cache/dresses.js');
+var accessoriesCache = require('./cache/accessories.js');
 
 var Current = require('./schema').Current
 
@@ -32,22 +34,23 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-var categories = {
-  11450: 'Clothing & Accessories',
-  15724: 'Womens clothing',
-  63861: 'Dresses',
-  dresses: 63861
-}
-
-
 app.get('/getStuff', function(req, res) {
-  dressesGetter()
+  //dressesGetter()
+  accessoriesGetter()
   res.status(200)
   res.end()
 })
 
 app.get('/gather', function(req, res) {
-  var dataObj = {data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount}
+
+  var dataObj = {
+    access: {
+      data: accessoriesCache.brands, pageCount: accessoriesCache.brands.length, brandsCount: accessoriesCache.brandsCount
+    },
+    dresses: {
+      data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount
+    }
+  }
   res.status(200)
   res.send(dataObj)
 })

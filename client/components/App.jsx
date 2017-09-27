@@ -8,6 +8,36 @@ import Navbar from './Navbar.jsx'
 import Details from './Details.jsx'
 
 class App extends React.Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			dresses: [],
+      currentData: [],
+      brandsCount: '',
+			showSidebar: false,
+      pageCount: 0,
+      pageNumTags: [],
+      pageNumTagIndex: 0,
+      page: 0,
+      morePages: true,
+      lessPages: false,
+		}
+	}
+
+	componentWillMount() {
+    console.log('componentWillMount is mounting')
+    Ebay.gatherData('dresses', (err, res) => {
+      this.setState({
+        dresses: res.dresses.data,
+        firstSetDresses: res.dresses.data[0],
+        dressesPageCount: res.pageCount,
+        brandsCount: res.brandsCount
+      }, () => {
+        this.createPageButtons()
+      })
+    })
+	}
 
 	render () {
 		return (
