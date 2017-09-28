@@ -16,7 +16,7 @@ var categories = {
   11450: 'Clothing & Accessories',
   15724: 'Womens clothing',
   63861: 'Dresses',
-  dresses: 63861
+  dresses: '63861'
 }
 
 var otherOptions = {
@@ -30,6 +30,7 @@ var dataReady = {
 }
 
 var dressesGetter = () => {
+
 	var url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
 	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
 	  `categoryId=${categories.dresses}&` +
@@ -43,9 +44,10 @@ var dressesGetter = () => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 100; i > 0; i--) {
+	    for (var i = 10; i > 0; i--) {
 	      console.log('@@@@@@@@@@@', i)
 	      data.push(await axios.get(url + i));
+
 	    }
 
 	    return data;
@@ -150,7 +152,6 @@ var dressesGetter = () => {
 	        return brands.joined
 	      })
 	      .then(function(brands){
-	      	console.log('in the saving then')
 	        //sort by value and put in an local array for quick access
 	        var sortedBrands = helpers.sortObj(brands)
 	        dataReady.dresses = sortedBrands
@@ -168,6 +169,7 @@ var dressesGetter = () => {
 	          }
 	        }
 
+	      	console.log('SAVING THE DRESSES and length', dressesCache.brands.length)
 	        var newCurrentObj = new Current({
 	          category: categories['dresses'],
 	          info: dressesCache,

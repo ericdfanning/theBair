@@ -120,6 +120,10 @@ class CategoryBrands extends React.Component {
 	render () {
 		return (
 			<div>
+			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
+			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
+          <button className="btn btn-secondary" onClick={this.test.bind(this)}> test </button>
+
           <div className="container-fluid">
             <div className="row col-12"> 
             {this.props.isMobile ? 
