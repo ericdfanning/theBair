@@ -1,7 +1,7 @@
 
 var unique = (array, newBatch) => {
 	var arr = []
-	console.log('newBatch', array.length)
+	// console.log('newBatch', array.length)
 	for (let i = 0; i < array.length; i++) {
 		arr = arr.concat(array[i].ids)
 	}
@@ -13,7 +13,7 @@ var unique = (array, newBatch) => {
 			filtered.push(newBatch[i])
 		}
 	}
-	console.log('filtered in helper and arr length', filtered.length, arr.length)
+	// console.log('filtered in helper and arr length', filtered.length, arr.length)
 	return filtered
 }
 
@@ -58,7 +58,7 @@ function combineAll(current, old) {
 	  			}
 	  			newObj[key].price.push(arr[0], arr[arr.length - 1])
 	  			if (newObj[key].name === 'LULAROE') {
-	  			  console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
+	  			  // console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
 	  			}
 	  			combineAvgs(newObj[key].avgs, old[i].brands[key].avgs)
 	  			// newObj[key].avg = Object.assign({}, combineAvgs(newObj[key].avgs, old[i].brands[key].avgs))

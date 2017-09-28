@@ -4,6 +4,10 @@ import { Link, Redirect } from 'react-router-dom'
 
 class Accessories extends React.Component {
 
+	componentWillMount() {
+		console.log('accessories mounted')
+	}
+
 	render () {
 		return (
 			<div>

@@ -10,13 +10,10 @@ var Category = require('../schema').Category
 var ItemIds = require('../schema').ItemIds
 var Current = require('../schema').Current
 
-var dressesCache = require('../cache/dresses');
+var topsAndBlousesCache = require('../cache/topsAndBlouses');
 
 var categories = {
-  11450: 'Clothing & Accessories',
-  15724: 'Womens clothing',
-  63861: 'Dresses',
-  dresses: 63861
+  topsAndBlouses: '53159',
 }
 
 var otherOptions = {
@@ -24,21 +21,16 @@ var otherOptions = {
   sortByPrice: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&'
 }
 
-var dataReady = {
-  dresses: [],
-  shoes: []
-}
-
-var dressesGetter = () => {
+var topsAndBlouses = () => {
 	var url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
 	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
-	  `categoryId=${categories.dresses}&` +
+	  `categoryId=${categories.topsAndBlouses}&` +
 	  `outputSelector=SellingStatus&` + 
 	  `outputSelector=AspectHistogram&` + 
 	  `paginationInput.entriesPerPage=100&` + 
 	  `itemFilter(0).name=Condition&itemFilter(0).value=3000&` +
 	  `itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&` +
-	  `paginationInput.pageNumber=` 
+	  `paginationInput.pageNumber=`  
 
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
@@ -69,9 +61,9 @@ var dressesGetter = () => {
 	.then(function(result) {
 	  // ******* GET ORIGINAL LISTING INFO FOR ITEMS ABOVE ********
 	  var filtered = []
-	  var query = ItemIds.find({category: categories['dresses']}, function(err, ids) {
+	  var query = ItemIds.find({category: categories['topsAndBlouses']}, function(err, ids) {
 	    if (err) {
-
+	    	console.log('FAILED TO SAVE ITEM IDS')
 	    }
 	  })
 
@@ -81,7 +73,7 @@ var dressesGetter = () => {
 	    filtered = helpers.unique(ids, result)
 	    var newItemIds = new ItemIds({
 	      created: new Date(),
-	      category: '63861',
+	      category: '53159',
 	      ids: filtered
 	    })
 
@@ -106,7 +98,7 @@ var dressesGetter = () => {
 	    async function getBrandNamesAsync(){
 	      var items = []
 	      var ids = []
-	      // console.log('filtered length before multiple get', filtered.length)
+	      console.log('filtered length before multiple get', filtered)
 	      for (var i = 0; i <= filtered.length; i++) {
 	        if (ids.length === 20 || i === filtered.length) {
 	          console.log('every 20', i)
@@ -124,11 +116,13 @@ var dressesGetter = () => {
 	      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
 	      // Get EndTime - var date = new Date(obj.EndTime) date.toLocaleDateString()
 	      // console.log('multiple items request from filtered data', result.length)
-	      var query = Category.find({category: categories['dresses']}, function(err, currentBrands) {
+
+	      var query = Category.find({category: categories['topsAndBlouses']}, function(err, currentBrands) {
 	        if (err) {
 	        	console.log('failed to find in Category')
 	        }
 	      })
+
 	      var promise = query.exec();
 	      promise.then(function (current) {
 	        var brands = helpers.createBrandsObj(result, current)
@@ -137,7 +131,7 @@ var dressesGetter = () => {
 	      .then(function(brands) {
 	        var newCategoryObj = new Category({
 	          created: new Date(),
-	          category: categories['dresses'],
+	          category: categories['topsAndBlouses'],
 	          brands: brands.current
 	        })
 
@@ -153,24 +147,24 @@ var dressesGetter = () => {
 	      	console.log('in the saving then')
 	        //sort by value and put in an local array for quick access
 	        var sortedBrands = helpers.sortObj(brands)
-	        dataReady.dresses = sortedBrands
 
 	        // create cache for front end
-	        dressesCache.brandsCount = sortedBrands.length
-	        dressesCache.brands = []
+	        topsAndBlousesCache.brandsCount = sortedBrands.length
+	        topsAndBlousesCache.brands = []
 	        var data = []
 	        for (let i = 0; i < sortedBrands.length; i++) {
 	        	data.push(sortedBrands[i])
 	        	// create pagination in 50 item increments
 	        	if ((i % 50 === 0 && i !== 0) || i === sortedBrands.length - 1) {
-	            dressesCache.brands.push(data)
+	            topsAndBlousesCache.brands.push(data)
 	            data = []
 	          }
 	        }
-
+	        console.log('topsAndBlousesCache CACHE', topsAndBlousesCache.brands)
+	        topsAndBlousesCache.test = 'new string'
 	        var newCurrentObj = new Current({
-	          category: categories['dresses'],
-	          info: dressesCache,
+	          category: categories['topsAndBlouses'],
+	          info: topsAndBlousesCache,
 	          created: new Date()
 	        })
 
@@ -193,4 +187,4 @@ var dressesGetter = () => {
 	});
 }
 
-module.exports = dressesGetter
+module.exports = topsAndBlouses
