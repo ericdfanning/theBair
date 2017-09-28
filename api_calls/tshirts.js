@@ -108,7 +108,7 @@ var tshirts = () => {
 	    async function getBrandNamesAsync(){
 	      var items = []
 	      var ids = []
-	      console.log('filtered length before multiple get', filtered)
+	      // console.log('filtered length before multiple get', filtered)
 	      for (var i = 0; i <= filtered.length; i++) {
 	        if (ids.length === 20 || i === filtered.length) {
 	          console.log('every 20', i)

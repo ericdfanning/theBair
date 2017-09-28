@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 export const getData = function(cb) {
+  console.log('production', process.env.NODE_ENV)
   $.ajax({
     method: 'GET',
     url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
@@ -17,6 +18,7 @@ export const getData = function(cb) {
 }
 
 export const gatherData = function(category, cb) { 
+  console.log('production', process.env.NODE_ENV)
   $.ajax({
     method: 'GET',
     url: process.env.NODE_ENV === 'production' ? `http://thebairdata.com/${category}`: `http://127.0.0.1:8000/${category}`,
