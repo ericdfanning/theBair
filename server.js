@@ -11,10 +11,13 @@ var Promise = require('mpromise');
 var helpers = require('./helpers');
 var cors = require('cors');
 var cron = require('./cronScan.js');
+
 var dressesGetter = require('./api_calls/dresses.js');
-var accessoriesGetter = require('./api_calls/accessories.js');
+var tshirtsGetter = require('./api_calls/tshirts.js');
 var dressesCache = require('./cache/dresses.js');
-var accessoriesCache = require('./cache/accessories.js');
+var tshirtsCache = require('./cache/tshirts.js');
+var topsAndBlousesGetter = require('./api_calls/topsAndBlouses.js');
+var topsAndBlousesCache = require('./cache/topsAndBlouses.js');
 
 var Current = require('./schema').Current
 
@@ -35,33 +38,56 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/getStuff', function(req, res) {
-  //dressesGetter()
-  accessoriesGetter()
+  dressesGetter()
+  tshirtsGetter()
+  topsAndBlousesGetter()
   res.status(200)
   res.end()
 })
 
-app.get('/gather', function(req, res) {
+// app.get('/gather', function(req, res) {
 
-  var dataObj = {
-    access: {
-      data: accessoriesCache.brands, pageCount: accessoriesCache.brands.length, brandsCount: accessoriesCache.brandsCount
-    },
-    dresses: {
-      data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount
-    }
-  }
-  res.status(200)
-  res.send(dataObj)
-})
+//   var dataObj = {
+//     access: {
+//       data: tshirtsCache.brands, pageCount: tshirtsCache.brands.length, brandsCount: tshirtsCache.brandsCount
+//     },
+//     dresses: {
+//       data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount
+//     }
+//   }
+//   res.status(200)
+//   res.send(dataObj)
+// })
 
-app.get('/womensfashion/dresses', function(req, res) {
-  console.log('inside womensfashion/dresses')
+app.get('/Dresses', function(req, res) {
+  console.log('inside dresses')
   var dataObj = {
     data: dressesCache.brands,
     pageCount: dressesCache.brands.length,
     brandsCount: dressesCache.brandsCount
   }
+  res.status(200)
+  res.send(dataObj)
+})
+
+app.get('/T-Shirts', function(req, res) {
+  var dataObj = {
+      data: tshirtsCache.brands,
+      pageCount: tshirtsCache.brands.length,
+      brandsCount: tshirtsCache.brandsCount
+  }
+  console.log('inside tshirts',tshirtsCache.brands.length )
+  res.status(200)
+  res.send(dataObj)
+})
+
+app.get('/Tops/Blouses', function(req, res) {
+  var dataObj = {
+      data: topsAndBlousesCache.brands,
+      pageCount: topsAndBlousesCache.brands.length,
+      brandsCount: topsAndBlousesCache.brandsCount
+  }
+  console.log('inside topsAndBlousesCache', topsAndBlousesCache)
   res.status(200)
   res.send(dataObj)
 })

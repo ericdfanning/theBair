@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux';
 // import { landlordProperties, landlordTenants } from './landlordReducer'
-import {dresses} from './dressesReducer'
+import { womensBrands } from './womensBrandsReducer'
+import { categories } from './setCategoriesReducer'
+import { isMobile } from './setDeviceReducer'
+
 const appReducer = combineReducers({
-  dresses
+  womensBrands,
+  isMobile,
+  categories,
 });
 
 export default appReducer;
