@@ -1,6 +1,8 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
 var dressesGetter = require('./api_calls/dresses.js')
+var tshirtsGetter = require('./api_calls/tshirts.js')
+var topsAndBlousesGetter = require('./api_calls/topsAndBlouses.js')
 var express = require('express');
 var app = express();
 
@@ -16,6 +18,8 @@ var app = express();
     let today = new Date();
   console.log('CRON JOB RAN AT ', today.toString(), '**************')
   dressesGetter()
+  tshirtsGetter()
+  topsAndBlousesGetter()
     Category.find({})
       .exec((err, catCalls) => {
         if (err) console.error(`ERROR: ${err}`);
