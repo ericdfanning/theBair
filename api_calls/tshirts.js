@@ -10,14 +10,15 @@ var Category = require('../schema').Category
 var ItemIds = require('../schema').ItemIds
 var Current = require('../schema').Current
 
-var accessoriesCache = require('../cache/accessories');
+var tshirtsCache = require('../cache/tshirts');
 
 var categories = {
   11450: 'Clothing & Accessories',
   15724: 'Womens clothing',
   63861: 'Dresses',
-  dresses: 63861,
-  tshirts: 63869,
+  dresses: '63861',
+  tshirts: '63869',
+
 }
 
 var otherOptions = {
@@ -30,7 +31,7 @@ var dataReady = {
   shoes: []
 }
 
-var dressesGetter = () => {
+var tshirts = () => {
 	var url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
 	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
 	  `categoryId=${categories.tshirts}&` +
@@ -44,7 +45,7 @@ var dressesGetter = () => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 15; i > 0; i--) {
+	    for (var i = 1; i > 0; i--) {
 	      console.log('@@@@@@@@@@@', i)
 	      data.push(await axios.get(url + i));
 	    }
@@ -126,7 +127,7 @@ var dressesGetter = () => {
 	      // Get EndTime - var date = new Date(obj.EndTime) date.toLocaleDateString()
 	      // console.log('multiple items request from filtered data', result.length)
 
-	      var query = Category.find({category: categories['dresses']}, function(err, currentBrands) {
+	      var query = Category.find({category: categories['tshirts']}, function(err, currentBrands) {
 	        if (err) {
 	        	console.log('failed to find in Category')
 	        }
@@ -159,21 +160,21 @@ var dressesGetter = () => {
 	        dataReady.dresses = sortedBrands
 
 	        // create cache for front end
-	        accessoriesCache.brandsCount = sortedBrands.length
-	        accessoriesCache.brands = []
+	        tshirtsCache.brandsCount = sortedBrands.length
+	        tshirtsCache.brands = []
 	        var data = []
 	        for (let i = 0; i < sortedBrands.length; i++) {
 	        	data.push(sortedBrands[i])
 	        	// create pagination in 50 item increments
 	        	if ((i % 50 === 0 && i !== 0) || i === sortedBrands.length - 1) {
-	            accessoriesCache.brands.push(data)
+	            tshirtsCache.brands.push(data)
 	            data = []
 	          }
 	        }
-	        console.log('ACCESSORIES CACHE', accessoriesCache.brands)
+	        console.log('ACCESSORIES CACHE', tshirtsCache.brands)
 	        var newCurrentObj = new Current({
 	          category: categories['tshirts'],
-	          info: accessoriesCache,
+	          info: tshirtsCache,
 	          created: new Date()
 	        })
 
@@ -196,4 +197,4 @@ var dressesGetter = () => {
 	});
 }
 
-module.exports = dressesGetter
+module.exports = tshirts

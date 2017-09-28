@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Details from './Details.jsx';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const customStyles = {
   content : {
@@ -22,7 +24,7 @@ const customStyles = {
 let topBrand = '';
 let topCount = 0;
 
-export default class Titles extends Component {
+class Titles extends Component {
 
 	constructor(props) {
 		super(props)
@@ -33,26 +35,11 @@ export default class Titles extends Component {
 		  averageData: '',
 		  topBrand: '',
 		  page: 1,
-		  mobile: false,
 		  mobileDetails: false
 
 		}
 
 		this.renderItem = this.renderItem.bind(this)
-	}
-
-	componentDidMount() {
-		var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-    var mobile = false
-    if (x < 481) {
-    	mobile = true
-    }
-		this.setState({mobile: mobile})
 	}
 
 	openModal(item) {
@@ -65,7 +52,7 @@ export default class Titles extends Component {
 		  			})}
 		  		</div>
 		  	)
-		!this.state.mobile ?
+		!this.props.isMobile ?
 		  	this.setState({
 		  		averageData: div,
 		  		itemClicked: item,
@@ -92,7 +79,7 @@ export default class Titles extends Component {
 		var price = brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1]: '$' + brand.price[1]
 
 		return (
-      <div className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
+      <div key={i} className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
 			  <div className="col-md-4 col-sm-6 col-8">Brand: 
 			  	<h3>{brand.name}</h3> 
 			  </div>
@@ -155,3 +142,16 @@ export default class Titles extends Component {
 		)
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+	  isMobile: state.isMobile
+  }
+}
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({getDresses}, dispatch)
+// }
+
+export default connect(mapStateToProps)(Titles)
+

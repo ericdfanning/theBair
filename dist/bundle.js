@@ -11721,6 +11721,10 @@ var _Details = __webpack_require__(250);
 
 var _Details2 = _interopRequireDefault(_Details);
 
+var _redux = __webpack_require__(326);
+
+var _reactRedux = __webpack_require__(266);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11763,7 +11767,6 @@ var Titles = function (_Component) {
 			averageData: '',
 			topBrand: '',
 			page: 1,
-			mobile: false,
 			mobileDetails: false
 
 		};
@@ -11773,21 +11776,6 @@ var Titles = function (_Component) {
 	}
 
 	_createClass(Titles, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var w = window,
-			    d = document,
-			    e = d.documentElement,
-			    g = d.getElementsByTagName('body')[0],
-			    x = w.innerWidth || e.clientWidth || g.clientWidth,
-			    y = w.innerHeight || e.clientHeight || g.clientHeight;
-			var mobile = false;
-			if (x < 481) {
-				mobile = true;
-			}
-			this.setState({ mobile: mobile });
-		}
-	}, {
 		key: 'openModal',
 		value: function openModal(item) {
 			var keysArr = Object.keys(item.avgs);
@@ -11812,7 +11800,7 @@ var Titles = function (_Component) {
 					);
 				})
 			);
-			!this.state.mobile ? this.setState({
+			!this.props.isMobile ? this.setState({
 				averageData: div,
 				itemClicked: item,
 				modalIsOpen: true
@@ -11837,7 +11825,7 @@ var Titles = function (_Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'row dataRows', onClick: this.openModal.bind(this, brand) },
+				{ key: i, className: 'row dataRows', onClick: this.openModal.bind(this, brand) },
 				_react2.default.createElement(
 					'div',
 					{ className: 'col-md-4 col-sm-6 col-8' },
@@ -11958,7 +11946,17 @@ var Titles = function (_Component) {
 	return Titles;
 }(_react.Component);
 
-exports.default = Titles;
+function mapStateToProps(state) {
+	return {
+		isMobile: state.isMobile
+	};
+}
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({getDresses}, dispatch)
+// }
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Titles);
 
 /***/ }),
 /* 105 */
@@ -12257,11 +12255,9 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createStoreWithMiddleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxPromise2.default, _reduxThunk2.default), (0, _reduxPersist.autoRehydrate)())(_redux.createStore);
+var createStoreWithMiddleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxPromise2.default, _reduxThunk2.default))(_redux.createStore);
 
 var store = createStoreWithMiddleware(_store2.default);
-
-(0, _reduxPersist.persistStore)(store);
 
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -27474,7 +27470,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27493,9 +27489,9 @@ var _Main = __webpack_require__(109);
 
 var _Main2 = _interopRequireDefault(_Main);
 
-var _Dresses = __webpack_require__(245);
+var _CategoryBrands = __webpack_require__(338);
 
-var _Dresses2 = _interopRequireDefault(_Dresses);
+var _CategoryBrands2 = _interopRequireDefault(_CategoryBrands);
 
 var _Accessories = __webpack_require__(248);
 
@@ -27509,6 +27505,12 @@ var _Details = __webpack_require__(250);
 
 var _Details2 = _interopRequireDefault(_Details);
 
+var _redux = __webpack_require__(326);
+
+var _reactRedux = __webpack_require__(266);
+
+var _setDevice = __webpack_require__(342);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27518,73 +27520,93 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-	_inherits(App, _React$Component);
+  _inherits(App, _React$Component);
 
-	function App() {
-		_classCallCheck(this, App);
+  function App() {
+    _classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
 
-	_createClass(App, [{
-		key: 'render',
+  _createClass(App, [{
+    key: 'componentWillMount',
 
-		// constructor(props) {
-		// 	super(props)
+    // constructor(props) {
+    // 	super(props)
 
-		// 	this.state = {
-		// 		dresses: [],
-		//      currentData: [],
-		//      brandsCount: '',
-		// 		showSidebar: false,
-		//      pageCount: 0,
-		//      pageNumTags: [],
-		//      pageNumTagIndex: 0,
-		//      page: 0,
-		//      morePages: true,
-		//      lessPages: false,
-		// 	}
-		// }
+    // 	this.state = {
+    // 		dresses: [],
+    //      currentData: [],
+    //      brandsCount: '',
+    // 		showSidebar: false,
+    //      pageCount: 0,
+    //      pageNumTags: [],
+    //      pageNumTagIndex: 0,
+    //      page: 0,
+    //      morePages: true,
+    //      lessPages: false,
+    // 	}
+    // }
 
-		// componentWillMount() {
-		//    console.log('componentWillMount is mounting')
-		//    Ebay.gatherData('dresses', (err, res) => {
-		//      this.setState({
-		//        dresses: res.dresses.data,
-		//        firstSetDresses: res.dresses.data[0],
-		//        dressesPageCount: res.pageCount,
-		//        brandsCount: res.brandsCount
-		//      }, () => {
-		//        this.createPageButtons()
-		//      })
-		//    })
-		// }
+    // componentWillMount() {
+    //    console.log('componentWillMount is mounting')
+    //    Ebay.gatherData('dresses', (err, res) => {
+    //      this.setState({
+    //        dresses: res.dresses.data,
+    //        firstSetDresses: res.dresses.data[0],
+    //        dressesPageCount: res.pageCount,
+    //        brandsCount: res.brandsCount
+    //      }, () => {
+    //        this.createPageButtons()
+    //      })
+    //    })
+    // }
 
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'headerLinks' },
-				_react2.default.createElement(_Navbar2.default, null),
-				_react2.default.createElement(
-					'main',
-					{ className: 'mainBody' },
-					_react2.default.createElement(
-						_reactRouterDom.Switch,
-						null,
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Dresses2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dresses', component: _Dresses2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
-					)
-				)
-			);
-		}
-	}]);
 
-	return App;
+    value: function componentWillMount() {
+      var w = window,
+          d = document,
+          e = d.documentElement,
+          g = d.getElementsByTagName('body')[0],
+          x = w.innerWidth || e.clientWidth || g.clientWidth,
+          y = w.innerHeight || e.clientHeight || g.clientHeight;
+      var mobile = false;
+      if (x < 481) {
+        mobile = true;
+      }
+      this.props.setDevice(mobile);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'headerLinks' },
+        _react2.default.createElement(_Navbar2.default, null),
+        _react2.default.createElement(
+          'main',
+          { className: 'mainBody' },
+          _react2.default.createElement(
+            _reactRouterDom.Switch,
+            null,
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _CategoryBrands2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dresses', component: _CategoryBrands2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
+          )
+        )
+      );
+    }
+  }]);
+
+  return App;
 }(_react2.default.Component);
 
-exports.default = App;
+function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({ setDevice: _setDevice.setDevice }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(App);
 
 /***/ }),
 /* 238 */
@@ -28413,263 +28435,12 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 245 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(25);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _Titles = __webpack_require__(104);
-
-var _Titles2 = _interopRequireDefault(_Titles);
-
-var _Main = __webpack_require__(109);
-
-var _Main2 = _interopRequireDefault(_Main);
-
-var _reactRedux = __webpack_require__(266);
-
-var _reactRouterDom = __webpack_require__(24);
-
-var _ebayData = __webpack_require__(246);
-
-var Ebay = _interopRequireWildcard(_ebayData);
-
-var _redux = __webpack_require__(326);
-
-var _dresses = __webpack_require__(306);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Dresses = function (_React$Component) {
-  _inherits(Dresses, _React$Component);
-
-  function Dresses(props) {
-    _classCallCheck(this, Dresses);
-
-    var _this = _possibleConstructorReturn(this, (Dresses.__proto__ || Object.getPrototypeOf(Dresses)).call(this, props));
-
-    _this.state = {
-      data: [],
-      currentData: [],
-      brandsCount: '',
-      showSidebar: false,
-      pageCount: 0,
-      pageNumTags: [],
-      pageNumTagIndex: 0,
-      page: 0,
-      morePages: true,
-      lessPages: false
-    };
-    return _this;
-  }
-
-  _createClass(Dresses, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _this2 = this;
-
-      this.props.getDresses();
-      console.log('componentWillMount is mounting');
-      Ebay.gatherData('dresses', function (err, res) {
-        _this2.setState({
-          data: res.data,
-          currentData: res.data[0],
-          pageCount: res.pageCount,
-          brandsCount: res.brandsCount
-        }, function () {
-          _this2.createPageButtons();
-        });
-      });
-    }
-  }, {
-    key: 'callAjax',
-    value: function callAjax() {
-      Ebay.getData(function (err, res) {
-        console.log('I just finished running');
-      });
-    }
-  }, {
-    key: 'increasePageRange',
-    value: function increasePageRange() {
-
-      if (this.state.pageNumTagIndex >= this.state.pageNumTags.length - 2) {
-        this.setState({ morePages: false, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
-      } else {
-        this.setState({ lessPages: true, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
-      }
-    }
-  }, {
-    key: 'decreasePageRange',
-    value: function decreasePageRange() {
-      if (this.state.pageNumTagIndex <= 1) {
-        this.setState({ lessPages: false, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
-      } else {
-        this.setState({ morePages: true, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
-      }
-    }
-  }, {
-    key: 'gatherData',
-    value: function gatherData(index) {
-      var _this3 = this;
-
-      this.setState({
-        currentData: this.state.data[index]
-      }, function () {
-        console.log('mounted', index, _this3.state.currentData);
-      });
-    }
-  }, {
-    key: 'createPageButtons',
-    value: function createPageButtons() {
-      var tags = [];
-      var buttons = [];
-      for (var i = 0; i < this.state.pageCount; i++) {
-        if (i % 10 === 0 && i !== 0 || i === this.state.pageCount - 1) {
-          tags.push(buttons);
-          buttons = [];
-        }
-        var tag = _react2.default.createElement(
-          'span',
-          { className: 'pageButton', onClick: this.gatherData.bind(this, i) },
-          ' ',
-          i + 1,
-          ' '
-        );
-        buttons.push(tag);
-      }
-
-      this.setState({ pageNumTags: tags.slice() });
-    }
-  }, {
-    key: 'renderPageButtons',
-    value: function renderPageButtons() {
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        ' Pages',
-        this.state.lessPages && _react2.default.createElement(
-          'span',
-          { className: 'pageButton', onClick: this.decreasePageRange.bind(this) },
-          ' ',
-          '<<',
-          ' '
-        ),
-        this.state.pageNumTags[this.state.pageNumTagIndex].map(function (v) {
-          return v;
-        }),
-        this.state.morePages && _react2.default.createElement(
-          'span',
-          { className: 'pageButton', onClick: this.increasePageRange.bind(this) },
-          ' ',
-          '>>',
-          ' '
-        )
-      );
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-secondary', onClick: this.callAjax.bind(this) },
-          ' Make server Call '
-        ),
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-secondary', onClick: this.gatherData.bind(this) },
-          ' Gather the Data '
-        ),
-        _react2.default.createElement(
-          'select',
-          { name: 'userType' },
-          _react2.default.createElement(
-            'option',
-            { value: 'landlord' },
-            'Landlord'
-          ),
-          _react2.default.createElement(
-            'option',
-            { value: 'tenant' },
-            'Tenant'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
-          _react2.default.createElement(
-            'div',
-            { className: 'row col-12' },
-            this.state.pageNumTags.length !== 0 && _react2.default.createElement(
-              'div',
-              { className: 'paginationAndBrandCount' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-12' },
-                ' ',
-                this.state.brandsCount,
-                ' different brands '
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-12' },
-                ' ',
-                this.renderPageButtons(),
-                ' '
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(_Titles2.default, { data: this.state.currentData })
-      );
-    }
-  }]);
-
-  return Dresses;
-}(_react2.default.Component);
-
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ getDresses: _dresses.getDresses }, dispatch);
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Dresses);
-
-/***/ }),
+/* 245 */,
 /* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -28683,10 +28454,9 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getData = exports.getData = function getData(cb) {
-  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff':
   _jquery2.default.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:8000/getStuff',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff' : 'http://127.0.0.1:8000/getStuff',
     success: function success(data) {
       console.log('back from the server inside of ebay ajax call success');
       cb(null, data);
@@ -28699,10 +28469,9 @@ var getData = exports.getData = function getData(cb) {
 };
 
 var gatherData = exports.gatherData = function gatherData(category, cb) {
-  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/dresses': 
   _jquery2.default.ajax({
     method: 'GET',
-    url: 'http://127.0.0.1:8000/gather',
+    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/' + category : 'http://127.0.0.1:8000/' + category,
     success: function success(data) {
       console.log('gathering data is done inside of ajax call success', data);
       cb(null, data);
@@ -28723,6 +28492,7 @@ var gatherData = exports.gatherData = function gatherData(category, cb) {
 //   $('.spinner img').fadeOut('fast');
 //   $('form input[type=submit]').attr('disabled', null);
 // }
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 247 */
@@ -39064,6 +38834,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(24);
 
+var _setCategories = __webpack_require__(339);
+
+var _redux = __webpack_require__(326);
+
+var _reactRedux = __webpack_require__(266);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39107,8 +38883,15 @@ var Navbar = function (_React$Component) {
 			var input = document.getElementById('searchBar').value;
 		}
 	}, {
+		key: 'handleCategoryClick',
+		value: function handleCategoryClick(category) {
+			this.props.setCategories(category);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'navbarMain' },
@@ -39116,14 +38899,11 @@ var Navbar = function (_React$Component) {
 					'div',
 					{ className: 'navbarMain' },
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/dresses', className: 'navbarButton' },
-						'Dresses'
-					),
-					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ to: '/accessories', className: 'navbarButton' },
-						'Accessories'
+						'a',
+						{ onClick: function onClick() {
+								return _this2.handleCategoryClick('womensFashion');
+							}, id: 'categoryNavLink', className: 'navbarButton' },
+						'Women\'s Fashion'
 					),
 					_react2.default.createElement('input', { id: 'searchBar', className: 'searchBar', type: 'text', name: 'input', placeholder: 'SEARCH CURRENTLY DISABLED', onKeyPress: this.findItem.bind(this) })
 				) : _react2.default.createElement(
@@ -39136,18 +38916,9 @@ var Navbar = function (_React$Component) {
 							'div',
 							{ className: 'col-12' },
 							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/dresses', className: 'navbarButton' },
-								'Dresses'
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'col-12' },
-							_react2.default.createElement(
-								_reactRouterDom.Link,
-								{ to: '/accessories', className: 'navbarButton' },
-								'Accessories'
+								'a',
+								{ className: 'navbarButton' },
+								'Women\'s Fashion'
 							)
 						),
 						_react2.default.createElement('input', { className: 'scol-12 searchBar', type: 'text', name: 'input', placeholder: 'SEARCH CURRENTLY DISABLED' })
@@ -39160,7 +38931,11 @@ var Navbar = function (_React$Component) {
 	return Navbar;
 }(_react2.default.Component);
 
-exports.default = Navbar;
+function mapDispatchToProps(dispatch) {
+	return (0, _redux.bindActionCreators)({ setCategories: _setCategories.setCategories }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Navbar);
 
 /***/ }),
 /* 250 */
@@ -41399,10 +41174,16 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(326);
 
-var _dressesReducer = __webpack_require__(337);
+var _womensBrandsReducer = __webpack_require__(343);
+
+var _setCategoriesReducer = __webpack_require__(340);
+
+var _setDeviceReducer = __webpack_require__(341);
 
 var appReducer = (0, _redux.combineReducers)({
-  dresses: _dressesReducer.dresses
+  womensBrands: _womensBrandsReducer.womensBrands,
+  isMobile: _setDeviceReducer.isMobile,
+  categories: _setCategoriesReducer.categories
 });
 // import { landlordProperties, landlordTenants } from './landlordReducer'
 exports.default = appReducer;
@@ -42962,39 +42743,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 306 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.FETCH_DRESSES = undefined;
-exports.getDresses = getDresses;
-
-var _axios = __webpack_require__(307);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var FETCH_DRESSES = exports.FETCH_DRESSES = 'fetch_dresses';
-
-// const ROOT_URL = process.env.NODE_ENV === 'production' ? 'http://www.myrentopia.com': 'http://localhost:8000'
-var ROOT_URL = 'http://localhost:8000';
-
-function getDresses() {
-	var request = _axios2.default.get(ROOT_URL + '/womensfashion/dresses');
-	console.log('in the dresses action', request);
-	return {
-		type: FETCH_DRESSES,
-		payload: request
-	};
-}
-
-/***/ }),
+/* 306 */,
 /* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44583,7 +44332,8 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 337 */
+/* 337 */,
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44592,27 +44342,472 @@ function applyMiddleware() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.dresses = dresses;
 
-var _dresses = __webpack_require__(306);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function dresses() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(25);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _Titles = __webpack_require__(104);
+
+var _Titles2 = _interopRequireDefault(_Titles);
+
+var _Main = __webpack_require__(109);
+
+var _Main2 = _interopRequireDefault(_Main);
+
+var _reactRouterDom = __webpack_require__(24);
+
+var _ebayData = __webpack_require__(246);
+
+var Ebay = _interopRequireWildcard(_ebayData);
+
+var _redux = __webpack_require__(326);
+
+var _reactRedux = __webpack_require__(266);
+
+var _getWomensBrands = __webpack_require__(344);
+
+var _tshirts = __webpack_require__(345);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CategoryBrands = function (_React$Component) {
+  _inherits(CategoryBrands, _React$Component);
+
+  function CategoryBrands(props) {
+    _classCallCheck(this, CategoryBrands);
+
+    var _this = _possibleConstructorReturn(this, (CategoryBrands.__proto__ || Object.getPrototypeOf(CategoryBrands)).call(this, props));
+
+    _this.state = {
+      showSidebar: false,
+      pageNumTags: [],
+      pageNumTagIndex: 0,
+      page: 0,
+      morePages: true,
+      lessPages: false,
+      categoryPicked: ''
+    };
+    return _this;
+  }
+
+  _createClass(CategoryBrands, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.getBrands('Dresses').then(function () {
+        return _this2.createPageButtons();
+      });
+      // console.log('componentWillMount is mounting')
+    }
+  }, {
+    key: 'callAjax',
+    value: function callAjax() {
+      Ebay.getData(function (err, res) {
+        console.log('I just finished running');
+      });
+    }
+  }, {
+    key: 'increasePageRange',
+    value: function increasePageRange() {
+
+      if (this.state.pageNumTagIndex >= this.state.pageNumTags.length - 2) {
+        this.setState({ morePages: false, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
+      } else {
+        this.setState({ lessPages: true, pageNumTagIndex: this.state.pageNumTagIndex + 1 });
+      }
+    }
+  }, {
+    key: 'decreasePageRange',
+    value: function decreasePageRange() {
+      if (this.state.pageNumTagIndex <= 1) {
+        this.setState({ lessPages: false, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
+      } else {
+        this.setState({ morePages: true, pageNumTagIndex: this.state.pageNumTagIndex - 1 });
+      }
+    }
+  }, {
+    key: 'gatherData',
+    value: function gatherData(index) {
+      this.setState({
+        page: index
+      });
+    }
+  }, {
+    key: 'test',
+    value: function test() {
+      console.log('please work!!!!!!');
+    }
+  }, {
+    key: 'createPageButtons',
+    value: function createPageButtons() {
+      var tags = [];
+      var buttons = [];
+      for (var i = 0; i < this.props.pageCount; i++) {
+        var tag = _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.gatherData.bind(this, i) },
+          ' ',
+          i + 1,
+          ' '
+        );
+        buttons.push(tag);
+        if (i % 10 === 0 && i !== 0 || i === this.props.pageCount - 1) {
+          tags.push(buttons);
+          buttons = [];
+        }
+      }
+      this.setState({ pageNumTags: tags.slice() });
+    }
+  }, {
+    key: 'renderPageButtons',
+    value: function renderPageButtons() {
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        ' Pages',
+        this.state.lessPages && _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.decreasePageRange.bind(this) },
+          ' ',
+          '<<',
+          ' '
+        ),
+        this.state.pageNumTags[this.state.pageNumTagIndex].map(function (v) {
+          return v;
+        }),
+        this.state.morePages && this.state.pageNumTags.length >= 10 && _react2.default.createElement(
+          'span',
+          { className: 'pageButton', onClick: this.increasePageRange.bind(this) },
+          ' ',
+          '>>',
+          ' '
+        )
+      );
+    }
+  }, {
+    key: 'handleCategoryPicked',
+    value: function handleCategoryPicked(category) {
+      var _this3 = this;
+
+      console.log('category picked', category);
+
+      this.props.getBrands(category).then(function () {
+        return _this3.createPageButtons();
+      });
+
+      this.setState({ categoryPicked: category, page: 0 });
+    }
+  }, {
+    key: 'handleCategoryPickedMobile',
+    value: function handleCategoryPickedMobile(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+
+      this.props.getBrands(e.target.userType.value).then(function () {
+        return _this4.createPageButtons();
+      });
+
+      this.setState({ categoryPicked: e.target.userType.value, page: 0 });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row col-12' },
+            this.props.isMobile ? _react2.default.createElement(
+              'div',
+              { className: 'col-12 selectCategoryMobile' },
+              _react2.default.createElement(
+                'form',
+                { onSubmit: this.handleCategoryPickedMobile.bind(this) },
+                _react2.default.createElement(
+                  'select',
+                  { className: 'selectpicker', name: 'userType' },
+                  _react2.default.createElement(
+                    'option',
+                    { selected: true, hidden: true },
+                    'Choose Category'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'Dresses' },
+                    'Dresses'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'T-Shirts' },
+                    'T-Shirts'
+                  ),
+                  _react2.default.createElement(
+                    'option',
+                    { value: 'Tops/Blouses' },
+                    'Tops/Blouses'
+                  )
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { className: 'selectCatBtnMobile btn btn-secondary', type: 'submit' },
+                  'Go'
+                )
+              )
+            ) : _react2.default.createElement(
+              'div',
+              { className: 'col-md-12 col-sm-6 categories' },
+              this.props.categories.map(function (v) {
+                return _react2.default.createElement(
+                  'a',
+                  { onClick: _this5.handleCategoryPicked.bind(_this5, v), className: 'categoryItem' },
+                  ' ',
+                  v,
+                  ' '
+                );
+              })
+            ),
+            this.state.pageNumTags.length !== 0 && _react2.default.createElement(
+              'div',
+              { className: 'paginationAndBrandCount' },
+              _react2.default.createElement(
+                'div',
+                { className: 'col-12' },
+                ' ',
+                this.props.brandsCount,
+                ' different ',
+                this.state.categoryPicked,
+                ' brands '
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-12' },
+                ' ',
+                this.renderPageButtons(),
+                ' '
+              )
+            )
+          )
+        ),
+        this.props.data && _react2.default.createElement(_Titles2.default, { data: this.props.data[this.state.page] })
+      );
+    }
+  }]);
+
+  return CategoryBrands;
+}(_react2.default.Component);
+
+function mapStateToProps(state) {
+  return {
+    data: state.womensBrands && state.womensBrands.data,
+    pageCount: state.womensBrands && state.womensBrands.pageCount,
+    brandsCount: state.womensBrands && state.womensBrands.brandsCount,
+    categories: state.categories,
+    isMobile: state.isMobile
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CategoryBrands);
+
+/***/ }),
+/* 339 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.setCategories = setCategories;
+var SET_CATEGORIES = exports.SET_CATEGORIES = 'set_categories';
+
+function setCategories(catName) {
+	var categories = {
+		womensFashion: ['Dresses', 'T-Shirts', 'Tops/Blouses']
+	};
+	console.log('categories action', catName, categories[catName]);
+	return {
+		type: SET_CATEGORIES,
+		payload: categories[catName]
+	};
+}
+
+/***/ }),
+/* 340 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.categories = categories;
+
+var _setCategories = __webpack_require__(339);
+
+function categories() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   switch (action.type) {
-    case _dresses.FETCH_DRESSES:
-      console.log('reducer for dresses', action.payload, 'response', action.payload.response);
+    case _setCategories.SET_CATEGORIES:
+      console.log('reducer', action.payload);
+      return action.payload;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isMobile = isMobile;
+
+var _setDevice = __webpack_require__(342);
+
+function isMobile() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _setDevice.SET_DEVICE:
+      console.log('mobile reducer', action.payload);
+      return action.payload;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 342 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.setDevice = setDevice;
+var SET_DEVICE = exports.SET_DEVICE = 'set_device';
+
+function setDevice(isMobile) {
+
+	return {
+		type: SET_DEVICE,
+		payload: isMobile
+	};
+}
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.womensBrands = womensBrands;
+
+var _getWomensBrands = __webpack_require__(344);
+
+function womensBrands() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _getWomensBrands.FETCH_BRANDS:
+      console.log('getBrands reducer', action.payload.data);
       return {
-        data: '',
-        pageCount: 0,
-        brandsCount: 0
+        data: action.payload.data.data,
+        pageCount: action.payload.data.pageCount,
+        brandsCount: action.payload.data.brandsCount
       };
 
     default:
       return state;
   }
 }
+
+/***/ }),
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.FETCH_BRANDS = undefined;
+exports.getBrands = getBrands;
+
+var _axios = __webpack_require__(307);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FETCH_BRANDS = exports.FETCH_BRANDS = 'fetch_brands';
+
+// const ROOT_URL = process.env.NODE_ENV === 'production' ? 'http://www.myrentopia.com': 'http://localhost:8000'
+var ROOT_URL = 'http://localhost:8000';
+
+function getBrands(category) {
+	var request = _axios2.default.get(ROOT_URL + '/' + category);
+
+	return {
+		type: FETCH_BRANDS,
+		payload: request
+	};
+}
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /***/ })
 /******/ ]);

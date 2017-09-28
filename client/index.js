@@ -12,11 +12,10 @@ import promise from 'redux-promise';
 import { persistStore, autoRehydrate } from 'redux-persist'
 import thunk from 'redux-thunk'
 
-const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(promise, thunk), autoRehydrate())(createStore);
+const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(promise, thunk))(createStore);
 
 const store = createStoreWithMiddleware(reducers)
 
-persistStore(store)
 
 render((
   <Provider store={store}>
@@ -25,3 +24,4 @@ render((
     </BrowserRouter>
   </Provider>
   ), document.getElementById('app'))
+

@@ -14,7 +14,7 @@ var Current = mongoose.model('current', currentSchema);
 
 var categorySchema = new Schema({
 	created: Date,
-	category: Number,
+	category: String,
   brands: Object, 
 });
 var Category = mongoose.model('category', categorySchema);
