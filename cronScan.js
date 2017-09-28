@@ -54,7 +54,7 @@ var app = express();
   // so at most one day will be lost, and any capsules that should have been
   // unearthed will simply be unearthed on the next day
   let job = new CronJob({
-    cronTime: '00 00 06 1-31 1-12 0-6',
+    cronTime: '00 00 03 1-31 1-12 0-6',
     onTick: scan,
     start: true,
     timeZone: 'America/Los_Angeles'
