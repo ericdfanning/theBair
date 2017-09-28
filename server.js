@@ -87,7 +87,7 @@ app.get('/Tops/Blouses', function(req, res) {
       pageCount: topsAndBlousesCache.brands.length,
       brandsCount: topsAndBlousesCache.brandsCount
   }
-  console.log('inside topsAndBlousesCache', topsAndBlousesCache)
+  console.log('inside topsAndBlousesCache', topsAndBlousesCache.brands.length)
   res.status(200)
   res.send(dataObj)
 })

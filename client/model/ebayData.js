@@ -2,9 +2,10 @@ import $ from 'jquery';
 
 export const getData = function(cb) {
   console.log('production', process.env.NODE_ENV)
+  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 
   $.ajax({
     method: 'GET',
-    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
+    url: 'http://127.0.0.1:8000/getStuff',
     success: (data) => {
       console.log('back from the server inside of ebay ajax call success')
       cb(null, data)
@@ -19,9 +20,10 @@ export const getData = function(cb) {
 
 export const gatherData = function(category, cb) { 
   console.log('production', process.env.NODE_ENV)
+  // process.env.NODE_ENV === 'production' ? `http://thebairdata.com/${category}`: 
   $.ajax({
     method: 'GET',
-    url: process.env.NODE_ENV === 'production' ? `http://thebairdata.com/${category}`: `http://127.0.0.1:8000/${category}`,
+    url: `http://127.0.0.1:8000/${category}`,
     success: (data) => {
       console.log('gathering data is done inside of ajax call success', data)
       cb(null, data)

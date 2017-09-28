@@ -44,7 +44,7 @@ var dressesGetter = () => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 10; i > 0; i--) {
+	    for (var i = 100; i > 80; i--) {
 	      console.log('@@@@@@@@@@@', i)
 	      data.push(await axios.get(url + i));
 
