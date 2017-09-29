@@ -17,21 +17,21 @@ export const getData = function(cb) {
 
 }
 
-export const gatherData = function(category, cb) { 
-  console.log('production', process.env.NODE_ENV)
-  // process.env.NODE_ENV === 'production' ? `http://thebairdata.com/${category}`: 
-  $.ajax({
-    method: 'GET',
-    url: `http://127.0.0.1:8000/${category}`,
-    success: (data) => {
-      console.log('gathering data is done inside of ajax call success', data)
-      cb(null, data)
-    }, 
-    error: (err) => {
-      cb(err)
-      console.log('FAILED', err)
-    }
-  })
+// export const gatherData = function(category, cb) { 
+//   console.log('production', process.env.NODE_ENV)
+//   // process.env.NODE_ENV === 'production' ? `http://thebairdata.com/${category}`: 
+//   $.ajax({
+//     method: 'GET',
+//     url: `http://127.0.0.1:8000/${category}`,
+//     success: (data) => {
+//       console.log('gathering data is done inside of ajax call success', data)
+//       cb(null, data)
+//     }, 
+//     error: (err) => {
+//       cb(err)
+//       console.log('FAILED', err)
+//     }
+//   })
 
 }
 
