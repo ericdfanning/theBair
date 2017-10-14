@@ -44406,11 +44406,6 @@ var CategoryBrands = function (_React$Component) {
       });
     }
   }, {
-    key: 'test',
-    value: function test() {
-      console.log('please work!!!!!!');
-    }
-  }, {
     key: 'createPageButtons',
     value: function createPageButtons() {
       var tags = [];
@@ -44463,13 +44458,10 @@ var CategoryBrands = function (_React$Component) {
     value: function handleCategoryPicked(category) {
       var _this3 = this;
 
-      console.log('category picked', category);
-
       this.props.getBrands(category).then(function () {
-        return _this3.createPageButtons();
+        _this3.createPageButtons();
+        _this3.setState({ categoryPicked: category, page: 0 });
       });
-
-      this.setState({ categoryPicked: category, page: 0 });
     }
   }, {
     key: 'handleCategoryPickedMobile',
@@ -44501,11 +44493,6 @@ var CategoryBrands = function (_React$Component) {
           'button',
           { className: 'btn btn-secondary', onClick: this.gatherData.bind(this) },
           ' Gather the Data '
-        ),
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-secondary', onClick: this.test.bind(this) },
-          ' test '
         ),
         _react2.default.createElement(
           'div',
@@ -44552,10 +44539,10 @@ var CategoryBrands = function (_React$Component) {
             ) : _react2.default.createElement(
               'div',
               { className: 'col-md-12 col-sm-6 categories' },
-              this.props.categories.map(function (v) {
+              this.props.categories.map(function (v, i) {
                 return _react2.default.createElement(
                   'a',
-                  { onClick: _this5.handleCategoryPicked.bind(_this5, v), className: 'categoryItem' },
+                  { key: i, onClick: _this5.handleCategoryPicked.bind(_this5, v), className: 'categoryItem' },
                   ' ',
                   v,
                   ' '
@@ -44623,9 +44610,8 @@ var SET_CATEGORIES = exports.SET_CATEGORIES = 'set_categories';
 
 function setCategories(catName) {
 	var categories = {
-		womensFashion: ['Dresses', 'T-Shirts', 'Tops/Blouses']
+		womensFashion: ['Dresses', 'T-Shirts', 'Tops & Blouses']
 	};
-	console.log('categories action', catName, categories[catName]);
 	return {
 		type: SET_CATEGORIES,
 		payload: categories[catName]
@@ -44652,7 +44638,6 @@ function categories() {
 
   switch (action.type) {
     case _setCategories.SET_CATEGORIES:
-      console.log('reducer', action.payload);
       return action.payload;
 
     default:
@@ -44680,7 +44665,6 @@ function isMobile() {
 
   switch (action.type) {
     case _setDevice.SET_DEVICE:
-      console.log('mobile reducer', action.payload);
       return action.payload;
 
     default:
@@ -44729,7 +44713,6 @@ function womensBrands() {
 
   switch (action.type) {
     case _getWomensBrands.FETCH_BRANDS:
-      console.log('getBrands reducer', action.payload.data);
       return {
         data: action.payload.data.data,
         pageCount: action.payload.data.pageCount,
@@ -44767,7 +44750,7 @@ var ROOT_URL = 'http://localhost:8000';
 
 function getBrands(category) {
 	var categories = {
-		'Tops/Blouses': 'topsAndBlouses',
+		'Tops & Blouses': 'topsAndBlouses',
 		'T-Shirts': 'tshirts',
 		'Dresses': 'dresses'
 	};

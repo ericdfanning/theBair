@@ -7,7 +7,7 @@ const ROOT_URL = 'http://localhost:8000'
 
 export function getBrands(category) {
 	const categories = {
-		'Tops/Blouses': 'topsAndBlouses',
+		'Tops & Blouses': 'topsAndBlouses',
 		'T-Shirts': 'tshirts',
 		'Dresses': 'dresses'
 	}
