@@ -60,12 +60,6 @@ class CategoryBrands extends React.Component {
       })
   }
 
-  test() {
-    console.log('please work!!!!!!')
-
-  }
-
-
   createPageButtons() {
     var tags = []
     var buttons = []
@@ -98,12 +92,12 @@ class CategoryBrands extends React.Component {
   }
 
   handleCategoryPicked(category) {
-    console.log('category picked', category)
 
     this.props.getBrands(category)
-      .then(() => this.createPageButtons())
-
-    this.setState({categoryPicked: category, page: 0})
+      .then(() => {
+        this.createPageButtons()
+        this.setState({categoryPicked: category, page: 0})
+      })
   }
 
   handleCategoryPickedMobile(e) {
@@ -121,7 +115,6 @@ class CategoryBrands extends React.Component {
 			<div>
 			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
 			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
-          <button className="btn btn-secondary" onClick={this.test.bind(this)}> test </button>
 
           <div className="container-fluid">
             <div className="row col-12"> 
@@ -139,8 +132,8 @@ class CategoryBrands extends React.Component {
               </div>
             :
               <div className="col-md-12 col-sm-6 categories">
-                {this.props.categories.map(v => {
-                  return <a onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
+                {this.props.categories.map((v, i) => {
+                  return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
                 })}
               </div> 
             }
