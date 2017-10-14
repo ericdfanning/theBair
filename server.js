@@ -12,12 +12,9 @@ var helpers = require('./helpers');
 var cors = require('cors');
 var cron = require('./cronScan.js');
 
-var dressesGetter = require('./api_calls/dresses.js');
-var tshirtsGetter = require('./api_calls/tshirts.js');
-var dressesCache = require('./cache/dresses.js');
-var tshirtsCache = require('./cache/tshirts.js');
-var topsAndBlousesGetter = require('./api_calls/topsAndBlouses.js');
-var topsAndBlousesCache = require('./cache/topsAndBlouses.js');
+var getAllEbayData = require('./api_calls/getAllEbayData.js');
+
+var allCategoriesCache = require('./cache/allCategoriesCache.js');
 
 var Current = require('./schema').Current
 
@@ -37,34 +34,30 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+var categories = {
+  dresses: '63861',
+  tshirts: '63869',
+  topsAndBlouses: '53159',
+}
+
+const gettersHousing = () => {
+  getAllEbayData(categories.dresses, allCategoriesCache.dresses)
+  getAllEbayData(categories.tshirts, allCategoriesCache.tshirts)
+  getAllEbayData(categories.topsAndBlouses, allCategoriesCache.topsAndBlouses)
+}
+
 app.get('/getStuff', function(req, res) {
-  dressesGetter()
-  tshirtsGetter()
-  topsAndBlousesGetter()
+  gettersHousing()
   res.status(200)
   res.end()
 })
 
-// app.get('/gather', function(req, res) {
-
-//   var dataObj = {
-//     access: {
-//       data: tshirtsCache.brands, pageCount: tshirtsCache.brands.length, brandsCount: tshirtsCache.brandsCount
-//     },
-//     dresses: {
-//       data: dressesCache.brands, pageCount: dressesCache.brands.length, brandsCount: dressesCache.brandsCount
-//     }
-//   }
-//   res.status(200)
-//   res.send(dataObj)
-// })
-
 app.get('/Dresses', function(req, res) {
   console.log('inside dresses')
   var dataObj = {
-    data: dressesCache.brands,
-    pageCount: dressesCache.brands.length,
-    brandsCount: dressesCache.brandsCount
+    data: allCategoriesCache.dresses.brands,
+    pageCount: allCategoriesCache.dresses.brands.length,
+    brandsCount: allCategoriesCache.dresses.brandsCount
   }
   res.status(200)
   res.send(dataObj)
@@ -72,22 +65,22 @@ app.get('/Dresses', function(req, res) {
 
 app.get('/T-Shirts', function(req, res) {
   var dataObj = {
-      data: tshirtsCache.brands,
-      pageCount: tshirtsCache.brands.length,
-      brandsCount: tshirtsCache.brandsCount
+      data: allCategoriesCache.tshirts.brands,
+      pageCount: allCategoriesCache.tshirts.brands.length,
+      brandsCount: allCategoriesCache.tshirts.brandsCount
   }
-  console.log('inside tshirts',tshirtsCache.brands.length )
+  console.log('inside tshirts',allCategoriesCache.tshirts.brands.length )
   res.status(200)
   res.send(dataObj)
 })
 
 app.get('/Tops/Blouses', function(req, res) {
   var dataObj = {
-      data: topsAndBlousesCache.brands,
-      pageCount: topsAndBlousesCache.brands.length,
-      brandsCount: topsAndBlousesCache.brandsCount
+      data: allCategoriesCache.topsAndBlouses.brands,
+      pageCount: allCategoriesCache.topsAndBlouses.brands.length,
+      brandsCount: allCategoriesCache.topsAndBlouses.brandsCount
   }
-  console.log('inside topsAndBlousesCache', topsAndBlousesCache.brands.length)
+  console.log('inside topsAndBlouses', allCategoriesCache.topsAndBlouses.brands.length)
   res.status(200)
   res.send(dataObj)
 })
@@ -98,7 +91,7 @@ app.get('*', (req, res) => {
 })
 
 
-
+module.exports = gettersHousing
 
 
 

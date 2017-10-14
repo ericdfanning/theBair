@@ -1,8 +1,6 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
-var dressesGetter = require('./api_calls/dresses.js')
-var tshirtsGetter = require('./api_calls/tshirts.js')
-var topsAndBlousesGetter = require('./api_calls/topsAndBlouses.js')
+var gettersHousing = require('./server')
 var express = require('express');
 var app = express();
 
@@ -17,9 +15,7 @@ var app = express();
   const scan = () => {
     let today = new Date();
   console.log('CRON JOB RAN AT ', today.toString(), '**************')
-  dressesGetter()
-  tshirtsGetter()
-  topsAndBlousesGetter()
+  gettersHousing()
     Category.find({})
       .exec((err, catCalls) => {
         if (err) console.error(`ERROR: ${err}`);
@@ -41,7 +37,7 @@ var app = express();
                   return console.log(err);
                 }
 
-                console.log('Category Object Deleted');
+                console.log('Category Object Deleted --- ', catCall.created, 'getDate() format', catCall.created.getDate());
               });
             }
           }
