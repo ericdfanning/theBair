@@ -28407,7 +28407,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -28423,12 +28423,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var getData = exports.getData = function getData(cb) {
 
   // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
-  console.log('production', process.env.NODE_ENV);
   _jquery2.default.ajax({
     method: 'GET',
     url: 'http://127.0.0.1:8000/getStuff',
     success: function success(data) {
-      console.log('back from the server inside of ebay ajax call success');
       cb(null, data);
     },
     error: function error(err) {
@@ -28465,7 +28463,6 @@ var getData = exports.getData = function getData(cb) {
 //   $('.spinner img').fadeOut('fast');
 //   $('form input[type=submit]').attr('disabled', null);
 // }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 247 */
@@ -44429,7 +44426,6 @@ var CategoryBrands = function (_React$Component) {
   }, {
     key: 'renderPageButtons',
     value: function renderPageButtons() {
-      console.log('');
       return _react2.default.createElement(
         'div',
         null,
