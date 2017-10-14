@@ -44379,8 +44379,6 @@ var _reactRedux = __webpack_require__(266);
 
 var _getWomensBrands = __webpack_require__(344);
 
-var _tshirts = __webpack_require__(345);
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -44815,20 +44813,19 @@ var FETCH_BRANDS = exports.FETCH_BRANDS = 'fetch_brands';
 var ROOT_URL = 'http://localhost:8000';
 
 function getBrands(category) {
-	var request = _axios2.default.get(ROOT_URL + '/' + category);
+	var categories = {
+		'Tops/Blouses': 'topsAndBlouses',
+		'T-Shirts': 'tshirts',
+		'Dresses': 'dresses'
+	};
+
+	var request = _axios2.default.get(ROOT_URL + '/' + categories[category]);
 
 	return {
 		type: FETCH_BRANDS,
 		payload: request
 	};
 }
-
-/***/ }),
-/* 345 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 
 /***/ })
 /******/ ]);

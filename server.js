@@ -52,7 +52,7 @@ app.get('/getStuff', function(req, res) {
   res.end()
 })
 
-app.get('/Dresses', function(req, res) {
+app.get('/dresses', function(req, res) {
   console.log('inside dresses')
   var dataObj = {
     data: allCategoriesCache.dresses.brands,
@@ -63,7 +63,7 @@ app.get('/Dresses', function(req, res) {
   res.send(dataObj)
 })
 
-app.get('/T-Shirts', function(req, res) {
+app.get('/tshirts', function(req, res) {
   var dataObj = {
       data: allCategoriesCache.tshirts.brands,
       pageCount: allCategoriesCache.tshirts.brands.length,
@@ -74,7 +74,7 @@ app.get('/T-Shirts', function(req, res) {
   res.send(dataObj)
 })
 
-app.get('/Tops/Blouses', function(req, res) {
+app.get('/topsAndBlouses', function(req, res) {
   var dataObj = {
       data: allCategoriesCache.topsAndBlouses.brands,
       pageCount: allCategoriesCache.topsAndBlouses.brands.length,

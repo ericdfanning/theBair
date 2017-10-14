@@ -8,7 +8,6 @@ import * as Ebay from '../model/ebayData.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
-import { getDresses } from '../actions/womensFashion/tshirts.js';
 
 class CategoryBrands extends React.Component {
 	constructor(props) {
