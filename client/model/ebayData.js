@@ -1,10 +1,12 @@
 import $ from 'jquery';
 
 export const getData = function(cb) {
+
+  // process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
   console.log('production', process.env.NODE_ENV) 
   $.ajax({
     method: 'GET',
-    url: process.env.NODE_ENV === 'production' ? 'http://thebairdata.com/getstuff': 'http://127.0.0.1:8000/getStuff',
+    url: 'http://127.0.0.1:8000/getStuff',
     success: (data) => {
       console.log('back from the server inside of ebay ajax call success')
       cb(null, data)
@@ -33,7 +35,7 @@ export const getData = function(cb) {
 //     }
 //   })
 
-}
+// }
 
 // startSpinner: function() {
 //   $('.spinner img').show();

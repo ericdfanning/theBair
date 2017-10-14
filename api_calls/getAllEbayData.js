@@ -10,15 +10,11 @@ var Category = require('../schema').Category
 var ItemIds = require('../schema').ItemIds
 var Current = require('../schema').Current
 
-var tshirtsCache = require('../cache/tshirts');
-
 var categories = {
   11450: 'Clothing & Accessories',
   15724: 'Womens clothing',
   63861: 'Dresses',
-  dresses: '63861',
-  tshirts: '63869',
-
+  dresses: '63861'
 }
 
 var otherOptions = {
@@ -26,28 +22,25 @@ var otherOptions = {
   sortByPrice: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&'
 }
 
-var dataReady = {
-  dresses: [],
-  shoes: []
-}
+var getAllEbayData = (categoryCode, cache) => {
 
-var tshirts = () => {
 	var url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
 	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
-	  `categoryId=${categories.tshirts}&` +
+	  `categoryId=${categoryCode}&` +
 	  `outputSelector=SellingStatus&` + 
 	  `outputSelector=AspectHistogram&` + 
 	  `paginationInput.entriesPerPage=100&` + 
 	  `itemFilter(0).name=Condition&itemFilter(0).value=3000&` +
 	  `itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&` +
-	  `paginationInput.pageNumber=`  
+	  `paginationInput.pageNumber=` 
 
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 100; i > 80; i--) {
-	      console.log('@@@@@@@@@@@', i)
+	    for (var i = 8; i > 6; i--) {
+	      console.log('@@@@@@@@@@@', i, 'category ----- ', categoryCode)
 	      data.push(await axios.get(url + i));
+
 	    }
 
 	    return data;
@@ -68,25 +61,28 @@ var tshirts = () => {
 	    return final
 	})
 	.catch(function(err){console.log('error', err)})
-	.then(function(result) {
-	  // ******* GET ORIGINAL LISTING INFO FOR ITEMS ABOVE ********
+	.then(function(result) { // ******* GET ORIGINAL LISTING INFO FOR ITEMS JUST RETRIEVED FROM ABOVE ASYNC FUNCTION********
+	  
 	  var filtered = []
-	  var query = ItemIds.find({category: categories['tshirts']}, function(err, ids) {
+	  // get previously fetched item ids from mongo DB
+	  var query = ItemIds.find({category: categoryCode}, function(err, ids) {
 	    if (err) {
-	    	console.log('FAILED TO SAVE ITEM IDS')
+	    	console.log('there was an error retrieving previous id\'s for comparison.')
 	    }
 	  })
 
 	  // `.exec()` gives you a fully-fledged promise
 	  var promise = query.exec();
 	  promise.then(function (ids) {
+	  	// If item ids fetched from eBay have already been retrieved before, only keep unique ones.
 	    filtered = helpers.unique(ids, result)
 	    var newItemIds = new ItemIds({
 	      created: new Date(),
-	      category: '63869',
+	      category: categoryCode,
 	      ids: filtered
 	    })
 
+	    //Save the new batch of item ids
 	    newItemIds.save(function(err, data) {
 	      if (err) {
 	        console.log('Major creation fail');
@@ -108,7 +104,7 @@ var tshirts = () => {
 	    async function getBrandNamesAsync(){
 	      var items = []
 	      var ids = []
-	      // console.log('filtered length before multiple get', filtered)
+	      // Since eBay only allows fetching 20 items at a time, async loop over all items 20 at a time
 	      for (var i = 0; i <= filtered.length; i++) {
 	        if (ids.length === 20 || i === filtered.length) {
 	          console.log('every 20', i)
@@ -123,11 +119,12 @@ var tshirts = () => {
 	    }
 
 	    getBrandNamesAsync().then( function(result) {
-	      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
-	      // Get EndTime - var date = new Date(obj.EndTime) date.toLocaleDateString()
-	      // console.log('multiple items request from filtered data', result.length)
+	    	// Other info details I may use in the future
+		      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
+		      // Get EndTime - var date = new Date(obj.EndTime) date.toLocaleDateString()	
 
-	      var query = Category.find({category: categories['tshirts']}, function(err, currentBrands) {
+		    // Get all saved queries from specified category
+	      var query = Category.find({category: categoryCode}, function(err, currentBrands) {
 	        if (err) {
 	        	console.log('failed to find in Category')
 	        }
@@ -135,46 +132,47 @@ var tshirts = () => {
 
 	      var promise = query.exec();
 	      promise.then(function (current) {
+	      	// using previously queiried data from eBay, use helper function to build new object from old and new data
 	        var brands = helpers.createBrandsObj(result, current)
 	        return brands
 	      })
 	      .then(function(brands) {
+	      	// create object to save to DB
 	        var newCategoryObj = new Category({
 	          created: new Date(),
-	          category: categories['tshirts'],
+	          category: categoryCode,
 	          brands: brands.current
 	        })
-
+	        // Save newly queried items from eBay to DB (not the combined object data from the helpers).
 	        newCategoryObj.save(function(err, data) {
 	          if (err) {
-	            console.log('Major creation fail');
+	            console.log('Failed to create newly combined object data');
 	          } 
 	        });
 	        
 	        return brands.joined
 	      })
 	      .then(function(brands){
-	      	console.log('in the saving then')
-	        //sort by value and put in an local array for quick access
+	        // sort newly combined object data by value 
 	        var sortedBrands = helpers.sortObj(brands)
-	        dataReady.dresses = sortedBrands
 
 	        // create cache for front end
-	        tshirtsCache.brandsCount = sortedBrands.length
-	        tshirtsCache.brands = []
+	        cache.brandsCount = sortedBrands.length
+	        cache.brands = []
 	        var data = []
 	        for (let i = 0; i < sortedBrands.length; i++) {
 	        	data.push(sortedBrands[i])
 	        	// create pagination in 50 item increments
 	        	if ((i % 50 === 0 && i !== 0) || i === sortedBrands.length - 1) {
-	            tshirtsCache.brands.push(data)
+	            cache.brands.push(data)
 	            data = []
 	          }
 	        }
-	        console.log('SAVING T-SHIRTS and length', tshirtsCache.brands.length)
+
+	      	console.log('SAVING THE DRESSES and length', cache.brands.length)
 	        var newCurrentObj = new Current({
-	          category: categories['tshirts'],
-	          info: tshirtsCache,
+	          category: categoryCode,
+	          info: cache,
 	          created: new Date()
 	        })
 
@@ -197,4 +195,4 @@ var tshirts = () => {
 	});
 }
 
-module.exports = tshirts
+module.exports = getAllEbayData
