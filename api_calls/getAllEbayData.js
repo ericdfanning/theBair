@@ -37,7 +37,7 @@ var getAllEbayData = (categoryCode, cache) => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    var data = []
-	    for (var i = 8; i > 6; i--) {
+	    for (var i = 14; i > 12; i--) {
 	      console.log('@@@@@@@@@@@', i, 'category ----- ', categoryCode)
 	      data.push(await axios.get(url + i));
 
