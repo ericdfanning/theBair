@@ -8,23 +8,6 @@ class Navbar extends React.Component {
 	constructor() {
 		super()
 
-		this.state = {
-			mobile: false
-		}
-	}
-
-	componentDidMount() {
-		var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-    var mobile = false
-    if (x < 481) {
-    	mobile = true
-    }
-		this.setState({mobile: mobile})
 	}
 
 	findItem() {
@@ -38,7 +21,7 @@ class Navbar extends React.Component {
 	render () {
 		return (
 			<div className="navbarMain">
-			{!this.state.mobile ?
+			{!this.props.mobile ?
 				<div className="navbarMain">
 					<a onClick={() => this.handleCategoryClick('womensFashion')} id="categoryNavLink" className="navbarButton">Women's Fashion</a>
 					<input id="searchBar" className="searchBar" type="text" name="input" placeholder="SEARCH CURRENTLY DISABLED" onKeyPress={this.findItem.bind(this)}/>
@@ -58,9 +41,15 @@ class Navbar extends React.Component {
 	}
 }
 
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({setCategories}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 

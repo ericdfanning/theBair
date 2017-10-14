@@ -27470,7 +27470,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27520,90 +27520,57 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+	_inherits(App, _React$Component);
 
-  function App() {
-    _classCallCheck(this, App);
+	function App() {
+		_classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-  }
+		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	}
 
-  _createClass(App, [{
-    key: 'componentWillMount',
+	_createClass(App, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			var w = window,
+			    d = document,
+			    e = d.documentElement,
+			    g = d.getElementsByTagName('body')[0],
+			    x = w.innerWidth || e.clientWidth || g.clientWidth,
+			    y = w.innerHeight || e.clientHeight || g.clientHeight;
+			var mobile = false;
+			if (x < 481) {
+				mobile = true;
+			}
+			this.props.setDevice(mobile);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'headerLinks' },
+				_react2.default.createElement(_Navbar2.default, null),
+				_react2.default.createElement(
+					'main',
+					{ className: 'mainBody' },
+					_react2.default.createElement(
+						_reactRouterDom.Switch,
+						null,
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dresses', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
+					)
+				)
+			);
+		}
+	}]);
 
-    // constructor(props) {
-    // 	super(props)
-
-    // 	this.state = {
-    // 		dresses: [],
-    //      currentData: [],
-    //      brandsCount: '',
-    // 		showSidebar: false,
-    //      pageCount: 0,
-    //      pageNumTags: [],
-    //      pageNumTagIndex: 0,
-    //      page: 0,
-    //      morePages: true,
-    //      lessPages: false,
-    // 	}
-    // }
-
-    // componentWillMount() {
-    //    console.log('componentWillMount is mounting')
-    //    Ebay.gatherData('dresses', (err, res) => {
-    //      this.setState({
-    //        dresses: res.dresses.data,
-    //        firstSetDresses: res.dresses.data[0],
-    //        dressesPageCount: res.pageCount,
-    //        brandsCount: res.brandsCount
-    //      }, () => {
-    //        this.createPageButtons()
-    //      })
-    //    })
-    // }
-
-
-    value: function componentWillMount() {
-      var w = window,
-          d = document,
-          e = d.documentElement,
-          g = d.getElementsByTagName('body')[0],
-          x = w.innerWidth || e.clientWidth || g.clientWidth,
-          y = w.innerHeight || e.clientHeight || g.clientHeight;
-      var mobile = false;
-      if (x < 481) {
-        mobile = true;
-      }
-      this.props.setDevice(mobile);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'headerLinks' },
-        _react2.default.createElement(_Navbar2.default, null),
-        _react2.default.createElement(
-          'main',
-          { className: 'mainBody' },
-          _react2.default.createElement(
-            _reactRouterDom.Switch,
-            null,
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _CategoryBrands2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dresses', component: _CategoryBrands2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
-          )
-        )
-      );
-    }
-  }]);
-
-  return App;
+	return App;
 }(_react2.default.Component);
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ setDevice: _setDevice.setDevice }, dispatch);
+	return (0, _redux.bindActionCreators)({ setDevice: _setDevice.setDevice }, dispatch);
 }
 
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(App);
@@ -38860,30 +38827,10 @@ var Navbar = function (_React$Component) {
 	function Navbar() {
 		_classCallCheck(this, Navbar);
 
-		var _this = _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this));
-
-		_this.state = {
-			mobile: false
-		};
-		return _this;
+		return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this));
 	}
 
 	_createClass(Navbar, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var w = window,
-			    d = document,
-			    e = d.documentElement,
-			    g = d.getElementsByTagName('body')[0],
-			    x = w.innerWidth || e.clientWidth || g.clientWidth,
-			    y = w.innerHeight || e.clientHeight || g.clientHeight;
-			var mobile = false;
-			if (x < 481) {
-				mobile = true;
-			}
-			this.setState({ mobile: mobile });
-		}
-	}, {
 		key: 'findItem',
 		value: function findItem() {
 			var input = document.getElementById('searchBar').value;
@@ -38901,7 +38848,7 @@ var Navbar = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'navbarMain' },
-				!this.state.mobile ? _react2.default.createElement(
+				!this.props.mobile ? _react2.default.createElement(
 					'div',
 					{ className: 'navbarMain' },
 					_react2.default.createElement(
@@ -38937,11 +38884,17 @@ var Navbar = function (_React$Component) {
 	return Navbar;
 }(_react2.default.Component);
 
+function mapStateToProps(state) {
+	return {
+		isMobile: state.isMobile
+	};
+}
+
 function mapDispatchToProps(dispatch) {
 	return (0, _redux.bindActionCreators)({ setCategories: _setCategories.setCategories }, dispatch);
 }
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Navbar);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Navbar);
 
 /***/ }),
 /* 250 */
