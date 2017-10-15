@@ -2,6 +2,8 @@ node_modules/
 
 server/config.js
 
+server/email.config.js
+
 server/ebay.config.js
 
 extraServerCrap.js

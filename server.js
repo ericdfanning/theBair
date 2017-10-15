@@ -11,12 +11,11 @@ var Promise = require('mpromise');
 var helpers = require('./helpers');
 var cors = require('cors');
 var cron = require('./cronScan.js');
+// var cron2 = require('./server/emailCronJob.js');
 
 var getAllEbayData = require('./api_calls/getAllEbayData.js');
 
 var allCategoriesCache = require('./cache/allCategoriesCache.js');
-
-var Current = require('./schema').Current
 
 var port = 8000
 app.set('port', port);
@@ -84,6 +83,18 @@ app.get('/topsAndBlouses', function(req, res) {
   res.status(200)
   res.send(dataObj)
 })
+
+let emailService = require('./server/emailService')
+
+app.get('/emailService', (req, res) => {
+  console.log('email service')
+  emailService.sendEmail()
+})
+
+app.get('/grizzly', function(req, res) {
+  res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
+})
+
 
 
 app.get('*', (req, res) => {

@@ -75,7 +75,6 @@ class CategoryBrands extends React.Component {
   }
 
   renderPageButtons() {
-    console.log('')
     return (
       <div> Pages
         {this.state.lessPages &&
