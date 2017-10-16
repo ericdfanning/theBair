@@ -4,8 +4,8 @@ const password = require('./email.config.js').password;
 const rolesEmail = require('./email.config.js').email;
 const template = require('./emailTemplate.js');
 const path = require('path')
-let bearImage = path.join(__dirname, '../images/grizzly-bear-roaring.png')
-var allCategoriesCache = require('../cache/allCategoriesCache.js');
+let bearImage = path.join(__dirname, '../../images/grizzly-bear-roaring.png')
+var allCategoriesCache = require('../../cache/allCategoriesCache.js');
 
 let transport = mailer.createTransport({
   service: 'gmail',

@@ -2,7 +2,7 @@ node_modules/
 
 server/config.js
 
-server/email.config.js
+server/emailService/email.config.js
 
 server/ebay.config.js
 

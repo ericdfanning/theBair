@@ -8,6 +8,7 @@ import Navbar from './Navbar.jsx'
 import Details from './Details.jsx'
 
 import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
 import { setDevice } from '../actions/setDevice'
 
@@ -35,8 +36,8 @@ class App extends React.Component {
 
 				<main className="mainBody">
 				  <Switch>
-				    <Route exact path='/' component={CategoryBrands} />
-				    <Route exact path='/dresses' component={CategoryBrands} />
+				    <Route exact path='/' component={Main} />
+				    <Route exact path='/womensFashion' component={CategoryBrands} />
 				    <Route exact path='/details' component={Details} />
 				    <Route exact path='/accessories' component={Accessories} />
 				  </Switch>
@@ -51,4 +52,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({setDevice}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps, null, {pure: false})(App)

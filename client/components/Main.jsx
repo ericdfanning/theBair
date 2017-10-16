@@ -8,7 +8,7 @@ class Main extends React.Component {
 		return (
 			<div>
       Accessories Main
-      <Link to="/dresses/accessories">Accessories</Link>
+      <Link to="/womensFashion">Categories</Link>
 			    
 			</div>
 		)
