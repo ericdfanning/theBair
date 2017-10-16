@@ -4,7 +4,7 @@ import Title from './Titles.jsx';
 import Main from './Main.jsx';
 import { Link, Redirect } from 'react-router-dom'
 import * as Ebay from '../model/ebayData.js';
-
+import Navbar from './Navbar.jsx'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
@@ -112,41 +112,43 @@ class CategoryBrands extends React.Component {
 	render () {
 		return (
 			<div>
-			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
-			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
+        <Navbar />
+        
+		    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
+		    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
 
-          <div className="container-fluid">
-            <div className="row col-12"> 
-            {this.props.isMobile ? 
-              <div className="col-12 selectCategoryMobile">
-                <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
-                  <select className="selectpicker" name="userType">
-                    <option selected hidden>Choose Category</option>
-                    <option value="Dresses">Dresses</option>
-                    <option value="T-Shirts">T-Shirts</option>
-                    <option value="Tops/Blouses">Tops/Blouses</option>
-                  </select>
-                  <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
-                </form>
-              </div>
-            :
-              <div className="col-md-12 col-sm-6 categories">
-                {this.props.categories.map((v, i) => {
-                  return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
-                })}
-              </div> 
-            }
-              {this.state.pageNumTags.length !== 0 && 
-                <div className="paginationAndBrandCount">
-                  <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   
-
-                  <div className="col-12"> {this.renderPageButtons()} </div>
-                </div>
-              }
+        <div className="container-fluid">
+          <div className="row col-12"> 
+          {this.props.isMobile ? 
+            <div className="col-12 selectCategoryMobile">
+              <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
+                <select className="selectpicker" name="userType">
+                  <option selected hidden>Choose Category</option>
+                  <option value="Dresses">Dresses</option>
+                  <option value="T-Shirts">T-Shirts</option>
+                  <option value="Tops/Blouses">Tops/Blouses</option>
+                </select>
+                <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
+              </form>
             </div>
+          :
+            <div className="col-md-12 col-sm-6 categories">
+              {this.props.categories.map((v, i) => {
+                return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
+              })}
+            </div> 
+          }
+            {this.state.pageNumTags.length !== 0 && 
+              <div className="paginationAndBrandCount">
+                <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   
+
+                <div className="col-12"> {this.renderPageButtons()} </div>
+              </div>
+            }
           </div>
-          
-          {this.props.data && <Title data={this.props.data[this.state.page]}/>}
+        </div>
+        
+        {this.props.data && <Title data={this.props.data[this.state.page]}/>}
 			</div>
 		)
 	}

@@ -15,7 +15,7 @@ var app = express();
   const scan = () => {
     let today = new Date();
   console.log('CRON JOB RAN AT ', today.toString(), '**************')
-  gettersHousing()
+  gettersHousing.gettersHousing()
     Category.find({})
       .exec((err, catCalls) => {
         if (err) console.error(`ERROR: ${err}`);

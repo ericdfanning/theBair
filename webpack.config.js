@@ -21,6 +21,13 @@ module.exports = {
            {
              presets:['es2015','react']
            }
+      },
+      {
+        test: /\.(jpeg|png|svg)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        },
       }
     ],
   },

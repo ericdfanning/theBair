@@ -41,12 +41,10 @@ var categories = {
 }
 
 const gettersHousing = () => {
-  console.log('THE EXPRESSION WAS CALLED')
   getAllEbayData(categories.dresses, allCategoriesCache.dresses)
   getAllEbayData(categories.tshirts, allCategoriesCache.tshirts)
   getAllEbayData(categories.topsAndBlouses, allCategoriesCache.topsAndBlouses)
 }
-
 
 module.exports.gettersHousing = gettersHousing
 

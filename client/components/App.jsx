@@ -4,7 +4,7 @@ import Title from './Titles.jsx';
 import Main from './Main.jsx';
 import CategoryBrands from './CategoryBrands.jsx';
 import Accessories from './Accessories.jsx'
-import Navbar from './Navbar.jsx'
+import HeaderMain from './HeaderMain.jsx'
 import Details from './Details.jsx'
 
 import { bindActionCreators } from 'redux';
@@ -32,7 +32,7 @@ class App extends React.Component {
 		return (
 			<div className="headerLinks">
 
-				<Navbar />
+				<HeaderMain />
 
 				<main className="mainBody">
 				  <Switch>

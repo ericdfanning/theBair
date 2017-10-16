@@ -54,17 +54,17 @@ router.get('/grizzly', function(req, res) {
   res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
 })
 
-// router.get('/grizzly', function(req, res) {
-//   res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
-// })
+router.get('/dresses', function(req, res) {
+  res.sendFile(path.join(__dirname, './images/dresses.jpeg'))
+})
 
-// router.get('/grizzly', function(req, res) {
-//   res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
-// })
+router.get('/tshirts', function(req, res) {
+  res.sendFile(path.join(__dirname, './images/tshirts.jpeg'))
+})
 
-// router.get('/grizzly', function(req, res) {
-//   res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
-// })
+router.get('/topsAndBlouses', function(req, res) {
+  res.sendFile(path.join(__dirname, './images/topsAndBlouses.jpeg'))
+})
 
 
 

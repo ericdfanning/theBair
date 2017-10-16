@@ -79,7 +79,7 @@ class Titles extends Component {
 		var price = brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1]: '$' + brand.price[1]
 
 		return (
-      <div key={i} className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
+      <div key={i} className="row dataRows cursorPointer" onClick={this.openModal.bind(this, brand)}> 
 			  <div className="col-md-4 col-sm-6 col-8">Brand: 
 			  	<h3>{brand.name}</h3> 
 			  </div>
