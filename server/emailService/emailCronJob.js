@@ -2,7 +2,7 @@ const CronJob = require('cron').CronJob;
 var express = require('express');
 var app = express();
 let emailService = require('./emailService');
-var allCategoriesCache = require('../cache/allCategoriesCache.js');
+var allCategoriesCache = require('../../cache/allCategoriesCache.js');
 
 (function() {
 

@@ -7,14 +7,14 @@ var app = express();
 var path = require('path');
 var ebay = require('ebay-api');
 var axios = require('axios');
+var router = require('./server/routes.js');
 var Promise = require('mpromise');
 var helpers = require('./helpers');
 var cors = require('cors');
 var cron = require('./cronScan.js');
-// var cron2 = require('./server/emailCronJob.js');
+var cron2 = require('./server/emailService/emailCronJob.js');
 
 var getAllEbayData = require('./api_calls/getAllEbayData.js');
-
 var allCategoriesCache = require('./cache/allCategoriesCache.js');
 
 var port = 8000
@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, './dist')));
 app.use(bodyParser.json());
 
 app.use(cors());
+app.use('/', router);
 
 var categories = {
   dresses: '63861',
@@ -40,69 +41,14 @@ var categories = {
 }
 
 const gettersHousing = () => {
+  console.log('THE EXPRESSION WAS CALLED')
   getAllEbayData(categories.dresses, allCategoriesCache.dresses)
   getAllEbayData(categories.tshirts, allCategoriesCache.tshirts)
   getAllEbayData(categories.topsAndBlouses, allCategoriesCache.topsAndBlouses)
 }
 
-app.get('/getStuff', function(req, res) {
-  gettersHousing()
-  res.status(200)
-  res.end()
-})
 
-app.get('/dresses', function(req, res) {
-  console.log('inside dresses')
-  var dataObj = {
-    data: allCategoriesCache.dresses.brands,
-    pageCount: allCategoriesCache.dresses.brands.length,
-    brandsCount: allCategoriesCache.dresses.brandsCount
-  }
-  res.status(200)
-  res.send(dataObj)
-})
-
-app.get('/tshirts', function(req, res) {
-  var dataObj = {
-      data: allCategoriesCache.tshirts.brands,
-      pageCount: allCategoriesCache.tshirts.brands.length,
-      brandsCount: allCategoriesCache.tshirts.brandsCount
-  }
-  console.log('inside tshirts',allCategoriesCache.tshirts.brands.length )
-  res.status(200)
-  res.send(dataObj)
-})
-
-app.get('/topsAndBlouses', function(req, res) {
-  var dataObj = {
-      data: allCategoriesCache.topsAndBlouses.brands,
-      pageCount: allCategoriesCache.topsAndBlouses.brands.length,
-      brandsCount: allCategoriesCache.topsAndBlouses.brandsCount
-  }
-  console.log('inside topsAndBlouses', allCategoriesCache.topsAndBlouses.brands.length)
-  res.status(200)
-  res.send(dataObj)
-})
-
-let emailService = require('./server/emailService')
-
-app.get('/emailService', (req, res) => {
-  console.log('email service')
-  emailService.sendEmail()
-})
-
-app.get('/grizzly', function(req, res) {
-  res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
-})
-
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './dist/index.html'))
-})
-
-
-module.exports = gettersHousing
+module.exports.gettersHousing = gettersHousing
 
 
 

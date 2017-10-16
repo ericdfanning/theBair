@@ -12200,8 +12200,8 @@ var Main = function (_React$Component) {
 				'Accessories Main',
 				_react2.default.createElement(
 					_reactRouterDom.Link,
-					{ to: '/dresses/accessories' },
-					'Accessories'
+					{ to: '/womensFashion' },
+					'Categories'
 				)
 			);
 		}
@@ -27556,8 +27556,8 @@ var App = function (_React$Component) {
 					_react2.default.createElement(
 						_reactRouterDom.Switch,
 						null,
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _CategoryBrands2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dresses', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/womensFashion', component: _CategoryBrands2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
 					)
@@ -27573,7 +27573,7 @@ function mapDispatchToProps(dispatch) {
 	return (0, _redux.bindActionCreators)({ setDevice: _setDevice.setDevice }, dispatch);
 }
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(App);
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps, null, { pure: false })(App);
 
 /***/ }),
 /* 238 */
