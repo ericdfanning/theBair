@@ -13719,6 +13719,10 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(26);
 
+var _redux = __webpack_require__(19);
+
+var _reactRedux = __webpack_require__(34);
+
 var _dresses = __webpack_require__(342);
 
 var _dresses2 = _interopRequireDefault(_dresses);
@@ -13754,11 +13758,36 @@ var Main = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				'Accessories Main',
-				_react2.default.createElement(
-					_reactRouterDom.Link,
-					{ to: '/womensFashion' },
-					'Categories'
+				!this.props.mobile ? _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMainTop' },
+						'Are you an eBay reseller? Then this site\'s for you!'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMain' },
+						'"Finding top selling brands on eBay is tough. ',
+						_react2.default.createElement('br', null),
+						'The Bair Data makes it easy."'
+					)
+				) : _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMainTop' },
+						'Are you an eBay reseller? Then this site\'s for you!'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMain' },
+						'"Finding top selling brands on eBay is tough. ',
+						_react2.default.createElement('br', null),
+						'The Bair Data makes it easy."'
+					)
 				),
 				_react2.default.createElement(
 					'div',
@@ -13768,7 +13797,7 @@ var Main = function (_React$Component) {
 						{ className: 'row' },
 						_react2.default.createElement(
 							'div',
-							{ id: 'mainScreen', className: 'col-4-lg' },
+							{ id: 'mainScreen' },
 							_react2.default.createElement(
 								'span',
 								{ className: 'span-homegal' },
@@ -13794,7 +13823,7 @@ var Main = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ id: 'mainScreen', className: 'col-4-lg' },
+							{ id: 'mainScreen' },
 							_react2.default.createElement(
 								'span',
 								{ className: 'span-homegal' },
@@ -13820,7 +13849,7 @@ var Main = function (_React$Component) {
 						),
 						_react2.default.createElement(
 							'div',
-							{ id: 'mainScreen', className: 'col-4-md' },
+							{ id: 'mainScreen' },
 							_react2.default.createElement(
 								'span',
 								{ className: 'span-homegal' },
@@ -13853,7 +13882,13 @@ var Main = function (_React$Component) {
 	return Main;
 }(_react2.default.Component);
 
-exports.default = Main;
+function mapStateToProps(state) {
+	return {
+		isMobile: state.isMobile
+	};
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Main);
 
 /***/ }),
 /* 128 */
@@ -30160,11 +30195,11 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'headerLinks' },
+				{ className: 'headerLinks mainBody' },
 				_react2.default.createElement(_HeaderMain2.default, null),
 				_react2.default.createElement(
 					'main',
-					{ className: 'mainBody' },
+					null,
 					_react2.default.createElement(
 						_reactRouterDom.Switch,
 						null,
@@ -32368,7 +32403,6 @@ var CategoryBrands = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Navbar2.default, null),
         _react2.default.createElement(
           'button',
           { className: 'btn btn-secondary', onClick: this.callAjax.bind(this) },
@@ -44898,10 +44932,6 @@ var _reactRouterDom = __webpack_require__(26);
 
 var _setCategories = __webpack_require__(134);
 
-var _redux = __webpack_require__(19);
-
-var _reactRedux = __webpack_require__(34);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44934,34 +44964,29 @@ var HeaderMain = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				!this.props.mobile ? _react2.default.createElement(
+				{ className: 'landingBanner' },
+				_react2.default.createElement(
 					'div',
-					null,
+					{ id: 'headerBanner' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'headerMainTop' },
-						'Are you an eBay reseller? Then this site\'s for you!'
+						{ id: 'logo' },
+						' The Bair Data '
 					),
-					_react2.default.createElement('br', null),
 					_react2.default.createElement(
-						'div',
-						{ className: 'headerMain' },
-						'"Finding top selling brands on eBay is tough.',
-						_react2.default.createElement(
-							'div',
-							null,
-							'The Bair Data makes it easy."'
-						)
-					)
-				) : _react2.default.createElement(
-					'div',
-					{ className: 'headerMain' },
-					'"Finding top selling brands on eBay is tough. ',
+						_reactRouterDom.Link,
+						{ className: 'bannerItems', to: '/contactInfo' },
+						'Contact Us'
+					),
 					_react2.default.createElement(
-						'div',
-						null,
-						'The Bair Data makes it easy."'
+						_reactRouterDom.Link,
+						{ className: 'bannerItems', to: '/about' },
+						'About'
+					),
+					_react2.default.createElement(
+						_reactRouterDom.Link,
+						{ className: 'bannerItems', to: '/womensFashion' },
+						'Categories'
 					)
 				)
 			);
@@ -44971,13 +44996,7 @@ var HeaderMain = function (_React$Component) {
 	return HeaderMain;
 }(_react2.default.Component);
 
-function mapStateToProps(state) {
-	return {
-		isMobile: state.isMobile
-	};
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(HeaderMain);
+exports.default = HeaderMain;
 
 /***/ })
 /******/ ]);

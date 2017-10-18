@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, Redirect } from 'react-router-dom'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import dressesImage from '../../images/dresses.jpeg'
 import tshirts from '../../images/tshirts.jpeg'
@@ -11,11 +13,20 @@ class Main extends React.Component {
 	render () {
 		return (
 			<div>
-      	Accessories Main
-      	<Link to="/womensFashion">Categories</Link>
+			{!this.props.mobile ?
+				<div>
+				  <div className="headerMainTop">Are you an eBay reseller? Then this site's for you!</div>
+				  <div className="headerMain">"Finding top selling brands on eBay is tough. <br/>The Bair Data makes it easy."</div>
+				</div>
+				:
+				<div>
+				  <div className="headerMainTop">Are you an eBay reseller? Then this site's for you!</div>
+				  <div className="headerMain">"Finding top selling brands on eBay is tough. <br/>The Bair Data makes it easy."</div>
+				</div>
+			}
         <div className="container-fluid">
           <div className="row">
-	          <div id="mainScreen" className="col-4-lg">
+	          <div id="mainScreen">
 	          	<span className="span-homegal">
 	              <a href="/womensFashion">
 	                  <div className="polaroid">
@@ -25,7 +36,7 @@ class Main extends React.Component {
 	              </a>
 	            </span>
 		        </div>
-		        <div id="mainScreen" className="col-4-lg">
+		        <div id="mainScreen">
 				   	  <span className="span-homegal">
 				        <a href="/womensFashion">
 			            <div className="polaroid">
@@ -35,7 +46,7 @@ class Main extends React.Component {
 				        </a>
 				      </span>	
 					  </div>
-					  <div id="mainScreen" className="col-4-md">
+					  <div id="mainScreen">
     		   	  <span className="span-homegal">
     		        <a href="/womensFashion">
     	            <div className="polaroid">
@@ -52,6 +63,12 @@ class Main extends React.Component {
 	}
 }
 
-export default Main;
+function mapStateToProps(state) {
+  return {
+    isMobile: state.isMobile
+  }
+}
+
+export default connect(mapStateToProps)(Main)
 
 

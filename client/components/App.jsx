@@ -30,11 +30,11 @@ class App extends React.Component {
 
 	render () {
 		return (
-			<div className="headerLinks">
+			<div className="headerLinks mainBody">
 
 				<HeaderMain />
 
-				<main className="mainBody">
+				<main>
 				  <Switch>
 				    <Route exact path='/' component={Main} />
 				    <Route exact path='/womensFashion' component={CategoryBrands} />

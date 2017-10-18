@@ -112,7 +112,6 @@ class CategoryBrands extends React.Component {
 	render () {
 		return (
 			<div>
-        <Navbar />
         
 		    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
 		    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>

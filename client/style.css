@@ -2,44 +2,34 @@
 	font-family: "Open Sans", sans-serif;
 }
 
+#headerBanner {
+	height: 60px;
+	border-bottom: 1px solid lightgray;
+	background-color: rgba(59,60,61,1);
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#logo {
+	float: left;
+	position: absolute;
+	margin: 5px;
+	color: white;
+	font-family: 'Saira Extra Condensed', sans-serif;
+	font-size: 35px;
+}
+
 .polaroid { 
    position: relative;
    margin: 20px;
-
-   -webkit-box-shadow: 4px 4px 4px #777;
-   -moz-box-shadow: 4px 4px 4px #777;
-   box-shadow: 4px 4px 4px #777;
+   border: 1px solid lightgray;
     -webkit-transition: margin 0.2s ease-out;
    -moz-transition: margin 0.2s ease-out;
    -o-transition: margin 0.2s ease-out;
 }
 
-.home-gal-col {
-  width: 25%;
-}
-
 #mainScreen {
 	margin: 0 auto;
-}
-
-.headerMain {
-	background-color: white;
-	text-align: center;
-	font-size: 25px;
-	color: #616161;
-	font-style: italic;
-	font-family: "Open Sans", sans-serif;
-	border-bottom: 1px solid gray;
-	margin-top: 10px;
-	padding-bottom: 50px;
-}
-
-.headerMainTop {
-	text-align: center;
-	font-size: 35px;
-	color: #616161;
-	margin-top: 50px;
-	padding-bottom: 30px;
 }
 
 .span-homegal a {
@@ -48,10 +38,10 @@
     -o-transition: margin 0.2s ease-out;
 }
 .span-homegal a:hover {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 .polaroid:hover{
-    margin-top: -3px; 
+    margin-top: 10px; 
 }
 
 .mainImage {
@@ -85,7 +75,11 @@ h2 span {
 }
 
 .mainBody {
-	background-color: #FEFEFE;
+	background-color: white;
+}
+
+html {
+	background-color: white;
 }
 
 .cursorPointer {
@@ -93,6 +87,37 @@ h2 span {
 }
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
+
+	.headerMain {
+		text-align: center;
+		font-size: 10px;
+		color: #616161;
+		font-style: italic;
+		font-family: "Open Sans", sans-serif;
+		border-bottom: 1px solid lightgray;
+		padding-bottom: 20px;
+	}
+
+	.headerMainTop {
+		text-align: center;
+		font-size: 20px;
+		font-family: "Open Sans", sans-serif;
+		color: #616161;
+		margin-top: 10px;
+	}
+
+	.bannerItems {
+		float: right;
+		margin-top: 20px;
+		margin-right: 10px;
+		color: white !important;
+		font-family: 'Saira Extra Condensed', sans-serif;
+		font-size: 20px;
+	}
+
+	.bannerItems:active {
+		color: white;
+	}
 
 	.paginationAndBrandCount {
 		width: 100%;
@@ -165,6 +190,37 @@ h2 span {
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
 
+	.headerMain {
+		text-align: center;
+		font-size: 10px;
+		color: #616161;
+		font-style: italic;
+		font-family: "Open Sans", sans-serif;
+		border-bottom: 1px solid lightgray;
+		padding-bottom: 20px;
+	}
+
+	.headerMainTop {
+		text-align: center;
+		font-size: 20px;
+		font-family: "Open Sans", sans-serif;
+		color: #616161;
+		margin-top: 10px;
+	}
+
+	.bannerItems {
+		float: right;
+		margin-top: 20px;
+		margin-right: 10px;
+		color: white !important;
+		font-family: 'Saira Extra Condensed', sans-serif;
+		font-size: 20px;
+	}
+
+	.bannerItems:active {
+		color: white;
+	}
+
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -233,6 +289,38 @@ h2 span {
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 
+	.headerMain {
+		text-align: center;
+		font-size: 20px;
+		color: #616161;
+		font-style: italic;
+		font-family: "Open Sans", sans-serif;
+		border-bottom: 1px solid lightgray;
+		margin: 0;
+	}
+
+	.headerMainTop {
+		text-align: center;
+		font-size: 30px;
+		font-family: "Open Sans", sans-serif;
+		color: #616161;
+		margin-top: 10px;
+	}
+
+	.bannerItems {
+		float: right;
+		margin-top: 20px;
+		margin-right: 10px;
+		margin-left: 10px;
+		color: white !important;
+		font-family: 'Saira Extra Condensed', sans-serif;
+		font-size: 20px;
+	}
+
+	.bannerItems:active {
+		color: white;
+	}
+
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -295,6 +383,38 @@ h2 span {
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
+
+	.headerMain {
+		text-align: center;
+		font-size: 20px;
+		color: #616161;
+		font-style: italic;
+		font-family: "Open Sans", sans-serif;
+		border-bottom: 1px solid lightgray;
+		padding-bottom: 20px;
+	}
+
+	.headerMainTop {
+		text-align: center;
+		font-size: 30px;
+		font-family: "Open Sans", sans-serif;
+		color: #616161;
+		margin-top: 10px;
+	}
+
+	.bannerItems {
+		float: right;
+		margin-top: 20px;
+		margin-right: 10px;
+		margin-left: 10px;
+		color: white !important;
+		font-family: 'Saira Extra Condensed', sans-serif;
+		font-size: 20px;
+	}
+
+	.bannerItems:active {
+		color: white;
+	}
 
 	.paginationAndBrandCount {
 		width: 100%;
@@ -359,6 +479,38 @@ h2 span {
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
+
+	.headerMain {
+		text-align: center;
+		font-size: 20px;
+		color: #616161;
+		font-style: italic;
+		font-family: "Open Sans", sans-serif;
+		border-bottom: 1px solid lightgray;
+		padding-bottom: 20px;
+	}
+
+	.headerMainTop {
+		text-align: center;
+		font-size: 30px;
+		font-family: "Open Sans", sans-serif;
+		color: #616161;
+		margin-top: 10px;
+	}
+
+	.bannerItems {
+		float: right;
+		margin-top: 20px;
+		margin-right: 10px;
+		margin-left: 10px;
+		color: white !important;
+		font-family: 'Saira Extra Condensed', sans-serif;
+		font-size: 20px;
+	}
+
+	.bannerItems:active {
+		color: white;
+	}
 
 	.paginationAndBrandCount {
 		width: 100%;
