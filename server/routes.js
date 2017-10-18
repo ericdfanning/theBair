@@ -10,7 +10,7 @@ router.get('/getStuff', function(req, res) {
   res.end()
 })
 
-router.get('/dresses', function(req, res) {
+router.get('/category/dresses', function(req, res) {
   console.log('inside dresses')
   var dataObj = {
     data: allCategoriesCache.dresses.brands,
@@ -21,7 +21,8 @@ router.get('/dresses', function(req, res) {
   res.send(dataObj)
 })
 
-router.get('/tshirts', function(req, res) {
+router.get('/category/tshirts', function(req, res) {
+  console.log('inside tshirts')
   var dataObj = {
       data: allCategoriesCache.tshirts.brands,
       pageCount: allCategoriesCache.tshirts.brands.length,
@@ -32,7 +33,8 @@ router.get('/tshirts', function(req, res) {
   res.send(dataObj)
 })
 
-router.get('/topsAndBlouses', function(req, res) {
+router.get('/category/topsAndBlouses', function(req, res) {
+  console.log('inside topsAndBlouses')
   var dataObj = {
       data: allCategoriesCache.topsAndBlouses.brands,
       pageCount: allCategoriesCache.topsAndBlouses.brands.length,

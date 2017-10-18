@@ -6,6 +6,8 @@ import CategoryBrands from './CategoryBrands.jsx';
 import Accessories from './Accessories.jsx'
 import HeaderMain from './HeaderMain.jsx'
 import Details from './Details.jsx'
+import ContactUs from './ContactUs.jsx'
+import About from './About.jsx'
 
 import { bindActionCreators } from 'redux';
 
@@ -40,6 +42,8 @@ class App extends React.Component {
 				    <Route exact path='/womensFashion' component={CategoryBrands} />
 				    <Route exact path='/details' component={Details} />
 				    <Route exact path='/accessories' component={Accessories} />
+				    <Route exact path='/contactInfo' component={ContactUs} />
+				    <Route exact path='/about' component={About} />
 				  </Switch>
 				</main>
 			</div>

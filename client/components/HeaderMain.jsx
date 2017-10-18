@@ -20,7 +20,7 @@ class HeaderMain extends React.Component {
 		return (
 			<div className="landingBanner">
 			<div id="headerBanner"> 
-			  <div id="logo"> The Bair Data </div>
+			  <Link id="logo" to="/"> The Bair Data </Link>
 			  <Link className="bannerItems" to="/contactInfo">Contact Us</Link>
 			  <Link className="bannerItems" to="/about">About</Link>
 			  <Link className="bannerItems" to="/womensFashion">Categories</Link>

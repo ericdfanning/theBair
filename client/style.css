@@ -2,6 +2,20 @@
 	font-family: "Open Sans", sans-serif;
 }
 
+#contactUsParent {
+	width: 100%;
+	height: 90vh;
+	position: relative;
+}
+#contactUs {
+	position: absolute;
+	top: 30%; left: 50%;
+	transform: translate(-50%,-50%);
+	font-size: 22px;
+	font-family: "Open Sans", sans-serif;
+	text-align: center;
+}
+
 #headerBanner {
 	height: 60px;
 	border-bottom: 1px solid lightgray;
@@ -19,55 +33,15 @@
 	font-size: 35px;
 }
 
-.polaroid { 
-   position: relative;
-   margin: 20px;
-   border: 1px solid lightgray;
-    -webkit-transition: margin 0.2s ease-out;
-   -moz-transition: margin 0.2s ease-out;
-   -o-transition: margin 0.2s ease-out;
-}
-
 #mainScreen {
 	margin: 0 auto;
 }
 
-.span-homegal a {
-    -webkit-transition: margin 0.2s ease-out;
-    -moz-transition: margin 0.2s ease-out;
-    -o-transition: margin 0.2s ease-out;
-}
 .span-homegal a:hover {
     margin-bottom: 0px;
 }
 .polaroid:hover{
     margin-top: 10px; 
-}
-
-.mainImage {
-	width: 350px;
-	height: 350px;
-}
-
-h2 { 
-   position: absolute; 
-   top: 250px; 
-   left: 0; 
-   width: 100%; 
-}
-
-h2 span { 
-   color: white; 
-   font: bold 18px/25px Helvetica, Sans-Serif; 
-   letter-spacing: -1px;  
-   background: rgb(0, 0, 0); /* fallback color */
-   background: rgba(0, 0, 0, 0.3);
-   padding: 10px; 
-}
-
-.dressesImage {
-	height: 30%;
-	width: 25%;
 }
 
 .headerLinks {
@@ -87,6 +61,33 @@ html {
 }
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
+
+	.mainImage {
+		width: 175px;
+		height: 175px;
+	}
+
+	.polaroid { 
+	  position: relative;
+	  border: 1px solid lightgray;
+	  margin-top: 10px;
+	}
+
+	h2 { 
+	   position: absolute; 
+	   top: 100px; 
+	   left: 0; 
+	   width: 100%; 
+	}
+
+	h2 span { 
+	   color: white; 
+	   font: bold 14px/21px Helvetica, Sans-Serif; 
+	   letter-spacing: -1px;  
+	   background: rgb(0, 0, 0); /* fallback color */
+	   background: rgba(0, 0, 0, 0.3);
+	   padding: 10px; 
+	}
 
 	.headerMain {
 		text-align: center;
@@ -115,10 +116,6 @@ html {
 		font-size: 20px;
 	}
 
-	.bannerItems:active {
-		color: white;
-	}
-
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -135,7 +132,7 @@ html {
 
 	.dataRows {
 		border: 1px solid lightgray;
-		border-radius: 7px;
+		border-radius: 3px;
 	}
 
 	.searchBar {
@@ -190,6 +187,34 @@ html {
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
 
+
+	.mainImage {
+		width: 200px;
+		height: 200px;
+	}
+
+	.polaroid { 
+	  position: relative;
+	  border: 1px solid lightgray;
+	  margin-top: 10px;
+	}
+
+	h2 { 
+	   position: absolute; 
+	   top: 100px; 
+	   left: 0; 
+	   width: 100%; 
+	}
+
+	h2 span { 
+	   color: white; 
+	   font: bold 14px/21px Helvetica, Sans-Serif; 
+	   letter-spacing: -1px;  
+	   background: rgb(0, 0, 0); /* fallback color */
+	   background: rgba(0, 0, 0, 0.3);
+	   padding: 10px; 
+	}
+
 	.headerMain {
 		text-align: center;
 		font-size: 10px;
@@ -217,10 +242,6 @@ html {
 		font-size: 20px;
 	}
 
-	.bannerItems:active {
-		color: white;
-	}
-
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -237,7 +258,7 @@ html {
 
 	.dataRows {
 		border: 1px solid lightgray;
-		border-radius: 7px;
+		border-radius: 3px;
 	}
 
 	.searchBar {
@@ -289,6 +310,40 @@ html {
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 
+
+	.mainImage {
+		width: 325px;
+		height: 325px;
+	}
+
+	.polaroid { 
+	  position: relative;
+	  margin: 20px;
+	  border: 1px solid lightgray;
+	}
+
+	h2 { 
+	   position: absolute; 
+	   top: 250px; 
+	   left: 0; 
+	   width: 100%; 
+	}
+
+	h2 span { 
+	   color: white; 
+	   font: bold 18px/25px Helvetica, Sans-Serif; 
+	   letter-spacing: -1px;  
+	   background: rgb(0, 0, 0); /* fallback color */
+	   background: rgba(0, 0, 0, 0.3);
+	   padding: 10px; 
+	}
+
+	.span-homegal a {
+    -webkit-transition: margin 0.2s ease-out;
+    -moz-transition: margin 0.2s ease-out;
+    -o-transition: margin 0.2s ease-out;
+	}
+
 	.headerMain {
 		text-align: center;
 		font-size: 20px;
@@ -317,10 +372,6 @@ html {
 		font-size: 20px;
 	}
 
-	.bannerItems:active {
-		color: white;
-	}
-
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -337,6 +388,11 @@ html {
 
 	.row {
 		border: none;
+	}
+
+	.dataRows {
+		border-top: 1px solid #FCFCFC;
+		border-bottom: 1px solid #FCFCFC;
 	}
 
 	.searchBar {
@@ -384,6 +440,42 @@ html {
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
 
+	.mainImage {
+		width: 350px;
+		height: 350px;
+	}
+
+	.polaroid { 
+	  position: relative;
+	  margin: 20px;
+	  border: 1px solid lightgray;
+	  -webkit-transition: margin 0.2s ease-out;
+	  -moz-transition: margin 0.2s ease-out;
+	  -o-transition: margin 0.2s ease-out;
+	}
+
+	h2 { 
+	   position: absolute; 
+	   top: 250px; 
+	   left: 0; 
+	   width: 100%; 
+	}
+
+	h2 span { 
+	   color: white; 
+	   font: bold 18px/25px Helvetica, Sans-Serif; 
+	   letter-spacing: -1px;  
+	   background: rgb(0, 0, 0); /* fallback color */
+	   background: rgba(0, 0, 0, 0.3);
+	   padding: 10px; 
+	}
+
+	.span-homegal a {
+    -webkit-transition: margin 0.2s ease-out;
+    -moz-transition: margin 0.2s ease-out;
+    -o-transition: margin 0.2s ease-out;
+	}
+
 	.headerMain {
 		text-align: center;
 		font-size: 20px;
@@ -412,10 +504,6 @@ html {
 		font-size: 20px;
 	}
 
-	.bannerItems:active {
-		color: white;
-	}
-
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -432,6 +520,11 @@ html {
 
 	.row {
 		border: none;
+	}
+
+	.dataRows {
+		border-top: 1px solid #FCFCFC;
+		border-bottom: 1px solid #FCFCFC;
 	}
 
 	.searchBar {
@@ -480,6 +573,26 @@ html {
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
 
+	.mainImage {
+		width: 350px;
+		height: 350px;
+	}
+
+	.polaroid { 
+	  position: relative;
+	  margin: 20px;
+	  border: 1px solid lightgray;
+	  -webkit-transition: margin 0.2s ease-out;
+	  -moz-transition: margin 0.2s ease-out;
+	  -o-transition: margin 0.2s ease-out;
+	}
+
+	.span-homegal a {
+    -webkit-transition: margin 0.2s ease-out;
+    -moz-transition: margin 0.2s ease-out;
+    -o-transition: margin 0.2s ease-out;
+	}
+
 	.headerMain {
 		text-align: center;
 		font-size: 20px;
@@ -508,10 +621,6 @@ html {
 		font-size: 20px;
 	}
 
-	.bannerItems:active {
-		color: white;
-	}
-
 	.paginationAndBrandCount {
 		width: 100%;
 		text-align: center;
@@ -528,6 +637,11 @@ html {
 
 	.row {
 		border: none;
+	}
+
+	.dataRows {
+		border-top: 1px solid #FCFCFC;
+		border-bottom: 1px solid #FCFCFC;
 	}
 
 	.searchBar {

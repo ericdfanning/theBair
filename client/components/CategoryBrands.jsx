@@ -24,9 +24,8 @@ class CategoryBrands extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-    this.props.getBrands('Dresses')
-      .then(() => this.createPageButtons())
+  componentWillReceiveProps() {
+    this.createPageButtons()
     // console.log('componentWillMount is mounting')
   }
 
@@ -118,25 +117,26 @@ class CategoryBrands extends React.Component {
 
         <div className="container-fluid">
           <div className="row col-12"> 
-          {this.props.isMobile ? 
-            <div className="col-12 selectCategoryMobile">
-              <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
-                <select className="selectpicker" name="userType">
-                  <option selected hidden>Choose Category</option>
-                  <option value="Dresses">Dresses</option>
-                  <option value="T-Shirts">T-Shirts</option>
-                  <option value="Tops/Blouses">Tops/Blouses</option>
-                </select>
-                <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
-              </form>
-            </div>
-          :
-            <div className="col-md-12 col-sm-6 categories">
-              {this.props.categories.map((v, i) => {
-                return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
-              })}
-            </div> 
-          }
+            {this.props.isMobile ? 
+              <div className="col-12 selectCategoryMobile">
+                <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
+                  <select className="selectpicker" name="userType">
+                    <option selected hidden>Choose Category</option>
+                    <option value="Dresses">Dresses</option>
+                    <option value="T-Shirts">T-Shirts</option>
+                    <option value="Tops/Blouses">Tops/Blouses</option>
+                  </select>
+                  <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
+                </form>
+              </div>
+            :
+              <div className="col-md-12 col-sm-6 categories">
+                {this.props.categories.map((v, i) => {
+                  return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
+                })}
+              </div> 
+            }
+
             {this.state.pageNumTags.length !== 0 && 
               <div className="paginationAndBrandCount">
                 <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   

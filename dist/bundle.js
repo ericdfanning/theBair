@@ -13735,6 +13735,8 @@ var _topsAndBlouses = __webpack_require__(344);
 
 var _topsAndBlouses2 = _interopRequireDefault(_topsAndBlouses);
 
+var _getWomensBrands = __webpack_require__(128);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13753,6 +13755,12 @@ var Main = function (_React$Component) {
 	}
 
 	_createClass(Main, [{
+		key: 'handleClick',
+		value: function handleClick(category) {
+			console.log('category picked', category);
+			this.props.getBrands(category);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -13769,7 +13777,7 @@ var Main = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'headerMain' },
-						'"Finding top selling brands on eBay is tough. ',
+						'"Finding top selling pre-owned brands on eBay is tough. ',
 						_react2.default.createElement('br', null),
 						'The Bair Data makes it easy."'
 					)
@@ -13784,7 +13792,7 @@ var Main = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'headerMain' },
-						'"Finding top selling brands on eBay is tough. ',
+						'"Finding top selling pre-owned brands on eBay is tough. ',
 						_react2.default.createElement('br', null),
 						'The Bair Data makes it easy."'
 					)
@@ -13802,8 +13810,8 @@ var Main = function (_React$Component) {
 								'span',
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
-									'a',
-									{ href: '/womensFashion' },
+									_reactRouterDom.Link,
+									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'dresses') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -13828,8 +13836,8 @@ var Main = function (_React$Component) {
 								'span',
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
-									'a',
-									{ href: '/womensFashion' },
+									_reactRouterDom.Link,
+									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'tshirts') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -13854,8 +13862,8 @@ var Main = function (_React$Component) {
 								'span',
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
-									'a',
-									{ href: '/womensFashion' },
+									_reactRouterDom.Link,
+									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'topsAndBlouses') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -13888,7 +13896,11 @@ function mapStateToProps(state) {
 	};
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Main);
+function mapDispatchToProps(dispatch) {
+	return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
 
 /***/ }),
 /* 128 */
@@ -13915,13 +13927,8 @@ var FETCH_BRANDS = exports.FETCH_BRANDS = 'fetch_brands';
 var ROOT_URL = 'http://localhost:8000';
 
 function getBrands(category) {
-	var categories = {
-		'Tops & Blouses': 'topsAndBlouses',
-		'T-Shirts': 'tshirts',
-		'Dresses': 'dresses'
-	};
 
-	var request = _axios2.default.get(ROOT_URL + '/' + categories[category]);
+	var request = _axios2.default.get(ROOT_URL + '/category/' + category);
 
 	return {
 		type: FETCH_BRANDS,
@@ -30152,6 +30159,14 @@ var _Details = __webpack_require__(118);
 
 var _Details2 = _interopRequireDefault(_Details);
 
+var _ContactUs = __webpack_require__(347);
+
+var _ContactUs2 = _interopRequireDefault(_ContactUs);
+
+var _About = __webpack_require__(346);
+
+var _About2 = _interopRequireDefault(_About);
+
 var _redux = __webpack_require__(19);
 
 var _reactRedux = __webpack_require__(34);
@@ -30206,7 +30221,9 @@ var App = function (_React$Component) {
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/womensFashion', component: _CategoryBrands2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default })
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/contactInfo', component: _ContactUs2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _About2.default })
 					)
 				)
 			);
@@ -32283,13 +32300,9 @@ var CategoryBrands = function (_React$Component) {
   }
 
   _createClass(CategoryBrands, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      this.props.getBrands('Dresses').then(function () {
-        return _this2.createPageButtons();
-      });
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      this.createPageButtons();
       // console.log('componentWillMount is mounting')
     }
   }, {
@@ -32375,22 +32388,22 @@ var CategoryBrands = function (_React$Component) {
   }, {
     key: 'handleCategoryPicked',
     value: function handleCategoryPicked(category) {
-      var _this3 = this;
+      var _this2 = this;
 
       this.props.getBrands(category).then(function () {
-        _this3.createPageButtons();
-        _this3.setState({ categoryPicked: category, page: 0 });
+        _this2.createPageButtons();
+        _this2.setState({ categoryPicked: category, page: 0 });
       });
     }
   }, {
     key: 'handleCategoryPickedMobile',
     value: function handleCategoryPickedMobile(e) {
-      var _this4 = this;
+      var _this3 = this;
 
       e.preventDefault();
 
       this.props.getBrands(e.target.userType.value).then(function () {
-        return _this4.createPageButtons();
+        return _this3.createPageButtons();
       });
 
       this.setState({ categoryPicked: e.target.userType.value, page: 0 });
@@ -32398,7 +32411,7 @@ var CategoryBrands = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -32461,7 +32474,7 @@ var CategoryBrands = function (_React$Component) {
               this.props.categories.map(function (v, i) {
                 return _react2.default.createElement(
                   'a',
-                  { key: i, onClick: _this5.handleCategoryPicked.bind(_this5, v), className: 'categoryItem' },
+                  { key: i, onClick: _this4.handleCategoryPicked.bind(_this4, v), className: 'categoryItem' },
                   ' ',
                   v,
                   ' '
@@ -43953,6 +43966,7 @@ function womensBrands() {
 
   switch (action.type) {
     case _getWomensBrands.FETCH_BRANDS:
+      console.log('in the reducer', action.payload.data);
       return {
         data: action.payload.data.data,
         pageCount: action.payload.data.pageCount,
@@ -44969,8 +44983,8 @@ var HeaderMain = function (_React$Component) {
 					'div',
 					{ id: 'headerBanner' },
 					_react2.default.createElement(
-						'div',
-						{ id: 'logo' },
+						_reactRouterDom.Link,
+						{ id: 'logo', to: '/' },
 						' The Bair Data '
 					),
 					_react2.default.createElement(
@@ -44997,6 +45011,116 @@ var HeaderMain = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = HeaderMain;
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var About = function (_React$Component) {
+	_inherits(About, _React$Component);
+
+	function About() {
+		_classCallCheck(this, About);
+
+		return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
+	}
+
+	_createClass(About, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ id: "contactUsParent" },
+				_react2.default.createElement(
+					"div",
+					{ id: "contactUs" },
+					"COMING SOON!"
+				)
+			);
+		}
+	}]);
+
+	return About;
+}(_react2.default.Component);
+
+exports.default = About;
+
+/***/ }),
+/* 347 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ContactUs = function (_React$Component) {
+	_inherits(ContactUs, _React$Component);
+
+	function ContactUs() {
+		_classCallCheck(this, ContactUs);
+
+		return _possibleConstructorReturn(this, (ContactUs.__proto__ || Object.getPrototypeOf(ContactUs)).apply(this, arguments));
+	}
+
+	_createClass(ContactUs, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ id: "contactUsParent" },
+				_react2.default.createElement(
+					"div",
+					{ id: "contactUs" },
+					"Please contact us with questions/concerns/requests at",
+					_react2.default.createElement("br", null),
+					"thebairdata@gmail.com"
+				)
+			);
+		}
+	}]);
+
+	return ContactUs;
+}(_react2.default.Component);
+
+exports.default = ContactUs;
 
 /***/ })
 /******/ ]);
