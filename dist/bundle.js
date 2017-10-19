@@ -13997,7 +13997,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -14013,8 +14013,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var FETCH_BRANDS = exports.FETCH_BRANDS = 'fetch_brands';
 
-// const ROOT_URL = process.env.NODE_ENV === 'production' ? 'http://thebairdata.com': 'http://localhost:8000'
-var ROOT_URL = 'http://localhost:8000';
+var ROOT_URL = process.env.NODE_ENV === 'production' ? 'http://thebairdata.com' : 'http://localhost:8000';
+// const ROOT_URL = 'http://localhost:8000'
 
 // ***** SET UP OBJECT FOR MEMOIZATION *******
 
@@ -14027,6 +14027,7 @@ function getBrands(category) {
 		payload: request
 	};
 }
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 129 */

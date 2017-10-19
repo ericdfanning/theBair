@@ -3,13 +3,6 @@ var allCategoriesCache = require('../cache/allCategoriesCache.js');
 var gettersHousing = require('../server.js');
 var path = require('path');
 
-router.get('/getStuff', function(req, res) {
-	console.log('get stuff WAS CALLED', gettersHousing)
-  gettersHousing.gettersHousing()
-  res.status(200)
-  res.end()
-})
-
 router.get('/category/dresses', function(req, res) {
   var dataObj = {
     data: allCategoriesCache.dresses.brands,
@@ -75,12 +68,6 @@ router.get('/category/jeans', function(req, res) {
   res.send(dataObj)
 })
 
-let emailService = require('./emailService/emailService.js')
-
-router.get('/emailService', (req, res) => {
-  console.log('email service')
-  emailService.sendEmail()
-})
 
 router.get('/grizzly', function(req, res) {
   res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
