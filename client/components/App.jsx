@@ -4,8 +4,10 @@ import Title from './Titles.jsx';
 import Main from './Main.jsx';
 import CategoryBrands from './CategoryBrands.jsx';
 import Accessories from './Accessories.jsx'
-import Navbar from './Navbar.jsx'
+import HeaderMain from './HeaderMain.jsx'
 import Details from './Details.jsx'
+import ContactUs from './ContactUs.jsx'
+import About from './About.jsx'
 
 import { bindActionCreators } from 'redux';
 
@@ -30,16 +32,21 @@ class App extends React.Component {
 
 	render () {
 		return (
-			<div className="headerLinks">
+			<div className="headerLinks mainBody">
 
-				<Navbar />
+				<HeaderMain />
 
-				<main className="mainBody">
+				<main>
 				  <Switch>
 				    <Route exact path='/' component={Main} />
-				    <Route exact path='/womensFashion' component={CategoryBrands} />
+				    <Route path='/womensFashion/dresses' component={CategoryBrands} />
+				    <Route path='/womensFashion/tshirts' component={CategoryBrands} />
+				    <Route path='/womensFashion/topsAndBlouses' component={CategoryBrands} />
+				    <Route path='/womensFashion' component={CategoryBrands} />
 				    <Route exact path='/details' component={Details} />
 				    <Route exact path='/accessories' component={Accessories} />
+				    <Route exact path='/contactInfo' component={ContactUs} />
+				    <Route exact path='/about' component={About} />
 				  </Switch>
 				</main>
 			</div>

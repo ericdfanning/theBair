@@ -48,7 +48,7 @@ class Titles extends Component {
 		  	var div = (
 		  		<div>
 		  			{keysArr.map(v => {
-		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
 		  			})}
 		  		</div>
 		  	)
@@ -79,7 +79,7 @@ class Titles extends Component {
 		var price = brand.val !== 1 ? '$' + brand.price[0] + ' - ' + '$' + brand.price[1]: '$' + brand.price[1]
 
 		return (
-      <div key={i} className="row dataRows" onClick={this.openModal.bind(this, brand)}> 
+      <div key={i} className="row dataRows cursorPointer" onClick={this.openModal.bind(this, brand)}> 
 			  <div className="col-md-4 col-sm-6 col-8">Brand: 
 			  	<h3>{brand.name}</h3> 
 			  </div>
@@ -93,7 +93,7 @@ class Titles extends Component {
 			  </div>
 			  <div className="col-md-3 col-sm-6 col-6">
 			  	  Price Range:
-			  	<h3 className="detailPrice"> {price}</h3>
+			  	<h3 id="moneyFont" className="detailPrice"> {price}</h3>
 			  	
 			  </div>
 			</div>

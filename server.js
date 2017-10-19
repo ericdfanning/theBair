@@ -1,23 +1,24 @@
 const APP_ID = require('./server/ebay.config').APP_ID
 
-var browserify = require('browserify-middleware');
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var path = require('path');
-var ebay = require('ebay-api');
-var axios = require('axios');
-var router = require('./server/routes.js');
-var Promise = require('mpromise');
-var helpers = require('./helpers');
-var cors = require('cors');
-var cron = require('./cronScan.js');
-var cron2 = require('./server/emailService/emailCronJob.js');
+let browserify = require('browserify-middleware');
+let express = require('express');
+let bodyParser = require('body-parser');
+let app = express();
+let path = require('path');
+let ebay = require('ebay-api');
+let axios = require('axios');
+let router = require('./server/routes.js');
+let Promise = require('mpromise');
+let helpers = require('./helpers');
+let cors = require('cors');
+let cron = require('./cronScan.js');
+let cron2 = require('./server/emailService/emailCronJob.js');
+let makeInitialAPICalls = require('./server/makeInitialAPICall.js');
 
-var getAllEbayData = require('./api_calls/getAllEbayData.js');
-var allCategoriesCache = require('./cache/allCategoriesCache.js');
+let getAllEbayData = require('./api_calls/getAllEbayData.js');
+let allCategoriesCache = require('./cache/allCategoriesCache.js');
 
-var port = 8000
+let port = 8000
 app.set('port', port);
 app.listen(app.get('port'), function() {
   console.log('Listening on port: ', port)
@@ -41,12 +42,10 @@ var categories = {
 }
 
 const gettersHousing = () => {
-  console.log('THE EXPRESSION WAS CALLED')
   getAllEbayData(categories.dresses, allCategoriesCache.dresses)
   getAllEbayData(categories.tshirts, allCategoriesCache.tshirts)
   getAllEbayData(categories.topsAndBlouses, allCategoriesCache.topsAndBlouses)
 }
-
 
 module.exports.gettersHousing = gettersHousing
 

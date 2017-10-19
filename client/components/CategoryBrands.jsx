@@ -4,7 +4,7 @@ import Title from './Titles.jsx';
 import Main from './Main.jsx';
 import { Link, Redirect } from 'react-router-dom'
 import * as Ebay from '../model/ebayData.js';
-
+import Navbar from './Navbar.jsx'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
@@ -24,10 +24,9 @@ class CategoryBrands extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-    this.props.getBrands('Dresses')
-      .then(() => this.createPageButtons())
-    // console.log('componentWillMount is mounting')
+  componentWillMount() {
+    this.createPageButtons()
+    console.log('componentWillMount is mounting')
   }
 
   callAjax() {
@@ -75,6 +74,7 @@ class CategoryBrands extends React.Component {
   }
 
   renderPageButtons() {
+    console.log('page num length', this.state.pageNumTags.length)
     return (
       <div> Pages
         {this.state.lessPages &&
@@ -83,7 +83,7 @@ class CategoryBrands extends React.Component {
 
         {this.state.pageNumTags[this.state.pageNumTagIndex].map(v => v)}
 
-        {this.state.morePages && this.state.pageNumTags.length >= 10 &&
+        {this.state.morePages && this.state.pageNumTags.length > 1 &&
           <span className="pageButton" onClick={this.increasePageRange.bind(this)}> {'>>'} </span>
         }
       </div>
@@ -110,13 +110,12 @@ class CategoryBrands extends React.Component {
   }
 
 	render () {
+    console.log('rendering', this.state.pageNumTags.length)
 		return (
 			<div>
-			    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
-			    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
 
-          <div className="container-fluid">
-            <div className="row col-12"> 
+        <div className="container-fluid">
+          <div className="row col-12"> 
             {this.props.isMobile ? 
               <div className="col-12 selectCategoryMobile">
                 <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
@@ -136,17 +135,18 @@ class CategoryBrands extends React.Component {
                 })}
               </div> 
             }
-              {this.state.pageNumTags.length !== 0 && 
-                <div className="paginationAndBrandCount">
-                  <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   
 
-                  <div className="col-12"> {this.renderPageButtons()} </div>
-                </div>
-              }
-            </div>
+            {this.state.pageNumTags.length !== 0 && 
+              <div className="paginationAndBrandCount">
+                <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   
+
+                <div className="col-12"> {this.renderPageButtons()} </div>
+              </div>
+            }
           </div>
-          
-          {this.props.data && <Title data={this.props.data[this.state.page]}/>}
+        </div>
+        
+        {this.props.data && <Title data={this.props.data[this.state.page]}/>}
 			</div>
 		)
 	}
