@@ -30219,9 +30219,7 @@ var App = function (_React$Component) {
 						_reactRouterDom.Switch,
 						null,
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/dresses', component: _CategoryBrands2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/tshirts', component: _CategoryBrands2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/topsAndBlouses', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/:category', component: _CategoryBrands2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion', component: _CategoryBrands2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default }),
@@ -32305,8 +32303,8 @@ var CategoryBrands = function (_React$Component) {
   _createClass(CategoryBrands, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.createPageButtons();
-      console.log('componentWillMount is mounting');
+      // this.createPageButtons()
+      this.props.getBrands(this.props.match.params.category);
     }
   }, {
     key: 'callAjax',

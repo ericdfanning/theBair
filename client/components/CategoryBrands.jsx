@@ -25,8 +25,8 @@ class CategoryBrands extends React.Component {
 	}
 
   componentWillMount() {
-    this.createPageButtons()
-    console.log('componentWillMount is mounting')
+    // this.createPageButtons()
+    this.props.getBrands(this.props.match.params.category)
   }
 
   callAjax() {
