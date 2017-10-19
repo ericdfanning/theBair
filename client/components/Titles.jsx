@@ -48,7 +48,7 @@ class Titles extends Component {
 		  	var div = (
 		  		<div>
 		  			{keysArr.map(v => {
-		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
 		  			})}
 		  		</div>
 		  	)
@@ -93,7 +93,7 @@ class Titles extends Component {
 			  </div>
 			  <div className="col-md-3 col-sm-6 col-6">
 			  	  Price Range:
-			  	<h3 className="detailPrice"> {price}</h3>
+			  	<h3 id="moneyFont" className="detailPrice"> {price}</h3>
 			  	
 			  </div>
 			</div>

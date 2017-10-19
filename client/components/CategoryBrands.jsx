@@ -24,9 +24,9 @@ class CategoryBrands extends React.Component {
 		}
 	}
 
-  componentWillReceiveProps() {
+  componentWillMount() {
     this.createPageButtons()
-    // console.log('componentWillMount is mounting')
+    console.log('componentWillMount is mounting')
   }
 
   callAjax() {
@@ -74,6 +74,7 @@ class CategoryBrands extends React.Component {
   }
 
   renderPageButtons() {
+    console.log('page num length', this.state.pageNumTags.length)
     return (
       <div> Pages
         {this.state.lessPages &&
@@ -82,7 +83,7 @@ class CategoryBrands extends React.Component {
 
         {this.state.pageNumTags[this.state.pageNumTagIndex].map(v => v)}
 
-        {this.state.morePages && this.state.pageNumTags.length >= 10 &&
+        {this.state.morePages && this.state.pageNumTags.length > 1 &&
           <span className="pageButton" onClick={this.increasePageRange.bind(this)}> {'>>'} </span>
         }
       </div>
@@ -109,11 +110,9 @@ class CategoryBrands extends React.Component {
   }
 
 	render () {
+    console.log('rendering', this.state.pageNumTags.length)
 		return (
 			<div>
-        
-		    <button className="btn btn-secondary" onClick={this.callAjax.bind(this)}> Make server Call </button>
-		    <button className="btn btn-secondary" onClick={this.gatherData.bind(this)}> Gather the Data </button>
 
         <div className="container-fluid">
           <div className="row col-12"> 

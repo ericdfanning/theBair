@@ -12468,7 +12468,7 @@ var Titles = function (_Component) {
 							avgs[v],
 							_react2.default.createElement(
 								'span',
-								{ style: { float: "right", marginRight: "20px" } },
+								{ className: 'moneyFont', style: { float: "right", marginRight: "20px" } },
 								'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)
 							)
 						)
@@ -12539,7 +12539,7 @@ var Titles = function (_Component) {
 					'Price Range:',
 					_react2.default.createElement(
 						'h3',
-						{ className: 'detailPrice' },
+						{ id: 'moneyFont', className: 'detailPrice' },
 						' ',
 						price
 					)
@@ -13811,7 +13811,7 @@ var Main = function (_React$Component) {
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
 									_reactRouterDom.Link,
-									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'dresses') },
+									{ to: '/womensFashion/dresses', onClick: this.handleClick.bind(this, 'dresses') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -13837,7 +13837,7 @@ var Main = function (_React$Component) {
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
 									_reactRouterDom.Link,
-									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'tshirts') },
+									{ to: '/womensFashion/tshirts', onClick: this.handleClick.bind(this, 'tshirts') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -13863,7 +13863,7 @@ var Main = function (_React$Component) {
 								{ className: 'span-homegal' },
 								_react2.default.createElement(
 									_reactRouterDom.Link,
-									{ to: '/womensFashion', onClick: this.handleClick.bind(this, 'topsAndBlouses') },
+									{ to: '/womensFashion/topsAndBlouses', onClick: this.handleClick.bind(this, 'topsAndBlouses') },
 									_react2.default.createElement(
 										'div',
 										{ className: 'polaroid' },
@@ -30219,7 +30219,10 @@ var App = function (_React$Component) {
 						_reactRouterDom.Switch,
 						null,
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
-						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/womensFashion', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/dresses', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/tshirts', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion/topsAndBlouses', component: _CategoryBrands2.default }),
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/womensFashion', component: _CategoryBrands2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/details', component: _Details2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/accessories', component: _Accessories2.default }),
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/contactInfo', component: _ContactUs2.default }),
@@ -32300,10 +32303,10 @@ var CategoryBrands = function (_React$Component) {
   }
 
   _createClass(CategoryBrands, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       this.createPageButtons();
-      // console.log('componentWillMount is mounting')
+      console.log('componentWillMount is mounting');
     }
   }, {
     key: 'callAjax',
@@ -32362,6 +32365,7 @@ var CategoryBrands = function (_React$Component) {
   }, {
     key: 'renderPageButtons',
     value: function renderPageButtons() {
+      console.log('page num length', this.state.pageNumTags.length);
       return _react2.default.createElement(
         'div',
         null,
@@ -32376,7 +32380,7 @@ var CategoryBrands = function (_React$Component) {
         this.state.pageNumTags[this.state.pageNumTagIndex].map(function (v) {
           return v;
         }),
-        this.state.morePages && this.state.pageNumTags.length >= 10 && _react2.default.createElement(
+        this.state.morePages && this.state.pageNumTags.length > 1 && _react2.default.createElement(
           'span',
           { className: 'pageButton', onClick: this.increasePageRange.bind(this) },
           ' ',
@@ -32413,19 +32417,10 @@ var CategoryBrands = function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
+      console.log('rendering', this.state.pageNumTags.length);
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-secondary', onClick: this.callAjax.bind(this) },
-          ' Make server Call '
-        ),
-        _react2.default.createElement(
-          'button',
-          { className: 'btn btn-secondary', onClick: this.gatherData.bind(this) },
-          ' Gather the Data '
-        ),
         _react2.default.createElement(
           'div',
           { className: 'container-fluid' },
@@ -43966,7 +43961,7 @@ function womensBrands() {
 
   switch (action.type) {
     case _getWomensBrands.FETCH_BRANDS:
-      console.log('in the reducer', action.payload.data);
+
       return {
         data: action.payload.data.data,
         pageCount: action.payload.data.pageCount,

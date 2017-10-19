@@ -34,7 +34,7 @@ class Main extends React.Component {
           <div className="row">
 	          <div id="mainScreen">
 	          	<span className="span-homegal">
-	              <Link to="/womensFashion" onClick={this.handleClick.bind(this, 'dresses')}>
+	              <Link to="/womensFashion/dresses" onClick={this.handleClick.bind(this, 'dresses')}>
 	                  <div className="polaroid">
 	                      <img className="mainImage" src={dressesImage}/>
 	                      <h2><span>Dresses</span></h2>
@@ -44,7 +44,7 @@ class Main extends React.Component {
 		        </div>
 		        <div id="mainScreen">
 				   	  <span className="span-homegal">
-				        <Link to="/womensFashion" onClick={this.handleClick.bind(this, 'tshirts')}>
+				        <Link to="/womensFashion/tshirts" onClick={this.handleClick.bind(this, 'tshirts')}>
 			            <div className="polaroid">
 		                <img className="mainImage" src={tshirts}/>
 		                <h2><span>T-Shirts</span></h2>
@@ -54,7 +54,7 @@ class Main extends React.Component {
 					  </div>
 					  <div id="mainScreen">
     		   	  <span className="span-homegal">
-    		        <Link to="/womensFashion" onClick={this.handleClick.bind(this, 'topsAndBlouses')}>
+    		        <Link to="/womensFashion/topsAndBlouses" onClick={this.handleClick.bind(this, 'topsAndBlouses')}>
     	            <div className="polaroid">
                     <img className="mainImage" src={topsAndBlouses}/>
                     <h2><span>Tops & Blouses</span></h2>
