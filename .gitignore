@@ -5,5 +5,3 @@ server/config.js
 server/emailService/email.config.js
 
 server/ebay.config.js
-
-extraServerCrap.js

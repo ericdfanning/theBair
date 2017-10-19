@@ -13892,7 +13892,11 @@ var Main = function (_React$Component) {
 									)
 								)
 							)
-						),
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
 						_react2.default.createElement(
 							'div',
 							{ id: 'mainScreen' },
