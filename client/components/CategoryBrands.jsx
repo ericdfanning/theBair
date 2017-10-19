@@ -25,14 +25,18 @@ class CategoryBrands extends React.Component {
 	}
 
   componentWillMount() {
-    // this.createPageButtons()
+    const categories = {
+      dresses: 'Dresses',
+      tshirts: 'T-Shirts',
+      topsAndBlouses: 'Tops & Blouses',
+      flats: 'Flats',
+      sweaters: 'Sweaters',
+      jeans: 'Jeans'
+    }
+    
+    this.setState({categoryPicked: categories[this.props.match.params.category]})
     this.props.getBrands(this.props.match.params.category)
-  }
-
-  callAjax() {
-  	Ebay.getData((err, res) => {
-  		console.log('I just finished running')
-  	})
+      .then(()=>{this.createPageButtons()}) 
   }
 
   increasePageRange() {
@@ -63,7 +67,7 @@ class CategoryBrands extends React.Component {
     var tags = []
     var buttons = []
     for (var i = 0; i < this.props.pageCount; i++) {
-      var tag = <span className="pageButton" onClick={this.gatherData.bind(this, i)}> {i + 1} </span>
+      var tag = <span key={i} className="pageButton" onClick={this.gatherData.bind(this, i)}> {i + 1} </span>
       buttons.push(tag)
       if ((i%10 === 0 && i !== 0) || i === this.props.pageCount - 1) {
         tags.push(buttons)
@@ -74,17 +78,16 @@ class CategoryBrands extends React.Component {
   }
 
   renderPageButtons() {
-    console.log('page num length', this.state.pageNumTags.length)
     return (
-      <div> Pages
+      <div style={{fontFamily: "Open Sans"}}> Pages
         {this.state.lessPages &&
-          <span className="pageButton" onClick={this.decreasePageRange.bind(this)}> {'<<'} </span>
+          <span className="pageButton" onClick={this.decreasePageRange.bind(this)}><i className="fa fa-chevron-left fa-fw chevron" aria-hidden="true"></i></span>
         }
 
         {this.state.pageNumTags[this.state.pageNumTagIndex].map(v => v)}
 
         {this.state.morePages && this.state.pageNumTags.length > 1 &&
-          <span className="pageButton" onClick={this.increasePageRange.bind(this)}> {'>>'} </span>
+          <span className="pageButton" onClick={this.increasePageRange.bind(this)}><i className="fa fa-chevron-right fa-fw chevron" aria-hidden="true"></i></span>
         }
       </div>
     )
@@ -110,17 +113,16 @@ class CategoryBrands extends React.Component {
   }
 
 	render () {
-    console.log('rendering', this.state.pageNumTags.length)
 		return (
 			<div>
 
         <div className="container-fluid">
           <div className="row col-12"> 
-            {this.props.isMobile ? 
+            {this.props.isMobile &&
               <div className="col-12 selectCategoryMobile">
                 <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
                   <select className="selectpicker" name="userType">
-                    <option selected hidden>Choose Category</option>
+                    <option selected hidden>Choose Category</option> 
                     <option value="Dresses">Dresses</option>
                     <option value="T-Shirts">T-Shirts</option>
                     <option value="Tops/Blouses">Tops/Blouses</option>
@@ -128,17 +130,12 @@ class CategoryBrands extends React.Component {
                   <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
                 </form>
               </div>
-            :
-              <div className="col-md-12 col-sm-6 categories">
-                {this.props.categories.map((v, i) => {
-                  return <a key={i} onClick={this.handleCategoryPicked.bind(this, v)} className="categoryItem"> {v} </a>
-                })}
-              </div> 
             }
 
             {this.state.pageNumTags.length !== 0 && 
               <div className="paginationAndBrandCount">
-                <div className="col-12"> {this.props.brandsCount} different {this.state.categoryPicked} brands </div>   
+              <div style={{fontFamily: "Open Sans"}} className="col-12">{this.state.categoryPicked}</div>
+                <div style={{fontFamily: "Open Sans"}} className="col-12"> {this.props.brandsCount} total brands </div><br/>  
 
                 <div className="col-12"> {this.renderPageButtons()} </div>
               </div>
@@ -146,7 +143,7 @@ class CategoryBrands extends React.Component {
           </div>
         </div>
         
-        {this.props.data && <Title data={this.props.data[this.state.page]}/>}
+        {this.props.data && this.state.pageNumTags.length !== 0 && <Title data={this.props.data[this.state.page]}/>}
 			</div>
 		)
 	}

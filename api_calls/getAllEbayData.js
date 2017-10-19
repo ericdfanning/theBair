@@ -10,16 +10,18 @@ var Category = require('../schema').Category
 var ItemIds = require('../schema').ItemIds
 var Current = require('../schema').Current
 
-var categories = {
-  11450: 'Clothing & Accessories',
-  15724: 'Womens clothing',
-  63861: 'Dresses',
-  dresses: '63861'
-}
-
 var otherOptions = {
   freeShipping: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&',
   sortByPrice: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&'
+}
+
+var categories = {
+	'63861': 'Dresses',
+	'63869': 'T-Shirts',
+	'53159': 'Tops & Blouses',
+	'45333': 'Flats',
+	'63866': 'Sweaters',
+	'11554': 'Jeans'
 }
 
 var getAllEbayData = (categoryCode, cache) => {
@@ -169,7 +171,7 @@ var getAllEbayData = (categoryCode, cache) => {
 	          }
 	        }
 
-	      	console.log('SAVING THE DRESSES and length', cache.brands.length)
+	      	console.log(`SAVING THE ${categories[categoryCode]} and length`, cache.brands.length)
 	        var newCurrentObj = new Current({
 	          category: categoryCode,
 	          info: cache,

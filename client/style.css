@@ -2,6 +2,35 @@
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+.chevron {
+	color: rgba(32,64,97,1);
+}
+
+.search { 
+	float: right;
+	width: 300px;
+	margin-top: 20px;
+	margin-right: 20px;
+	border-radius: 20px;	
+	background-color: white;
+}
+.search input:focus {
+	outline: none;
+}
+.search input { 
+	border: none;
+	text-indent: 30px;
+	width: 300px;
+	margin-right: 20px;
+	background-color: transparent;
+}
+.search .fa-search { 
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+
 #contactUsParent {
 	width: 100%;
 	height: 90vh;
@@ -12,14 +41,14 @@
 	top: 30%; left: 50%;
 	transform: translate(-50%,-50%);
 	font-size: 22px;
-	font-family: "Open Sans", sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	text-align: center;
 }
 
 #headerBanner {
 	height: 60px;
 	border-bottom: 1px solid lightgray;
-	background-color: rgba(59,60,61,1);
+	background-color: rgba(32,64,97,1); /* charcoal color rgba(59,60,61,1) */
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -312,8 +341,8 @@ html {
 
 
 	.mainImage {
-		width: 325px;
-		height: 325px;
+		width: 275px;
+		height: 275px;
 	}
 
 	.polaroid { 
@@ -324,7 +353,7 @@ html {
 
 	h2 { 
 	   position: absolute; 
-	   top: 250px; 
+	   top: 200px; 
 	   left: 0; 
 	   width: 100%; 
 	}
@@ -384,6 +413,8 @@ html {
 		cursor: pointer;
 		color: black;
 		margin: 3px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: bold;
 	}
 
 	.row {
@@ -441,8 +472,8 @@ html {
 @media only screen and (min-width : 992px) {
 
 	.mainImage {
-		width: 350px;
-		height: 350px;
+		width: 300px;
+		height: 300px;
 	}
 
 	.polaroid { 
@@ -456,7 +487,7 @@ html {
 
 	h2 { 
 	   position: absolute; 
-	   top: 250px; 
+	   top: 200px; 
 	   left: 0; 
 	   width: 100%; 
 	}
@@ -516,6 +547,8 @@ html {
 		cursor: pointer;
 		color: black;
 		margin: 3px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: bold;
 	}
 
 	.row {
@@ -574,8 +607,8 @@ html {
 @media only screen and (min-width : 1200px) {
 
 	.mainImage {
-		width: 350px;
-		height: 350px;
+		width: 300px;
+		height: 300px;
 	}
 
 	.polaroid { 
@@ -585,6 +618,22 @@ html {
 	  -webkit-transition: margin 0.2s ease-out;
 	  -moz-transition: margin 0.2s ease-out;
 	  -o-transition: margin 0.2s ease-out;
+	}
+	
+	h2 { 
+	   position: absolute; 
+	   top: 200px; 
+	   left: 0; 
+	   width: 100%; 
+	}
+
+	h2 span { 
+	   color: white; 
+	   font: bold 18px/25px Helvetica, Sans-Serif; 
+	   letter-spacing: -1px;  
+	   background: rgb(0, 0, 0); /* fallback color */
+	   background: rgba(0, 0, 0, 0.3);
+	   padding: 10px; 
 	}
 
 	.span-homegal a {
@@ -633,6 +682,8 @@ html {
 		cursor: pointer;
 		color: black;
 		margin: 3px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: bold;
 	}
 
 	.row {

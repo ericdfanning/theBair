@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import dressesImage from '../../images/dresses.jpeg'
 import tshirts from '../../images/tshirts.jpeg'
 import topsAndBlouses from '../../images/topsAndBlouses.jpeg'
+import flats from '../../images/womensFlats.jpeg'
+import sweaters from '../../images/sweater.jpeg'
+import jeans from '../../images/jeans.jpeg'
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
 
 class Main extends React.Component {
@@ -58,6 +61,36 @@ class Main extends React.Component {
     	            <div className="polaroid">
                     <img className="mainImage" src={topsAndBlouses}/>
                     <h2><span>Tops & Blouses</span></h2>
+    	            </div>
+    		        </Link>
+    		      </span>
+	    		  </div>
+					  <div id="mainScreen">
+    		   	  <span className="span-homegal">
+    		        <Link to="/womensFashion/flats" onClick={this.handleClick.bind(this, 'flats')}>
+    	            <div className="polaroid">
+                    <img className="mainImage" src={flats}/>
+                    <h2><span>Flats</span></h2>
+    	            </div>
+    		        </Link>
+    		      </span>
+	    		  </div>
+					  <div id="mainScreen">
+    		   	  <span className="span-homegal">
+    		        <Link to="/womensFashion/sweaters" onClick={this.handleClick.bind(this, 'sweaters')}>
+    	            <div className="polaroid">
+                    <img className="mainImage" src={sweaters}/>
+                    <h2><span>Sweaters</span></h2>
+    	            </div>
+    		        </Link>
+    		      </span>
+	    		  </div>
+					  <div id="mainScreen">
+    		   	  <span className="span-homegal">
+    		        <Link to="/womensFashion/jeans" onClick={this.handleClick.bind(this, 'jeans')}>
+    	            <div className="polaroid">
+                    <img className="mainImage" src={jeans}/>
+                    <h2><span>Jeans</span></h2>
     	            </div>
     		        </Link>
     		      </span>
