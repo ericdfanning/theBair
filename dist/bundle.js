@@ -45085,11 +45085,6 @@ var HeaderMain = function (_React$Component) {
 						'About'
 					),
 					_react2.default.createElement(
-						_reactRouterDom.Link,
-						{ className: 'bannerItems', to: '/womensFashion' },
-						'Categories'
-					),
-					_react2.default.createElement(
 						'form',
 						{ className: 'search', onSubmit: this.handleSearch.bind(this) },
 						_react2.default.createElement('span', { className: 'fa fa-search' }),
