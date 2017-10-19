@@ -47,8 +47,8 @@ class Titles extends Component {
 		  	var avgs = item.avgs
 		  	var div = (
 		  		<div>
-		  			{keysArr.map(v => {
-		  				return <div style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+		  			{keysArr.map((v, i) => {
+		  				return <div key={i} style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
 		  			})}
 		  		</div>
 		  	)
@@ -126,7 +126,7 @@ class Titles extends Component {
 				   <div className="brandsInfo">
 				     <h4 style={{paddingLeft: "20px"}}>Name: {this.state.itemClicked.name}</h4>
 				     <h4 style={{paddingLeft: "20px"}}>Number Sold: {this.state.itemClicked.val}</h4>
-				     <h5 style={{paddingLeft: "20px"}}>Sold between: {this.state.itemClicked.endTime}</h5>
+				     <h5 style={{paddingLeft: "20px"}}>Sold since: {this.state.itemClicked.endTime}</h5>
 				     {this.state.itemClicked.price &&
 				       <h5 style={{paddingLeft: "20px"}}>Price Range: ${this.state.itemClicked.price[0]} - ${this.state.itemClicked.price[1]}</h5>
 				     }

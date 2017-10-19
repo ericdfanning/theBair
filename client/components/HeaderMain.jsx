@@ -16,6 +16,12 @@ class HeaderMain extends React.Component {
 		this.props.setCategories(category)
 	}
 
+	handleSearch(e) {
+		e.preventDefault()
+
+		console.log('search submitted', e.target.text.value)
+	}
+
 	render () {
 		return (
 			<div className="landingBanner">
@@ -24,6 +30,10 @@ class HeaderMain extends React.Component {
 			  <Link className="bannerItems" to="/contactInfo">Contact Us</Link>
 			  <Link className="bannerItems" to="/about">About</Link>
 			  <Link className="bannerItems" to="/womensFashion">Categories</Link>
+			  <form className="search" onSubmit={this.handleSearch.bind(this)}>
+			    <span className="fa fa-search"></span>
+			    <input type="text" placeholder="Searching is not available, sorry" name="text"/>
+			 	</form>
 			</div>
 			</div>
 		)
