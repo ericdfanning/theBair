@@ -67,12 +67,13 @@ module.exports = (cats) => {
               </div>
                <h2> Here's the leaders for this week. </h2>
               <div id="stats">
+                <h2>In Women's Fashion</h2>
                 <h3><span>Dresses: ${cats.dresses.val} ${cats.dresses.name} sold since ${cats.dresses.endTime} with the highest average of ${topAverage(cats.dresses.avgs).total} sold between ${topAverage(cats.dresses.avgs).range}</span></h3>
                 <h3><span>T-Shirts: ${cats.tshirts.val} ${cats.tshirts.name} sold since ${cats.tshirts.endTime} with the highest average of ${topAverage(cats.tshirts.avgs).total} sold between ${topAverage(cats.tshirts.avgs).range}</span></h3>
                 <h3><span>Tops & Blouses: ${cats.topsAndBlouses.val} ${cats.topsAndBlouses.name} sold since ${cats.topsAndBlouses.endTime} with the highest average of ${topAverage(cats.topsAndBlouses.avgs).total} sold between ${topAverage(cats.topsAndBlouses.avgs).range}</span></h3>
-                <h3><span>T-Shirts: ${cats.flats.val} ${cats.flats.name} sold since ${cats.flats.endTime} with the highest average of ${topAverage(cats.flats.avgs).total} sold between ${topAverage(cats.flats.avgs).range}</span></h3>
-                <h3><span>T-Shirts: ${cats.sweaters.val} ${cats.sweaters.name} sold since ${cats.sweaters.endTime} with the highest average of ${topAverage(cats.sweaters.avgs).total} sold between ${topAverage(cats.sweaters.avgs).range}</span></h3>
-                <h3><span>T-Shirts: ${cats.jeans.val} ${cats.jeans.name} sold since ${cats.jeans.endTime} with the highest average of ${topAverage(cats.jeans.avgs).total} sold between ${topAverage(cats.jeans.avgs).range}</span></h3>
+                <h3><span>Flats: ${cats.flats.val} ${cats.flats.name} sold since ${cats.flats.endTime} with the highest average of ${topAverage(cats.flats.avgs).total} sold between ${topAverage(cats.flats.avgs).range}</span></h3>
+                <h3><span>Sweaters: ${cats.sweaters.val} ${cats.sweaters.name} sold since ${cats.sweaters.endTime} with the highest average of ${topAverage(cats.sweaters.avgs).total} sold between ${topAverage(cats.sweaters.avgs).range}</span></h3>
+                <h3><span>Jeans: ${cats.jeans.val} ${cats.jeans.name} sold since ${cats.jeans.endTime} with the highest average of ${topAverage(cats.jeans.avgs).total} sold between ${topAverage(cats.jeans.avgs).range}</span></h3>
               </div>
             </div>
             <p>Don't want to receive emails from us? Unsubscribe <a target="_blank" href="http://localhost:8000">here</a>.</p>
