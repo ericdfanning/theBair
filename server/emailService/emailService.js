@@ -24,7 +24,10 @@ exports.sendEmail = (recipient, message) => {
   var dataObj = {
     dresses: allCategoriesCache.dresses.brands[0][0],
     tshirts: allCategoriesCache.tshirts.brands[0][0],
-    topsAndBlouses: allCategoriesCache.topsAndBlouses.brands[0][0]
+    topsAndBlouses: allCategoriesCache.topsAndBlouses.brands[0][0],
+    flats: allCategoriesCache.flats.brands[0][0],
+    sweaters: allCategoriesCache.sweaters.brands[0][0],
+    jeans: allCategoriesCache.jeans.brands[0][0]
   }
 
   let options = {
