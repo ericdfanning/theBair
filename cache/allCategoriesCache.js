@@ -1,79 +1,20 @@
-module.exports.dresses = {
-	brands: [],
-	brandsCount: Number
-}
+const makeObj = () => ({brands: [], brandsCount: Number})
 
-module.exports.womensTshirts = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.topsAndBlouses = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.flats = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.womensSweaters = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.womensJeans = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.heels = {
-	brands: [],
-	brandsCount: Number
-}
-
-module.exports.womansSandals = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.womansCoatsJackets = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensJeans = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensSweaters = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensDressShirts = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensCasualShirts = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensTshirts = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensBlazors = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.ties = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensDressFormalShoes = {
-	brands: [],
-	brandsCount: Number
-}
-module.exports.mensCasualShoes = {
-	brands: [],
-	brandsCount: Number
-}
+module.exports.dresses = makeObj()
+module.exports.womensTshirts = makeObj()
+module.exports.topsAndBlouses = makeObj()
+module.exports.flats = makeObj()
+module.exports.womensSweaters = makeObj()
+module.exports.womensJeans = makeObj()
+module.exports.heels = makeObj()
+module.exports.womansSandals = makeObj()
+module.exports.womansCoatsJackets = makeObj()
+module.exports.mensJeans = makeObj()
+module.exports.mensSweaters = makeObj()
+module.exports.mensDressShirts = makeObj()
+module.exports.mensCasualShirts = makeObj()
+module.exports.mensTshirts = makeObj()
+module.exports.mensBlazors = makeObj()
+module.exports.ties = makeObj()
+module.exports.mensDressFormalShoes = makeObj()
+module.exports.mensCasualShoes = makeObj()
