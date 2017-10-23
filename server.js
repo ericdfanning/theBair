@@ -33,6 +33,26 @@ app.use(express.static(path.join(__dirname, './dist')));
 app.use(bodyParser.json());
 
 app.use(cors());
+
+
+var Category = require('./schema').Category
+var ItemIds = require('./schema').ItemIds
+var Current = require('./schema').Current
+
+// app.get('/testing', (req, res) => {
+//   console.log('INSIDE THIS PIECE OF CRAP!')
+//   var query = Current.find({category: '63861'}, function(err, currentBrands) {
+//     if (err) {
+//       console.log('failed to find in Category')
+//     }
+//   })
+
+//   var promise = query.exec();
+//   promise.then(function (current) {
+//     console.log('RESPONSE FROM MONGO', current[current.length - 1].info)
+//   })
+// })
+
 app.use('/', router);
 
 var categories = {

@@ -12,6 +12,33 @@ import sweaters from '../../images/sweater.jpeg'
 import jeans from '../../images/jeans.jpeg'
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
 
+const cats = [
+  {
+  	title: 'Dresses',
+  	lwrCase: 'dresses'
+  },
+    {
+  	title: 'T-Shirts',
+  	lwrCase: 'tshirts'
+  },
+    {
+  	title: 'Tops & Blouses',
+  	lwrCase: 'topsAndBlouses'
+  },
+    {
+  	title: 'Flats',
+  	lwrCase: 'flats'
+  },
+    {
+  	title: 'Sweaters',
+  	lwrCase: 'sweaters'
+  },
+    {
+  	title: 'Jeans',
+  	lwrCase: 'jeans'
+  }
+]
+
 class Main extends React.Component {
 
 	handleClick(category) {
