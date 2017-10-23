@@ -13704,7 +13704,7 @@ function verifyPlainObject(value, displayName, methodName) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13758,260 +13758,188 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var cats = [{
-	title: 'Dresses',
-	lwrCase: 'dresses'
+  title: 'Dresses',
+  img: _dresses2.default,
+  lwrCase: 'dresses'
 }, {
-	title: 'T-Shirts',
-	lwrCase: 'tshirts'
+  title: 'T-Shirts',
+  img: _tshirts2.default,
+  lwrCase: 'tshirts'
 }, {
-	title: 'Tops & Blouses',
-	lwrCase: 'topsAndBlouses'
+  title: 'Tops & Blouses',
+  img: _topsAndBlouses2.default,
+  lwrCase: 'topsAndBlouses'
 }, {
-	title: 'Flats',
-	lwrCase: 'flats'
+  title: 'Flats',
+  img: _womensFlats2.default,
+  lwrCase: 'flats'
 }, {
-	title: 'Sweaters',
-	lwrCase: 'sweaters'
+  title: 'Sweaters',
+  img: _sweater2.default,
+  lwrCase: 'sweaters'
 }, {
-	title: 'Jeans',
-	lwrCase: 'jeans'
+  title: 'Jeans',
+  img: _jeans2.default,
+  lwrCase: 'jeans'
+}, {
+  title: 'Coats & Jackets',
+  img: _jeans2.default,
+  lwrCase: 'womansCoatsJackets'
+}, {
+  title: 'Heels',
+  img: _jeans2.default,
+  lwrCase: 'heels'
+}, {
+  title: 'Womans Sandals',
+  img: _jeans2.default,
+  lwrCase: 'womansSandals'
+}, {
+  title: 'Mens Jeans',
+  img: _jeans2.default,
+  lwrCase: 'mensJeans'
+}, {
+  title: 'Mens Sweaters',
+  img: _jeans2.default,
+  lwrCase: 'mensSweaters'
+}, {
+  title: 'Dress Shirts',
+  img: _jeans2.default,
+  lwrCase: 'mensDressShirts'
+}, {
+  title: 'Mens Casual Shirts',
+  img: _jeans2.default,
+  lwrCase: 'mensCasualShirts'
+}, {
+  title: 'Mens T-Shirts',
+  img: _jeans2.default,
+  lwrCase: 'mensTshirts'
+}, {
+  title: 'Mens Blazors & Sport Coats',
+  img: _jeans2.default,
+  lwrCase: 'mensBlazors'
+}, {
+  title: 'Ties',
+  img: _jeans2.default,
+  lwrCase: 'ties'
+}, {
+  title: 'Mens Dress/Formal Shoes',
+  img: _jeans2.default,
+  lwrCase: 'mensDressFormalShoes'
+}, {
+  title: 'Mens Casual Shoes',
+  img: _jeans2.default,
+  lwrCase: 'mensCasualShoes'
 }];
 
 var Main = function (_React$Component) {
-	_inherits(Main, _React$Component);
+  _inherits(Main, _React$Component);
 
-	function Main() {
-		_classCallCheck(this, Main);
+  function Main() {
+    _classCallCheck(this, Main);
 
-		return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+  }
 
-	_createClass(Main, [{
-		key: 'handleClick',
-		value: function handleClick(category) {
-			console.log('category picked', category);
-			this.props.getBrands(category);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				!this.props.mobile ? _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'div',
-						{ className: 'headerMainTop' },
-						'Are you an eBay reseller? Then this site\'s for you!'
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'headerMain' },
-						'"Finding top selling pre-owned brands on eBay is tough. ',
-						_react2.default.createElement('br', null),
-						'The Bair Data makes it easy."'
-					)
-				) : _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'div',
-						{ className: 'headerMainTop' },
-						'Are you an eBay reseller? Then this site\'s for you!'
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'headerMain' },
-						'"Finding top selling pre-owned brands on eBay is tough. ',
-						_react2.default.createElement('br', null),
-						'The Bair Data makes it easy."'
-					)
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'container-fluid' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'row' },
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/dresses', onClick: this.handleClick.bind(this, 'dresses') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _dresses2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'Dresses'
-											)
-										)
-									)
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/tshirts', onClick: this.handleClick.bind(this, 'tshirts') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _tshirts2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'T-Shirts'
-											)
-										)
-									)
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/topsAndBlouses', onClick: this.handleClick.bind(this, 'topsAndBlouses') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _topsAndBlouses2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'Tops & Blouses'
-											)
-										)
-									)
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'row' },
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/flats', onClick: this.handleClick.bind(this, 'flats') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _womensFlats2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'Flats'
-											)
-										)
-									)
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/sweaters', onClick: this.handleClick.bind(this, 'sweaters') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _sweater2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'Sweaters'
-											)
-										)
-									)
-								)
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'mainScreen' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'span-homegal' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: '/womensFashion/jeans', onClick: this.handleClick.bind(this, 'jeans') },
-									_react2.default.createElement(
-										'div',
-										{ className: 'polaroid' },
-										_react2.default.createElement('img', { className: 'mainImage', src: _jeans2.default }),
-										_react2.default.createElement(
-											'h2',
-											null,
-											_react2.default.createElement(
-												'span',
-												null,
-												'Jeans'
-											)
-										)
-									)
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
+  _createClass(Main, [{
+    key: 'handleClick',
+    value: function handleClick(category) {
+      this.props.getBrands(category);
+    }
+  }, {
+    key: 'renderCategories',
+    value: function renderCategories() {
+      var _this2 = this;
 
-	return Main;
+      return _react2.default.createElement(
+        'div',
+        { className: 'row' },
+        cats.map(function (v, i) {
+          return _react2.default.createElement(
+            'div',
+            { key: i, id: 'mainScreen' },
+            _react2.default.createElement(
+              'span',
+              { className: 'span-homegal' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/womensFashion/' + cats[i].lwrCase, onClick: _this2.handleClick.bind(_this2, '' + cats[i].lwrCase) },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'polaroid' },
+                  _react2.default.createElement('img', { className: 'mainImage', src: '' + cats[i].img }),
+                  _react2.default.createElement(
+                    'h2',
+                    null,
+                    _react2.default.createElement(
+                      'span',
+                      null,
+                      cats[i].title
+                    )
+                  )
+                )
+              )
+            )
+          );
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        !this.props.mobile ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'headerMainTop' },
+            'Are you an eBay reseller? Then this site\'s for you!'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'headerMain' },
+            '"Finding top selling pre-owned brands on eBay is tough. ',
+            _react2.default.createElement('br', null),
+            'The Bair Data makes it easy."'
+          )
+        ) : _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'headerMainTop' },
+            'Are you an eBay reseller? Then this site\'s for you!'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'headerMain' },
+            '"Finding top selling pre-owned brands on eBay is tough. ',
+            _react2.default.createElement('br', null),
+            'The Bair Data makes it easy."'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          this.renderCategories()
+        )
+      );
+    }
+  }]);
+
+  return Main;
 }(_react2.default.Component);
 
 function mapStateToProps(state) {
-	return {
-		isMobile: state.isMobile
-	};
+  return {
+    isMobile: state.isMobile
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-	return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
+  return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
