@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Title from './Titles.jsx';
 import Main from './Main.jsx';
 import { Link, Redirect } from 'react-router-dom'
-import * as Ebay from '../model/ebayData.js';
 import Navbar from './Navbar.jsx'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
