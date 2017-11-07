@@ -4,7 +4,7 @@ var gettersHousing = require('../server.js');
 var path = require('path');
 
 router.get('/category/dresses', function(req, res) {
-  
+
   var dataObj = {
     data: allCategoriesCache.dresses.brands,
     pageCount: allCategoriesCache.dresses.brands.length,
@@ -203,11 +203,6 @@ router.get('/category/mensCasualShoes', function(req, res) {
   console.log('inside mensCasualShoes',allCategoriesCache.mensCasualShoes.brands.length )
   res.status(200)
   res.send(dataObj)
-})
-
-
-router.get('/grizzly', function(req, res) {
-  res.sendFile(path.join(__dirname, './images/grizzly-bear-roaring.png'))
 })
 
 router.get('*', (req, res) => {
