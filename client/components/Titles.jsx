@@ -93,7 +93,7 @@ class Titles extends Component {
 			  </div>
 			  <div className="col-md-3 col-sm-6 col-6">
 			  	  Price Range:
-			  	<h3 id="moneyFont" className="detailPrice"> {price}</h3>
+			  	<h3 className="detailPrice"> {price}</h3>
 			  	
 			  </div>
 			</div>

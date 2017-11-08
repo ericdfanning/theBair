@@ -1,21 +1,17 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
-var gettersHousing = require('./server')
+var gettersHousing = require('./server/makeInitialAPICall')
 var express = require('express');
 var app = express();
 
 (function() {
-  /*
-    * This function is fed to the CRON job below, and will perform a scan
-    * of the entire capsules table to find capsules whose unearthDates are
-    * today or earlier.  It will mark these as unearthed and no longer buried,
-    * and will send an email to the user at the provided email address, notifying
-    * them of their unearthed capsule.
-   */
+  // **** This will run to find any stored category results that are older than 2 weeks and remove it
   const scan = () => {
     let today = new Date();
-  console.log('CRON JOB RAN AT ', today.toString(), '**************')
-  gettersHousing.gettersHousing()
+    console.log('CRON JOB RAN AT ', today.toString(), '**************')
+
+    gettersHousing()
+
     Category.find({})
       .exec((err, catCalls) => {
         if (err) console.error(`ERROR: ${err}`);

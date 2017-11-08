@@ -19,13 +19,6 @@ var categorySchema = new Schema({
 });
 var Category = mongoose.model('category', categorySchema);
 
-// var brandsSchema = new Schema({
-//   brand: Array, 
-//   sorted: Array,
-//   itemId: String
-// });
-// var Brands = mongoose.model('brands', brandsSchema);
-
 var leadersSchema = new Schema({
   leaders: Array
 });
@@ -44,7 +37,6 @@ module.exports.Leaders = Leaders;
 module.exports.ItemIds = ItemIds;
 module.exports.Category = Category;
 module.exports.Current = Current;
-// module.exports.Brands = Brands;
 
 // leaders schema will be made up of top 10 of the Queried sorted array 
   // per category 

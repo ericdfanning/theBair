@@ -1,7 +1,7 @@
-var getAllEbayData = require('../api_calls/getAllEbayData.js');
-var allCategoriesCache = require('../cache/allCategoriesCache.js');
+const getAllEbayData = require('../api_calls/getAllEbayData.js');
+const allCategoriesCache = require('../cache/allCategoriesCache.js');
 
-var categories = {
+const categories = {
   dresses: '63861',
   womansCoatsJackets: '63862',
   womensTshirts: '63869',
@@ -22,22 +22,16 @@ var categories = {
   mensCasualShoes: '24087'
 }
 
-getAllEbayData(categories.dresses, allCategoriesCache.dresses)
-getAllEbayData(categories.womensTshirts, allCategoriesCache.womensTshirts)
-getAllEbayData(categories.topsAndBlouses, allCategoriesCache.topsAndBlouses)
-getAllEbayData(categories.flats, allCategoriesCache.flats)
-getAllEbayData(categories.womensSweaters, allCategoriesCache.womensSweaters)
-getAllEbayData(categories.womensJeans, allCategoriesCache.womensJeans)
-getAllEbayData(categories.womansCoatsJackets, allCategoriesCache.womansCoatsJackets)
-getAllEbayData(categories.heels, allCategoriesCache.heels)
-getAllEbayData(categories.womansSandals, allCategoriesCache.womansSandals)
+// fetch all categories on start of server/reboot of server
+for (let key in categories) {
+  getAllEbayData(categories[key], allCategoriesCache[key])
+}
 
-getAllEbayData(categories.mensJeans, allCategoriesCache.mensJeans)
-getAllEbayData(categories.mensSweaters, allCategoriesCache.mensSweaters)
-getAllEbayData(categories.mensDressShirts, allCategoriesCache.mensDressShirts)
-getAllEbayData(categories.mensCasualShirts, allCategoriesCache.mensCasualShirts)
-getAllEbayData(categories.mensTshirts, allCategoriesCache.mensTshirts)
-getAllEbayData(categories.mensBlazors, allCategoriesCache.mensBlazors)
-getAllEbayData(categories.ties, allCategoriesCache.ties)
-getAllEbayData(categories.mensDressFormalShoes, allCategoriesCache.mensDressFormalShoes)
-getAllEbayData(categories.mensCasualShoes, allCategoriesCache.mensCasualShoes)
+// function used by cron to fetch all categories once a day
+const gettersHousing = () => {
+  for (let key in categories) {
+    getAllEbayData(categories[key], allCategoriesCache[key])
+  }
+}
+
+module.exports = gettersHousing

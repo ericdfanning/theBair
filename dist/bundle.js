@@ -4231,16 +4231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 35 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KEY_PREFIX; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REHYDRATE; });
-var KEY_PREFIX = 'reduxPersist:';
-var REHYDRATE = 'persist/REHYDRATE';
-
-/***/ }),
+/* 35 */,
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12539,7 +12530,7 @@ var Titles = function (_Component) {
 					'Price Range:',
 					_react2.default.createElement(
 						'h3',
-						{ id: 'moneyFont', className: 'detailPrice' },
+						{ className: 'detailPrice' },
 						' ',
 						price
 					)
@@ -12837,100 +12828,65 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var topBrand = '';
-var topCount = 0;
-
-var Titles = function (_Component) {
-	_inherits(Titles, _Component);
-
-	function Titles(props) {
-		_classCallCheck(this, Titles);
-
-		var _this = _possibleConstructorReturn(this, (Titles.__proto__ || Object.getPrototypeOf(Titles)).call(this, props));
-
-		_this.state = {
-			itemClicked: {},
-			averageData: '',
-			topBrand: '',
-			page: 1
-
-		};
-
-		return _this;
-	}
-
-	_createClass(Titles, [{
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			return _react2.default.createElement(
-				'div',
+var Details = function Details(_ref) {
+	var itemClicked = _ref.itemClicked,
+	    toggle = _ref.toggle,
+	    averageData = _ref.averageData;
+	return _react2.default.createElement(
+		"div",
+		null,
+		_react2.default.createElement(
+			"div",
+			{ className: "brandsInfo" },
+			_react2.default.createElement(
+				"button",
+				{ className: "btn btn-secondary detailsBackBtn", onClick: function onClick() {
+						toggle();
+					} },
+				" Back "
+			),
+			_react2.default.createElement(
+				"h4",
+				{ style: { paddingLeft: "20px" } },
+				"Name: ",
+				itemClicked.name
+			),
+			_react2.default.createElement(
+				"h4",
+				{ style: { paddingLeft: "20px" } },
+				"Number Sold: ",
+				itemClicked.val
+			),
+			_react2.default.createElement(
+				"h5",
+				{ style: { paddingLeft: "20px" } },
+				"Sold between: ",
+				itemClicked.endTime
+			),
+			itemClicked.price && _react2.default.createElement(
+				"h5",
+				{ style: { paddingLeft: "20px" } },
+				"Price Range: $",
+				itemClicked.price[0],
+				" - $",
+				itemClicked.price[1]
+			),
+			_react2.default.createElement(
+				"div",
 				null,
-				_react2.default.createElement(
-					'div',
-					{ className: 'brandsInfo' },
-					_react2.default.createElement(
-						'button',
-						{ className: 'btn btn-secondary detailsBackBtn', onClick: function onClick() {
-								_this2.props.toggle();
-							} },
-						' Back '
-					),
-					_react2.default.createElement(
-						'h4',
-						{ style: { paddingLeft: "20px" } },
-						'Name: ',
-						this.props.itemClicked.name
-					),
-					_react2.default.createElement(
-						'h4',
-						{ style: { paddingLeft: "20px" } },
-						'Number Sold: ',
-						this.props.itemClicked.val
-					),
-					_react2.default.createElement(
-						'h5',
-						{ style: { paddingLeft: "20px" } },
-						'Sold between: ',
-						this.props.itemClicked.endTime
-					),
-					this.props.itemClicked.price && _react2.default.createElement(
-						'h5',
-						{ style: { paddingLeft: "20px" } },
-						'Price Range: $',
-						this.props.itemClicked.price[0],
-						' - $',
-						this.props.itemClicked.price[1]
-					),
-					_react2.default.createElement(
-						'div',
-						null,
-						this.props.averageData
-					)
-				)
-			);
-		}
-	}]);
+				averageData
+			)
+		)
+	);
+};
 
-	return Titles;
-}(_react.Component);
-
-exports.default = Titles;
+exports.default = Details;
 
 /***/ }),
 /* 119 */
@@ -13704,7 +13660,7 @@ function verifyPlainObject(value, displayName, methodName) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -13723,29 +13679,9 @@ var _redux = __webpack_require__(19);
 
 var _reactRedux = __webpack_require__(34);
 
-var _dresses = __webpack_require__(342);
+var _categories = __webpack_require__(352);
 
-var _dresses2 = _interopRequireDefault(_dresses);
-
-var _tshirts = __webpack_require__(343);
-
-var _tshirts2 = _interopRequireDefault(_tshirts);
-
-var _topsAndBlouses = __webpack_require__(344);
-
-var _topsAndBlouses2 = _interopRequireDefault(_topsAndBlouses);
-
-var _womensFlats = __webpack_require__(350);
-
-var _womensFlats2 = _interopRequireDefault(_womensFlats);
-
-var _sweater = __webpack_require__(349);
-
-var _sweater2 = _interopRequireDefault(_sweater);
-
-var _jeans = __webpack_require__(348);
-
-var _jeans2 = _interopRequireDefault(_jeans);
+var _categories2 = _interopRequireDefault(_categories);
 
 var _getWomensBrands = __webpack_require__(128);
 
@@ -13757,189 +13693,100 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var cats = [{
-  title: 'Dresses',
-  img: _dresses2.default,
-  lwrCase: 'dresses'
-}, {
-  title: 'T-Shirts',
-  img: _tshirts2.default,
-  lwrCase: 'tshirts'
-}, {
-  title: 'Tops & Blouses',
-  img: _topsAndBlouses2.default,
-  lwrCase: 'topsAndBlouses'
-}, {
-  title: 'Flats',
-  img: _womensFlats2.default,
-  lwrCase: 'flats'
-}, {
-  title: 'Sweaters',
-  img: _sweater2.default,
-  lwrCase: 'sweaters'
-}, {
-  title: 'Jeans',
-  img: _jeans2.default,
-  lwrCase: 'jeans'
-}, {
-  title: 'Coats & Jackets',
-  img: _jeans2.default,
-  lwrCase: 'womansCoatsJackets'
-}, {
-  title: 'Heels',
-  img: _jeans2.default,
-  lwrCase: 'heels'
-}, {
-  title: 'Womans Sandals',
-  img: _jeans2.default,
-  lwrCase: 'womansSandals'
-}, {
-  title: 'Mens Jeans',
-  img: _jeans2.default,
-  lwrCase: 'mensJeans'
-}, {
-  title: 'Mens Sweaters',
-  img: _jeans2.default,
-  lwrCase: 'mensSweaters'
-}, {
-  title: 'Dress Shirts',
-  img: _jeans2.default,
-  lwrCase: 'mensDressShirts'
-}, {
-  title: 'Mens Casual Shirts',
-  img: _jeans2.default,
-  lwrCase: 'mensCasualShirts'
-}, {
-  title: 'Mens T-Shirts',
-  img: _jeans2.default,
-  lwrCase: 'mensTshirts'
-}, {
-  title: 'Mens Blazors & Sport Coats',
-  img: _jeans2.default,
-  lwrCase: 'mensBlazors'
-}, {
-  title: 'Ties',
-  img: _jeans2.default,
-  lwrCase: 'ties'
-}, {
-  title: 'Mens Dress/Formal Shoes',
-  img: _jeans2.default,
-  lwrCase: 'mensDressFormalShoes'
-}, {
-  title: 'Mens Casual Shoes',
-  img: _jeans2.default,
-  lwrCase: 'mensCasualShoes'
-}];
-
 var Main = function (_React$Component) {
-  _inherits(Main, _React$Component);
+	_inherits(Main, _React$Component);
 
-  function Main() {
-    _classCallCheck(this, Main);
+	function Main() {
+		_classCallCheck(this, Main);
 
-    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-  }
+		return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	}
 
-  _createClass(Main, [{
-    key: 'handleClick',
-    value: function handleClick(category) {
-      this.props.getBrands(category);
-    }
-  }, {
-    key: 'renderCategories',
-    value: function renderCategories() {
-      var _this2 = this;
+	_createClass(Main, [{
+		key: 'handleClick',
+		value: function handleClick(category) {
+			this.props.getBrands(category);
+		}
+	}, {
+		key: 'renderCategories',
+		value: function renderCategories() {
+			var _this2 = this;
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'row' },
-        cats.map(function (v, i) {
-          return _react2.default.createElement(
-            'div',
-            { key: i, id: 'mainScreen' },
-            _react2.default.createElement(
-              'span',
-              { className: 'span-homegal' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/womensFashion/' + cats[i].lwrCase, onClick: _this2.handleClick.bind(_this2, '' + cats[i].lwrCase) },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'polaroid' },
-                  _react2.default.createElement('img', { className: 'mainImage', src: '' + cats[i].img }),
-                  _react2.default.createElement(
-                    'h2',
-                    null,
-                    _react2.default.createElement(
-                      'span',
-                      null,
-                      cats[i].title
-                    )
-                  )
-                )
-              )
-            )
-          );
-        })
-      );
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        !this.props.mobile ? _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'headerMainTop' },
-            'Are you an eBay reseller? Then this site\'s for you!'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'headerMain' },
-            '"Finding top selling pre-owned brands on eBay is tough. ',
-            _react2.default.createElement('br', null),
-            'The Bair Data makes it easy."'
-          )
-        ) : _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'headerMainTop' },
-            'Are you an eBay reseller? Then this site\'s for you!'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'headerMain' },
-            '"Finding top selling pre-owned brands on eBay is tough. ',
-            _react2.default.createElement('br', null),
-            'The Bair Data makes it easy."'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
-          this.renderCategories()
-        )
-      );
-    }
-  }]);
+			return _react2.default.createElement(
+				'div',
+				{ className: 'row' },
+				_categories2.default.map(function (v, i) {
+					return _react2.default.createElement(
+						'div',
+						{ key: i, id: 'mainScreen' },
+						_react2.default.createElement(
+							'span',
+							{ className: 'span-homegal' },
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ to: '/womensFashion/' + _categories2.default[i].path, onClick: _this2.handleClick.bind(_this2, '' + _categories2.default[i].path) },
+								_react2.default.createElement(
+									'div',
+									{ className: 'polaroid' },
+									_react2.default.createElement('img', { className: 'mainImage', src: '' + _categories2.default[i].img }),
+									_react2.default.createElement(
+										'h2',
+										null,
+										_react2.default.createElement(
+											'span',
+											null,
+											_categories2.default[i].title
+										)
+									)
+								)
+							)
+						)
+					);
+				})
+			);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMainTop' },
+						'Are you an eBay reseller? Then this site\'s for you!'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'headerMain' },
+						'"Finding top selling pre-owned brands on eBay is tough. ',
+						_react2.default.createElement('br', null),
+						'The Bair Data makes it easy."'
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'container-fluid' },
+					this.renderCategories()
+				)
+			);
+		}
+	}]);
 
-  return Main;
+	return Main;
 }(_react2.default.Component);
 
 function mapStateToProps(state) {
-  return {
-    isMobile: state.isMobile
-  };
+	return {
+		isMobile: state.isMobile
+	};
 }
 
 function mapDispatchToProps(dispatch) {
-  return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
+	return (0, _redux.bindActionCreators)({ getBrands: _getWomensBrands.getBrands }, dispatch);
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
@@ -13968,7 +13815,7 @@ var FETCH_BRANDS = exports.FETCH_BRANDS = 'fetch_brands';
 var ROOT_URL = process.env.NODE_ENV === 'production' ? 'http://thebairdata.com' : 'http://localhost:8000';
 // const ROOT_URL = 'http://localhost:8000'
 
-// ***** SET UP OBJECT FOR MEMOIZATION *******
+// ***** SET UP ACTION FOR MEMOIZATION AND CONNECT TO STORE *******
 
 function getBrands(category) {
 
@@ -14530,460 +14377,11 @@ module.exports = isArguments;
 
 
 /***/ }),
-/* 137 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = createPersistor;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaults_asyncLocalStorage__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__purgeStoredState__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_json_stringify_safe__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_json_stringify_safe___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_json_stringify_safe__);
-
-
-
-
-
-function createPersistor(store, config) {
-  // defaults
-  var serializer = config.serialize === false ? function (data) {
-    return data;
-  } : defaultSerializer;
-  var deserializer = config.serialize === false ? function (data) {
-    return data;
-  } : defaultDeserializer;
-  var blacklist = config.blacklist || [];
-  var whitelist = config.whitelist || false;
-  var transforms = config.transforms || [];
-  var debounce = config.debounce || false;
-  var keyPrefix = config.keyPrefix !== undefined ? config.keyPrefix : __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* KEY_PREFIX */];
-
-  // pluggable state shape (e.g. immutablejs)
-  var stateInit = config._stateInit || {};
-  var stateIterator = config._stateIterator || defaultStateIterator;
-  var stateGetter = config._stateGetter || defaultStateGetter;
-  var stateSetter = config._stateSetter || defaultStateSetter;
-
-  // storage with keys -> getAllKeys for localForage support
-  var storage = config.storage || Object(__WEBPACK_IMPORTED_MODULE_1__defaults_asyncLocalStorage__["a" /* default */])('local');
-  if (storage.keys && !storage.getAllKeys) {
-    storage.getAllKeys = storage.keys;
-  }
-
-  // initialize stateful values
-  var lastState = stateInit;
-  var paused = false;
-  var storesToProcess = [];
-  var timeIterator = null;
-
-  store.subscribe(function () {
-    if (paused) return;
-
-    var state = store.getState();
-
-    stateIterator(state, function (subState, key) {
-      if (!passWhitelistBlacklist(key)) return;
-      if (stateGetter(lastState, key) === stateGetter(state, key)) return;
-      if (storesToProcess.indexOf(key) !== -1) return;
-      storesToProcess.push(key);
-    });
-
-    var len = storesToProcess.length;
-
-    // time iterator (read: debounce)
-    if (timeIterator === null) {
-      timeIterator = setInterval(function () {
-        if (paused && len === storesToProcess.length || storesToProcess.length === 0) {
-          clearInterval(timeIterator);
-          timeIterator = null;
-          return;
-        }
-
-        var key = storesToProcess.shift();
-        var storageKey = createStorageKey(key);
-        var endState = transforms.reduce(function (subState, transformer) {
-          return transformer.in(subState, key);
-        }, stateGetter(store.getState(), key));
-        if (typeof endState !== 'undefined') storage.setItem(storageKey, serializer(endState), warnIfSetError(key));
-      }, debounce);
-    }
-
-    lastState = state;
-  });
-
-  function passWhitelistBlacklist(key) {
-    if (whitelist && whitelist.indexOf(key) === -1) return false;
-    if (blacklist.indexOf(key) !== -1) return false;
-    return true;
-  }
-
-  function adhocRehydrate(incoming) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    var state = {};
-    if (options.serial) {
-      stateIterator(incoming, function (subState, key) {
-        try {
-          var data = deserializer(subState);
-          var value = transforms.reduceRight(function (interState, transformer) {
-            return transformer.out(interState, key);
-          }, data);
-          state = stateSetter(state, key, value);
-        } catch (err) {
-          if (process.env.NODE_ENV !== 'production') console.warn('Error rehydrating data for key "' + key + '"', subState, err);
-        }
-      });
-    } else state = incoming;
-
-    store.dispatch(rehydrateAction(state));
-    return state;
-  }
-
-  function createStorageKey(key) {
-    return '' + keyPrefix + key;
-  }
-
-  // return `persistor`
-  return {
-    rehydrate: adhocRehydrate,
-    pause: function pause() {
-      paused = true;
-    },
-    resume: function resume() {
-      paused = false;
-    },
-    purge: function purge(keys) {
-      return Object(__WEBPACK_IMPORTED_MODULE_2__purgeStoredState__["a" /* default */])({ storage: storage, keyPrefix: keyPrefix }, keys);
-    }
-  };
-}
-
-function warnIfSetError(key) {
-  return function setError(err) {
-    if (err && process.env.NODE_ENV !== 'production') {
-      console.warn('Error storing data for key:', key, err);
-    }
-  };
-}
-
-function defaultSerializer(data) {
-  return __WEBPACK_IMPORTED_MODULE_3_json_stringify_safe___default()(data, null, null, function (k, v) {
-    if (process.env.NODE_ENV !== 'production') return null;
-    throw new Error('\n      redux-persist: cannot process cyclical state.\n      Consider changing your state structure to have no cycles.\n      Alternatively blacklist the corresponding reducer key.\n      Cycle encounted at key "' + k + '" with value "' + v + '".\n    ');
-  });
-}
-
-function defaultDeserializer(serial) {
-  return JSON.parse(serial);
-}
-
-function rehydrateAction(data) {
-  return {
-    type: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* REHYDRATE */],
-    payload: data
-  };
-}
-
-function defaultStateIterator(collection, callback) {
-  return Object.keys(collection).forEach(function (key) {
-    return callback(collection[key], key);
-  });
-}
-
-function defaultStateGetter(state, key) {
-  return state[key];
-}
-
-function defaultStateSetter(state, key, value) {
-  state[key] = value;
-  return state;
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
-
-/***/ }),
-/* 138 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_setImmediate__ = __webpack_require__(139);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-var noStorage = function noStorage() {
-  /* noop */return null;
-};
-if (process.env.NODE_ENV !== 'production') {
-  noStorage = function noStorage() {
-    console.error('redux-persist asyncLocalStorage requires a global localStorage object. Either use a different storage backend or if this is a universal redux application you probably should conditionally persist like so: https://gist.github.com/rt2zz/ac9eb396793f95ff3c3b');
-    return null;
-  };
-}
-
-function _hasStorage(storageType) {
-  if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) !== 'object' || !(storageType in window)) {
-    return false;
-  }
-
-  try {
-    var storage = window[storageType];
-    var testKey = 'redux-persist ' + storageType + ' test';
-    storage.setItem(testKey, 'test');
-    storage.getItem(testKey);
-    storage.removeItem(testKey);
-  } catch (e) {
-    if (process.env.NODE_ENV !== 'production') console.warn('redux-persist ' + storageType + ' test failed, persistence will be disabled.');
-    return false;
-  }
-  return true;
-}
-
-function hasLocalStorage() {
-  return _hasStorage('localStorage');
-}
-
-function hasSessionStorage() {
-  return _hasStorage('sessionStorage');
-}
-
-function getStorage(type) {
-  if (type === 'local') {
-    return hasLocalStorage() ? window.localStorage : { getItem: noStorage, setItem: noStorage, removeItem: noStorage, getAllKeys: noStorage };
-  }
-  if (type === 'session') {
-    return hasSessionStorage() ? window.sessionStorage : { getItem: noStorage, setItem: noStorage, removeItem: noStorage, getAllKeys: noStorage };
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (function (type, config) {
-  var storage = getStorage(type);
-  return {
-    getAllKeys: function getAllKeys(cb) {
-      return new Promise(function (resolve, reject) {
-        try {
-          var keys = [];
-          for (var i = 0; i < storage.length; i++) {
-            keys.push(storage.key(i));
-          }
-          Object(__WEBPACK_IMPORTED_MODULE_0__utils_setImmediate__["a" /* default */])(function () {
-            cb && cb(null, keys);
-            resolve(keys);
-          });
-        } catch (e) {
-          cb && cb(e);
-          reject(e);
-        }
-      });
-    },
-    getItem: function getItem(key, cb) {
-      return new Promise(function (resolve, reject) {
-        try {
-          var s = storage.getItem(key);
-          Object(__WEBPACK_IMPORTED_MODULE_0__utils_setImmediate__["a" /* default */])(function () {
-            cb && cb(null, s);
-            resolve(s);
-          });
-        } catch (e) {
-          cb && cb(e);
-          reject(e);
-        }
-      });
-    },
-    setItem: function setItem(key, string, cb) {
-      return new Promise(function (resolve, reject) {
-        try {
-          storage.setItem(key, string);
-          Object(__WEBPACK_IMPORTED_MODULE_0__utils_setImmediate__["a" /* default */])(function () {
-            cb && cb(null);
-            resolve();
-          });
-        } catch (e) {
-          cb && cb(e);
-          reject(e);
-        }
-      });
-    },
-    removeItem: function removeItem(key, cb) {
-      return new Promise(function (resolve, reject) {
-        try {
-          storage.removeItem(key);
-          Object(__WEBPACK_IMPORTED_MODULE_0__utils_setImmediate__["a" /* default */])(function () {
-            cb && cb(null);
-            resolve();
-          });
-        } catch (e) {
-          cb && cb(e);
-          reject(e);
-        }
-      });
-    }
-  };
-});
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
-
-/***/ }),
-/* 139 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {var hasNativeSupport = typeof global !== 'undefined' && typeof global.setImmediate !== 'undefined';
-var setImmediate = hasNativeSupport ? function (fn, ms) {
-  return global.setImmediate(fn, ms);
-} : function (fn, ms) {
-  return setTimeout(fn, ms);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (setImmediate);
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(70)))
-
-/***/ }),
-/* 140 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = purgeStoredState;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(35);
-
-
-function purgeStoredState(config, keys) {
-  var storage = config.storage;
-  var keyPrefix = config.keyPrefix !== undefined ? config.keyPrefix : __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* KEY_PREFIX */];
-
-  // basic validation
-  if (Array.isArray(config)) throw new Error('redux-persist: purgeStoredState requires config as a first argument (found array). An array of keys is the optional second argument.');
-  if (!storage) throw new Error('redux-persist: config.storage required in purgeStoredState');
-
-  if (typeof keys === 'undefined') {
-    // if keys is not defined, purge all keys
-    return new Promise(function (resolve, reject) {
-      storage.getAllKeys(function (err, allKeys) {
-        if (err) {
-          if (process.env.NODE_ENV !== 'production') console.warn('redux-persist: error during purgeStoredState in storage.getAllKeys');
-          reject(err);
-        } else {
-          resolve(purgeStoredState(config, allKeys.filter(function (key) {
-            return key.indexOf(keyPrefix) === 0;
-          }).map(function (key) {
-            return key.slice(keyPrefix.length);
-          })));
-        }
-      });
-    });
-  } else {
-    // otherwise purge specified keys
-    return Promise.all(keys.map(function (key) {
-      return storage.removeItem('' + keyPrefix + key, warnIfRemoveError(key));
-    }));
-  }
-}
-
-function warnIfRemoveError(key) {
-  return function removeError(err) {
-    if (err && process.env.NODE_ENV !== 'production') {
-      console.warn('Error storing data for key:', key, err);
-    }
-  };
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
-
-/***/ }),
-/* 141 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = getStoredState;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaults_asyncLocalStorage__ = __webpack_require__(138);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-function getStoredState(config, onComplete) {
-  var storage = config.storage || Object(__WEBPACK_IMPORTED_MODULE_1__defaults_asyncLocalStorage__["a" /* default */])('local');
-  var deserializer = config.serialize === false ? function (data) {
-    return data;
-  } : defaultDeserializer;
-  var blacklist = config.blacklist || [];
-  var whitelist = config.whitelist || false;
-  var transforms = config.transforms || [];
-  var keyPrefix = config.keyPrefix !== undefined ? config.keyPrefix : __WEBPACK_IMPORTED_MODULE_0__constants__["a" /* KEY_PREFIX */];
-
-  // fallback getAllKeys to `keys` if present (LocalForage compatability)
-  if (storage.keys && !storage.getAllKeys) storage = _extends({}, storage, { getAllKeys: storage.keys });
-
-  var restoredState = {};
-  var completionCount = 0;
-
-  storage.getAllKeys(function (err, allKeys) {
-    if (err) {
-      if (process.env.NODE_ENV !== 'production') console.warn('redux-persist/getStoredState: Error in storage.getAllKeys');
-      complete(err);
-    }
-
-    var persistKeys = allKeys.filter(function (key) {
-      return key.indexOf(keyPrefix) === 0;
-    }).map(function (key) {
-      return key.slice(keyPrefix.length);
-    });
-    var keysToRestore = persistKeys.filter(passWhitelistBlacklist);
-
-    var restoreCount = keysToRestore.length;
-    if (restoreCount === 0) complete(null, restoredState);
-    keysToRestore.forEach(function (key) {
-      storage.getItem(createStorageKey(key), function (err, serialized) {
-        if (err && process.env.NODE_ENV !== 'production') console.warn('redux-persist/getStoredState: Error restoring data for key:', key, err);else restoredState[key] = rehydrate(key, serialized);
-        completionCount += 1;
-        if (completionCount === restoreCount) complete(null, restoredState);
-      });
-    });
-  });
-
-  function rehydrate(key, serialized) {
-    var state = null;
-
-    try {
-      var data = deserializer(serialized);
-      state = transforms.reduceRight(function (subState, transformer) {
-        return transformer.out(subState, key);
-      }, data);
-    } catch (err) {
-      if (process.env.NODE_ENV !== 'production') console.warn('redux-persist/getStoredState: Error restoring data for key:', key, err);
-    }
-
-    return state;
-  }
-
-  function complete(err, restoredState) {
-    onComplete(err, restoredState);
-  }
-
-  function passWhitelistBlacklist(key) {
-    if (whitelist && whitelist.indexOf(key) === -1) return false;
-    if (blacklist.indexOf(key) !== -1) return false;
-    return true;
-  }
-
-  function createStorageKey(key) {
-    return '' + keyPrefix + key;
-  }
-
-  if (typeof onComplete !== 'function' && !!Promise) {
-    return new Promise(function (resolve, reject) {
-      onComplete = function onComplete(err, restoredState) {
-        if (err) reject(err);else resolve(restoredState);
-      };
-    });
-  }
-}
-
-function defaultDeserializer(serial) {
-  return JSON.parse(serial);
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
-
-/***/ }),
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
 /* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15018,8 +14416,6 @@ var _reduxPromise = __webpack_require__(329);
 
 var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 
-var _reduxPersist = __webpack_require__(335);
-
 var _reduxThunk = __webpack_require__(341);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
@@ -15027,6 +14423,9 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var createStoreWithMiddleware = (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_reduxPromise2.default, _reduxThunk2.default))(_redux.createStore);
+
+// import { persistStore, autoRehydrate } from 'redux-persist'
+
 
 var store = createStoreWithMiddleware(_store2.default);
 
@@ -32344,6 +31743,7 @@ var CategoryBrands = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
+      // remove this and call the categories from categories.js once the catsObj is set up
       var categories = {
         dresses: 'Dresses',
         tshirts: 'T-Shirts',
@@ -32378,8 +31778,8 @@ var CategoryBrands = function (_React$Component) {
       }
     }
   }, {
-    key: 'gatherData',
-    value: function gatherData(index) {
+    key: 'gatherPageData',
+    value: function gatherPageData(index) {
       this.setState({
         page: index
       });
@@ -32392,7 +31792,7 @@ var CategoryBrands = function (_React$Component) {
       for (var i = 0; i < this.props.pageCount; i++) {
         var tag = _react2.default.createElement(
           'span',
-          { key: i, className: 'pageButton', onClick: this.gatherData.bind(this, i) },
+          { key: i, className: 'pageButton', onClick: this.gatherPageData.bind(this, i) },
           ' ',
           i + 1,
           ' '
@@ -32438,19 +31838,6 @@ var CategoryBrands = function (_React$Component) {
       });
     }
   }, {
-    key: 'handleCategoryPickedMobile',
-    value: function handleCategoryPickedMobile(e) {
-      var _this4 = this;
-
-      e.preventDefault();
-
-      this.props.getBrands(e.target.userType.value).then(function () {
-        return _this4.createPageButtons();
-      });
-
-      this.setState({ categoryPicked: e.target.userType.value, page: 0 });
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -32462,43 +31849,6 @@ var CategoryBrands = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'row col-12' },
-            this.props.isMobile && _react2.default.createElement(
-              'div',
-              { className: 'col-12 selectCategoryMobile' },
-              _react2.default.createElement(
-                'form',
-                { onSubmit: this.handleCategoryPickedMobile.bind(this) },
-                _react2.default.createElement(
-                  'select',
-                  { className: 'selectpicker', name: 'userType' },
-                  _react2.default.createElement(
-                    'option',
-                    { selected: true, hidden: true },
-                    'Choose Category'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'Dresses' },
-                    'Dresses'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'T-Shirts' },
-                    'T-Shirts'
-                  ),
-                  _react2.default.createElement(
-                    'option',
-                    { value: 'Tops/Blouses' },
-                    'Tops/Blouses'
-                  )
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { className: 'selectCatBtnMobile btn btn-secondary', type: 'submit' },
-                  'Go'
-                )
-              )
-            ),
             this.state.pageNumTags.length !== 0 && _react2.default.createElement(
               'div',
               { className: 'paginationAndBrandCount' },
@@ -32538,8 +31888,7 @@ function mapStateToProps(state) {
     data: state.womensBrands && state.womensBrands.data,
     pageCount: state.womensBrands && state.womensBrands.pageCount,
     brandsCount: state.womensBrands && state.womensBrands.brandsCount,
-    categories: state.categories,
-    isMobile: state.isMobile
+    categories: state.categories
   };
 }
 
@@ -34292,295 +33641,12 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 335 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "storages", function() { return storages; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__autoRehydrate__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createPersistor__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createTransform__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getStoredState__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__persistStore__ = __webpack_require__(340);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__purgeStoredState__ = __webpack_require__(140);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "autoRehydrate", function() { return __WEBPACK_IMPORTED_MODULE_0__autoRehydrate__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createPersistor", function() { return __WEBPACK_IMPORTED_MODULE_1__createPersistor__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createTransform", function() { return __WEBPACK_IMPORTED_MODULE_2__createTransform__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "getStoredState", function() { return __WEBPACK_IMPORTED_MODULE_3__getStoredState__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "persistStore", function() { return __WEBPACK_IMPORTED_MODULE_4__persistStore__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "purgeStoredState", function() { return __WEBPACK_IMPORTED_MODULE_5__purgeStoredState__["a"]; });
-
-
-
-
-
-
-
-// @TODO remove in v5
-var deprecated = function deprecated(cb, cb2, cb3) {
-  console.error('redux-persist: this method of importing storages has been removed. instead use `import { asyncLocalStorage } from "redux-persist/storages"`');
-  if (typeof cb === 'function') cb();
-  if (typeof cb2 === 'function') cb2();
-  if (typeof cb3 === 'function') cb3();
-};
-var deprecatedStorage = { getAllKeys: deprecated, getItem: deprecated, setItem: deprecated, removeItem: deprecated };
-var storages = {
-  asyncLocalStorage: deprecatedStorage,
-  asyncSessionStorage: deprecatedStorage
-};
-
-
-
-/***/ }),
-/* 336 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = autoRehydrate;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_isStatePlainEnough__ = __webpack_require__(337);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-function autoRehydrate() {
-  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  var stateReconciler = config.stateReconciler || defaultStateReconciler;
-
-  return function (next) {
-    return function (reducer, initialState, enhancer) {
-      var store = next(liftReducer(reducer), initialState, enhancer);
-      return _extends({}, store, {
-        replaceReducer: function replaceReducer(reducer) {
-          return store.replaceReducer(liftReducer(reducer));
-        }
-      });
-    };
-  };
-
-  function liftReducer(reducer) {
-    var rehydrated = false;
-    var preRehydrateActions = [];
-    return function (state, action) {
-      if (action.type !== __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* REHYDRATE */]) {
-        if (config.log && !rehydrated) preRehydrateActions.push(action); // store pre-rehydrate actions for debugging
-        return reducer(state, action);
-      } else {
-        if (config.log && !rehydrated) logPreRehydrate(preRehydrateActions);
-        rehydrated = true;
-
-        var inboundState = action.payload;
-        var reducedState = reducer(state, action);
-
-        return stateReconciler(state, inboundState, reducedState, config.log);
-      }
-    };
-  }
-}
-
-function logPreRehydrate(preRehydrateActions) {
-  var concernedActions = preRehydrateActions.slice(1);
-  if (concernedActions.length > 0) {
-    console.log('\n      redux-persist/autoRehydrate: %d actions were fired before rehydration completed. This can be a symptom of a race\n      condition where the rehydrate action may overwrite the previously affected state. Consider running these actions\n      after rehydration:\n    ', concernedActions.length, concernedActions);
-  }
-}
-
-function defaultStateReconciler(state, inboundState, reducedState, log) {
-  var newState = _extends({}, reducedState);
-
-  Object.keys(inboundState).forEach(function (key) {
-    // if initialState does not have key, skip auto rehydration
-    if (!state.hasOwnProperty(key)) return;
-
-    // if initial state is an object but inbound state is null/undefined, skip
-    if (_typeof(state[key]) === 'object' && !inboundState[key]) {
-      if (log) console.log('redux-persist/autoRehydrate: sub state for key `%s` is falsy but initial state is an object, skipping autoRehydrate.', key);
-      return;
-    }
-
-    // if reducer modifies substate, skip auto rehydration
-    if (state[key] !== reducedState[key]) {
-      if (log) console.log('redux-persist/autoRehydrate: sub state for key `%s` modified, skipping autoRehydrate.', key);
-      newState[key] = reducedState[key];
-      return;
-    }
-
-    // otherwise take the inboundState
-    if (Object(__WEBPACK_IMPORTED_MODULE_1__utils_isStatePlainEnough__["a" /* default */])(inboundState[key]) && Object(__WEBPACK_IMPORTED_MODULE_1__utils_isStatePlainEnough__["a" /* default */])(state[key])) newState[key] = _extends({}, state[key], inboundState[key]); // shallow merge
-    else newState[key] = inboundState[key]; // hard set
-
-    if (log) console.log('redux-persist/autoRehydrate: key `%s`, rehydrated to ', key, newState[key]);
-  });
-  return newState;
-}
-
-/***/ }),
-/* 337 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isStatePlainEnough;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(45);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-
-
-function isStatePlainEnough(a) {
-  // isPlainObject + duck type not immutable
-  if (!a) return false;
-  if ((typeof a === 'undefined' ? 'undefined' : _typeof(a)) !== 'object') return false;
-  if (typeof a.asMutable === 'function') return false;
-  if (!Object(__WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__["a" /* default */])(a)) return false;
-  return true;
-}
-
-/***/ }),
-/* 338 */
-/***/ (function(module, exports) {
-
-exports = module.exports = stringify
-exports.getSerialize = serializer
-
-function stringify(obj, replacer, spaces, cycleReplacer) {
-  return JSON.stringify(obj, serializer(replacer, cycleReplacer), spaces)
-}
-
-function serializer(replacer, cycleReplacer) {
-  var stack = [], keys = []
-
-  if (cycleReplacer == null) cycleReplacer = function(key, value) {
-    if (stack[0] === value) return "[Circular ~]"
-    return "[Circular ~." + keys.slice(0, stack.indexOf(value)).join(".") + "]"
-  }
-
-  return function(key, value) {
-    if (stack.length > 0) {
-      var thisPos = stack.indexOf(this)
-      ~thisPos ? stack.splice(thisPos + 1) : stack.push(this)
-      ~thisPos ? keys.splice(thisPos, Infinity, key) : keys.push(key)
-      if (~stack.indexOf(value)) value = cycleReplacer.call(this, key, value)
-    }
-    else stack.push(value)
-
-    return replacer == null ? value : replacer.call(this, key, value)
-  }
-}
-
-
-/***/ }),
-/* 339 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function createTransform(inbound, outbound) {
-  var config = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-  var whitelist = config.whitelist || null;
-  var blacklist = config.blacklist || null;
-
-  function whitelistBlacklistCheck(key) {
-    if (whitelist && whitelist.indexOf(key) === -1) return true;
-    if (blacklist && blacklist.indexOf(key) !== -1) return true;
-    return false;
-  }
-
-  return {
-    in: function _in(state, key) {
-      return !whitelistBlacklistCheck(key) && inbound ? inbound(state, key) : state;
-    },
-    out: function out(state, key) {
-      return !whitelistBlacklistCheck(key) && outbound ? outbound(state, key) : state;
-    }
-  };
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (createTransform);
-
-/***/ }),
-/* 340 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (immutable) */ __webpack_exports__["a"] = persistStore;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getStoredState__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createPersistor__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_setImmediate__ = __webpack_require__(139);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-
-
-function persistStore(store) {
-  var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var onComplete = arguments[2];
-
-  // defaults
-  // @TODO remove shouldRestore
-  var shouldRestore = !config.skipRestore;
-  if (process.env.NODE_ENV !== 'production' && config.skipRestore) console.warn('redux-persist: config.skipRestore has been deprecated. If you want to skip restoration use `createPersistor` instead');
-
-  var purgeKeys = null;
-
-  // create and pause persistor
-  var persistor = Object(__WEBPACK_IMPORTED_MODULE_2__createPersistor__["a" /* default */])(store, config);
-  persistor.pause();
-
-  // restore
-  if (shouldRestore) {
-    Object(__WEBPACK_IMPORTED_MODULE_3__utils_setImmediate__["a" /* default */])(function () {
-      Object(__WEBPACK_IMPORTED_MODULE_1__getStoredState__["a" /* default */])(config, function (err, restoredState) {
-        if (err) {
-          complete(err);
-          return;
-        }
-        // do not persist state for purgeKeys
-        if (purgeKeys) {
-          if (purgeKeys === '*') restoredState = {};else purgeKeys.forEach(function (key) {
-            return delete restoredState[key];
-          });
-        }
-        try {
-          store.dispatch(rehydrateAction(restoredState, err));
-        } finally {
-          complete(err, restoredState);
-        }
-      });
-    });
-  } else Object(__WEBPACK_IMPORTED_MODULE_3__utils_setImmediate__["a" /* default */])(complete);
-
-  function complete(err, restoredState) {
-    persistor.resume();
-    onComplete && onComplete(err, restoredState);
-  }
-
-  return _extends({}, persistor, {
-    purge: function purge(keys) {
-      purgeKeys = keys || '*';
-      return persistor.purge(keys);
-    }
-  });
-}
-
-function rehydrateAction(payload) {
-  var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-  return {
-    type: __WEBPACK_IMPORTED_MODULE_0__constants__["b" /* REHYDRATE */],
-    payload: payload,
-    error: error
-  };
-}
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
-
-/***/ }),
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
 /* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34849,6 +33915,116 @@ module.exports = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCgRXhpZgA
 /***/ (function(module, exports) {
 
 module.exports = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAANigAwAEAAAAAQAAANgAAAAA/+0AOFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAAAAOEJJTQQlAAAAAAAQ1B2M2Y8AsgTpgAmY7PhCfv/AABEIANgA2AMBEQACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/3QAEABv/2gAMAwEAAhEDEQA/AP1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0P1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0f1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0v1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0/1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/1P1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/1f1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/1v1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/1/1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0P1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0f1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0v1SoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD/0/1SoAKACgAyKACgAoAKACgAoAKACgAoAKAM3XNftNAtfOuWJZjtjiTl5D6Af16DvWdSpGlHmky4QlN8sTyHxp8U761vIora+8jUSyyC2hIMcKZ/j/vk9OcewFcNGtUrS59o/mb1qcKMVHeX5Hp3gLxU/jHw5DqMlt9ldnaMqDlWKnBZT6GvRTujlOipgFABQAUAFABQAUAFABQAUAFAH//U/VKgAoAZNKsETyOdqIpZj6ADJoA+W7P9oy4lvphqF7d2BMrFJoyHh2ljtBXHy8YrzqyxCfNSl8jqpToWtUXzPRtD+Lt/NCkqy2er25/5aL8jH8VyP0rkWPqU3y1o/odf1OFRXpSOw034o6VdYW7SfT39ZV3J/wB9Ln9cV208bRqaXs/M5Z4WrDpf0OostStdSi821uIrmP8AvROGH6V3Jp6o5HoWaYBQAUAFABQBi+JPE8Hh+3AK+ddyA+VbqeW9z6KO5/Lm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"
+
+/***/ }),
+/* 351 */,
+/* 352 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _dresses = __webpack_require__(342);
+
+var _dresses2 = _interopRequireDefault(_dresses);
+
+var _tshirts = __webpack_require__(343);
+
+var _tshirts2 = _interopRequireDefault(_tshirts);
+
+var _topsAndBlouses = __webpack_require__(344);
+
+var _topsAndBlouses2 = _interopRequireDefault(_topsAndBlouses);
+
+var _womensFlats = __webpack_require__(350);
+
+var _womensFlats2 = _interopRequireDefault(_womensFlats);
+
+var _sweater = __webpack_require__(349);
+
+var _sweater2 = _interopRequireDefault(_sweater);
+
+var _jeans = __webpack_require__(348);
+
+var _jeans2 = _interopRequireDefault(_jeans);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cats = [{
+  title: 'Dresses',
+  img: _dresses2.default,
+  path: 'dresses'
+}, {
+  title: 'T-Shirts',
+  img: _tshirts2.default,
+  path: 'tshirts'
+}, {
+  title: 'Tops & Blouses',
+  img: _topsAndBlouses2.default,
+  path: 'topsAndBlouses'
+}, {
+  title: 'Flats',
+  img: _womensFlats2.default,
+  path: 'flats'
+}, {
+  title: 'Sweaters',
+  img: _sweater2.default,
+  path: 'sweaters'
+}, {
+  title: 'Jeans',
+  img: _jeans2.default,
+  path: 'jeans'
+}, {
+  title: 'Coats & Jackets',
+  img: _jeans2.default,
+  path: 'womansCoatsJackets'
+}, {
+  title: 'Heels',
+  img: _jeans2.default,
+  path: 'heels'
+}, {
+  title: 'Womans Sandals',
+  img: _jeans2.default,
+  path: 'womansSandals'
+}, {
+  title: 'Mens Jeans',
+  img: _jeans2.default,
+  path: 'mensJeans'
+}, {
+  title: 'Mens Sweaters',
+  img: _jeans2.default,
+  path: 'mensSweaters'
+}, {
+  title: 'Dress Shirts',
+  img: _jeans2.default,
+  path: 'mensDressShirts'
+}, {
+  title: 'Mens Casual Shirts',
+  img: _jeans2.default,
+  path: 'mensCasualShirts'
+}, {
+  title: 'Mens T-Shirts',
+  img: _jeans2.default,
+  path: 'mensTshirts'
+}, {
+  title: 'Mens Blazors & Sport Coats',
+  img: _jeans2.default,
+  path: 'mensBlazors'
+}, {
+  title: 'Ties',
+  img: _jeans2.default,
+  path: 'ties'
+}, {
+  title: 'Mens Dress/Formal Shoes',
+  img: _jeans2.default,
+  path: 'mensDressFormalShoes'
+}, {
+  title: 'Mens Casual Shoes',
+  img: _jeans2.default,
+  path: 'mensCasualShoes'
+}];
+
+module.exports = cats;
 
 /***/ })
 /******/ ]);

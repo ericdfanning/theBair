@@ -69,10 +69,6 @@ router.get('/category/jeans', function(req, res) {
   res.send(dataObj)
 })
 
-
-
-
-
 router.get('/category/womansCoatsJackets', function(req, res) {
   var dataObj = {
       data: allCategoriesCache.womansCoatsJackets.brands,

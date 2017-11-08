@@ -24,6 +24,8 @@ class CategoryBrands extends React.Component {
 	}
 
   componentWillMount() {
+
+    // remove this and call the categories from categories.js once the catsObj is set up
     const categories = {
       dresses: 'Dresses',
       tshirts: 'T-Shirts',
@@ -56,7 +58,7 @@ class CategoryBrands extends React.Component {
     }
   }
 
-  gatherData(index) {
+  gatherPageData(index) {
       this.setState({
         page: index,
       })
@@ -66,7 +68,7 @@ class CategoryBrands extends React.Component {
     var tags = []
     var buttons = []
     for (var i = 0; i < this.props.pageCount; i++) {
-      var tag = <span key={i} className="pageButton" onClick={this.gatherData.bind(this, i)}> {i + 1} </span>
+      var tag = <span key={i} className="pageButton" onClick={this.gatherPageData.bind(this, i)}> {i + 1} </span>
       buttons.push(tag)
       if ((i%10 === 0 && i !== 0) || i === this.props.pageCount - 1) {
         tags.push(buttons)
@@ -101,44 +103,20 @@ class CategoryBrands extends React.Component {
       })
   }
 
-  handleCategoryPickedMobile(e) {
-    e.preventDefault()
-
-    this.props.getBrands(e.target.userType.value)
-      .then(() => this.createPageButtons())
-
-    this.setState({categoryPicked: e.target.userType.value, page: 0})
-
-  }
-
 	render () {
 		return (
 			<div>
 
         <div className="container-fluid">
           <div className="row col-12"> 
-            {this.props.isMobile &&
-              <div className="col-12 selectCategoryMobile">
-                <form onSubmit={this.handleCategoryPickedMobile.bind(this)}>
-                  <select className="selectpicker" name="userType">
-                    <option selected hidden>Choose Category</option> 
-                    <option value="Dresses">Dresses</option>
-                    <option value="T-Shirts">T-Shirts</option>
-                    <option value="Tops/Blouses">Tops/Blouses</option>
-                  </select>
-                  <button className="selectCatBtnMobile btn btn-secondary" type="submit">Go</button>
-                </form>
-              </div>
-            }
+          {this.state.pageNumTags.length !== 0 && 
+            <div className="paginationAndBrandCount">
+            <div style={{fontFamily: "Open Sans"}} className="col-12">{this.state.categoryPicked}</div>
+              <div style={{fontFamily: "Open Sans"}} className="col-12"> {this.props.brandsCount} total brands </div><br/>  
 
-            {this.state.pageNumTags.length !== 0 && 
-              <div className="paginationAndBrandCount">
-              <div style={{fontFamily: "Open Sans"}} className="col-12">{this.state.categoryPicked}</div>
-                <div style={{fontFamily: "Open Sans"}} className="col-12"> {this.props.brandsCount} total brands </div><br/>  
-
-                <div className="col-12"> {this.renderPageButtons()} </div>
-              </div>
-            }
+              <div className="col-12"> {this.renderPageButtons()} </div>
+            </div>
+          }
           </div>
         </div>
         
@@ -153,8 +131,7 @@ function mapStateToProps(state) {
     data: state.womensBrands && state.womensBrands.data,
     pageCount: state.womensBrands && state.womensBrands.pageCount,
     brandsCount: state.womensBrands && state.womensBrands.brandsCount,
-    categories: state.categories,
-    isMobile: state.isMobile
+    categories: state.categories
   }
 }
 

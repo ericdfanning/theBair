@@ -9,7 +9,7 @@ import reducers from './reducers/store.js';
 import { render } from 'react-dom'
 import promise from 'redux-promise';
 
-import { persistStore, autoRehydrate } from 'redux-persist'
+// import { persistStore, autoRehydrate } from 'redux-persist'
 import thunk from 'redux-thunk'
 
 const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(promise, thunk))(createStore);
