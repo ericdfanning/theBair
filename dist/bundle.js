@@ -31727,7 +31727,6 @@ var CategoryBrands = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CategoryBrands.__proto__ || Object.getPrototypeOf(CategoryBrands)).call(this, props));
 
     _this.state = {
-      showSidebar: false,
       pageNumTags: [],
       pageNumTagIndex: 0,
       page: 0,

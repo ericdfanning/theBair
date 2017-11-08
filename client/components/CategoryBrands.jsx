@@ -13,7 +13,6 @@ class CategoryBrands extends React.Component {
 		super(props)
 
 		this.state = {
-			showSidebar: false,
       pageNumTags: [],
       pageNumTagIndex: 0,
       page: 0,
