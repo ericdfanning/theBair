@@ -15,12 +15,13 @@ router.get('/category/dresses', function(req, res) {
 })
 
 router.get('/category/tshirts', function(req, res) {
+  console.log('in the route ', allCategoriesCache.womensTshirts.brands.length)
   var dataObj = {
-      data: allCategoriesCache.tshirts.brands,
-      pageCount: allCategoriesCache.tshirts.brands.length,
-      brandsCount: allCategoriesCache.tshirts.brandsCount
+      data: allCategoriesCache.womensTshirts.brands,
+      pageCount: allCategoriesCache.womensTshirts.brands.length,
+      brandsCount: allCategoriesCache.womensTshirts.brandsCount
   }
-  console.log('inside tshirts',allCategoriesCache.tshirts.brands.length )
+  console.log('inside womensTshirts',allCategoriesCache.womensTshirts.brands.length )
   res.status(200)
   res.send(dataObj)
 })
@@ -49,11 +50,11 @@ router.get('/category/flats', function(req, res) {
 
 router.get('/category/sweaters', function(req, res) {
   var dataObj = {
-      data: allCategoriesCache.sweaters.brands,
-      pageCount: allCategoriesCache.sweaters.brands.length,
-      brandsCount: allCategoriesCache.sweaters.brandsCount
+      data: allCategoriesCache.womensSweaters.brands,
+      pageCount: allCategoriesCache.womensSweaters.brands.length,
+      brandsCount: allCategoriesCache.womensSweaters.brandsCount
   }
-  console.log('inside sweaters',allCategoriesCache.sweaters.brands.length )
+  console.log('inside womensSweaters',allCategoriesCache.womensSweaters.brands.length )
   res.status(200)
   res.send(dataObj)
 })

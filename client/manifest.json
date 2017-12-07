@@ -1,0 +1,8 @@
+{
+  "short_name": "EF Portfolio",
+  "name": "Fanning's Terminal Portfolio",
+  "start_url": "./bundle.js",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2196F3"
+}

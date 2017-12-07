@@ -34,18 +34,20 @@ function combineAvgs(current, old) {
 
 }
 
-function combineAll(current, old) {
+function combineAll(old) {
 	if (!old[0]) {
-		return current;
+	console.log('here###########################################')
+		return;
 	} else {
 	// console.log('AFTER SAVING FROM THE DATABASE****************************************************', old[0].brands)
 		var newObj = Object.assign({}, old[0].brands)
+		console.log('new object @@@@@@@@@', newObj)
 	  for (var i = 1; i < old.length; i++) {
 	    for (var key in old[i].brands) {
 	  	  if (newObj[key]) {
 	  	  	// console.log('aleardy exists', newObj[key].val, old[i].brands[key].val)
 	  	  	newObj[key].val += old[i].brands[key].val;
-	  	  	// console.log('ADDED TOGETHER', newObj[key].val)
+	  	  	console.log('ADDED TOGETHER', newObj[key], key, i)
 	  	  	newObj[key].price.push(old[i].brands[key].price[0], old[i].brands[key].price[1])
 	  	  	var arr = newObj[key].price.slice()
 	  	  	arr.sort(function (a, b) {
@@ -67,6 +69,7 @@ function combineAll(current, old) {
 	  	  }
 	    }
 	  }
+	  console.log('THE NEW OBJECT THAT WAS COMBINED ___________', newObj)
     return newObj
 	}
 }
@@ -77,64 +80,64 @@ var createBrandsObj = (result, old) => {
 	// against first element in 'current' array, building
 	// on big array. Then make that the local one
 	var brands = {};
-	var joined = {};
 	result.forEach(v => {
-	  for (let obj of v.data.Item) {
-	    if (obj.ItemSpecifics) {
-	      let date = new Date(obj.EndTime)
-	      date = date.toDateString().split('')
-	      date.splice(-4, 4)
-	      let endTime = date.join('')
-	      let price = obj.ConvertedCurrentPrice.Value
-	      for (let n of obj.ItemSpecifics.NameValueList) {
-	        if (n.Name === 'Brand') {
-	          var temp = n.Value[0].toUpperCase().split(' ')
-	            .join('').split("\'").join('').split('.').join('')
-	          if (brands[temp]) {
-	            brands[temp].val += 1;
-	            if (price > brands[temp].price[1]) {
-	            	var holder = brands[temp].price[1]
-	              brands[temp].price[1] = price
-	              brands[temp].price[0] = holder
-	            } else if (price < brands[temp].price[1] && price > brands[temp].price[0]) {
-	              brands[temp].price[0] = price
-	            }
-
-	            //check and set average price ranges in $5 increments
-	            var max1 = 0
-	            for (var i = 0; i <= price; i+=5, max1 = i) {}
-	            if (brands[temp].avgs[max1]) {
-	            	brands[temp].avgs[max1] += 1
-	            } else {
-	            	brands[temp].avgs[max1] = 1
-	            }
-	          } else {
-	          	if (temp !== 'UNBRANDED' && temp !== 'UNKNOWN') {
-		            brands[temp] = {
-		              name: n.Value[0].toUpperCase(),
-		              val: 1, endTime, price: [0, price], avgs: {}
-		            };
-		            //check and set average price ranges in $5 increments
-		            var max2 = 0
-		            for (var i = 0; i <= price; i+=5, max2 = i) {}
-		            if (brands[temp].avgs[max2]) {
-		            	brands[temp].avgs[max2] += 1
-		            } else {
-		            	brands[temp].avgs[max2] = 1
+		// console.log('$$$$$$ THE OLD ARRAY OF OBJECTS $$$$$$$$$$$$ ', old)
+		console.log('$$$$$$$$$$$$$$$$  INSIDE THE HELPER ', v.data.Ack)
+		if (v.data.Ack !== 'Failure') {
+		  for (let obj of v.data.Item) {
+		    if (obj.ItemSpecifics) {
+		      let date = new Date(obj.EndTime)
+		      date = date.toDateString().split('')
+		      date.splice(-4, 4)
+		      let endTime = date.join('')
+		      let price = obj.ConvertedCurrentPrice.Value
+		      for (let n of obj.ItemSpecifics.NameValueList) {
+		        if (n.Name === 'Brand') {
+		          var temp = n.Value[0].toUpperCase().split(' ')
+		            .join('').split("\'").join('').split('.').join('')
+		          if (brands[temp]) {
+		            brands[temp].val += 1;
+		            if (price > brands[temp].price[1]) {
+		            	var holder = brands[temp].price[1]
+		              brands[temp].price[1] = price
+		              brands[temp].price[0] = holder
+		            } else if (price < brands[temp].price[1] && price > brands[temp].price[0]) {
+		              brands[temp].price[0] = price
 		            }
-	            }
-	          }
-	        } 
-	      }
-	    }
+
+		            //check and set average price ranges in $5 increments
+		            var max1 = 0
+		            for (var i = 0; i <= price; i+=5, max1 = i) {}
+		            if (brands[temp].avgs[max1]) {
+		            	brands[temp].avgs[max1] += 1
+		            } else {
+		            	brands[temp].avgs[max1] = 1
+		            }
+		          } else {
+		          	if (temp !== 'UNBRANDED' && temp !== 'UNKNOWN') {
+			            brands[temp] = {
+			              name: n.Value[0].toUpperCase(),
+			              val: 1, endTime, price: [0, price], avgs: {}
+			            };
+			            //check and set average price ranges in $5 increments
+			            var max2 = 0
+			            for (var i = 0; i <= price; i+=5, max2 = i) {}
+			            if (brands[temp].avgs[max2]) {
+			            	brands[temp].avgs[max2] += 1
+			            } else {
+			            	brands[temp].avgs[max2] = 1
+			            }
+		            }
+		          }
+		        } 
+		      }
+		    }
+		  }
 	  }
 	})
-	// console.log('AFTER CREATION BEFORE SAVING****************************************************', brands)
-	var obj = {
-		joined: combineAll(brands, old),
-		current: brands
-	}
-	return obj;
+	console.log('AFTER CREATION BEFORE SAVING***************************************', brands)
+
+	return brands;
 }
 
 var sortObj = (brands) => {
@@ -165,6 +168,7 @@ var sortObj = (brands) => {
 }
 
 module.exports.createBrandsObj = createBrandsObj;
+module.exports.combineAll = combineAll;
 module.exports.unique = unique;
 module.exports.sortObj = sortObj;
 

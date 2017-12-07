@@ -1,8 +1,8 @@
 const CronJob = require('cron').CronJob;
-var express = require('express');
-var app = express();
-let emailService = require('./emailService');
-var allCategoriesCache = require('../../cache/allCategoriesCache.js');
+const express = require('express');
+const app = express();
+const emailService = require('./emailService');
+let allCategoriesCache = require('../../cache/allCategoriesCache.js');
 
 (function() {
 

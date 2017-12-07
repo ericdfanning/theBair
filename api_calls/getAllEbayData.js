@@ -6,6 +6,8 @@ const _ = require('underscore-node');
 const ebay = require('ebay-api');
 const axios = require('axios');
 
+let emailService = require('../server/emailService/emailService.js');
+
 const Category = require('../schema').Category
 const ItemIds = require('../schema').ItemIds
 const Current = require('../schema').Current
@@ -37,7 +39,7 @@ const categories = { // this object used only for console logging during develop
 }
 
 const getAllEbayData = (categoryCode, cache) => {
-
+	console.log('category', categoryCode, cache)
 	let url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
 	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
 	  `categoryId=${categoryCode}&` +
@@ -51,7 +53,7 @@ const getAllEbayData = (categoryCode, cache) => {
 	async function getSoldListingsAsync(){
 	    // The await keyword saves us from having to write a .then() block.
 	    let data = []
-	    for (let i = 1; i > 0; i--) {
+	    for (let i = 2; i > 0; i--) {
 	      console.log('@@@@@@@@@@@', i, 'category ----- ', categoryCode)
 	      data.push(await axios.get(url + i));
 	    }
@@ -132,45 +134,47 @@ const getAllEbayData = (categoryCode, cache) => {
 		      return items;
 		    }
 
-		    getBrandNamesAsync().then( function(result) {
+		    getBrandNamesAsync().then(function(result) {
 		    	// Other info details I may use in the future
 			      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
 			      // Get EndTime - let date = new Date(obj.EndTime) date.toLocaleDateString()	
 
-			    // Get all saved queries from specified category
-		      let query = Category.find({category: categoryCode}, function(err, currentBrands) {
-		        if (err) {
-		        	console.log('failed to find in Category')
-		        }
-		      })
+		      let brands = helpers.createBrandsObj(result)
 
-		      let promise = query.exec();
-		      // execute the promise
-		      promise.then(function (current) {
-		      	// using previously queiried data from eBay, use helper function to build new object from old and new data
-		        let brands = helpers.createBrandsObj(result, current)
-		        return brands
-		      })
-		      .then(function(brands) {
-		      	// create object to save to DB
-		        let newCategoryObj = new Category({
-		          created: new Date(),
-		          category: categoryCode,
-		          brands: brands.current
-		        })
-		        // Save newly queried items from eBay to DB (not the combined object data from the helpers).
-		        newCategoryObj.save(function(err, data) {
-		          if (err) {
-		            console.log('Failed to create newly combined object data');
-		          } 
-		        });
-		        
-		        return brands.joined
-		      })
-		      .then(function(brands){
-		        // sort newly combined object data by value 
+	      	// create object to save to DB
+	      	if (brands.current !== undefined) {
+		        // let newCategoryObj = new Category({
+		        //   created: new Date(),
+		        //   category: categoryCode,
+		        //   brands: brands
+		        // })
+		        // // Save newly queried items from eBay to DB (not the combined object data from the helpers).
+		        // newCategoryObj.save(function(err, data) {
+		        //   if (err) {
+		        //     console.log('Failed to create newly combined object data');
+		        //   } 
+		        // });
+	        }
+
+	        // Make query for all save category objects
+          let query = Category.find({category: categoryCode}, function(err, currentBrands) {
+            if (err) {
+            	console.log('failed to find in Category')
+            } else {
+            	console.log(';lkjad;lfkja;lkdjf;lakjsdf', currentBrands.length)
+            }
+          })
+
+          let promise2 = query.exec();
+          // execute the promise
+          console.log('is this a promise????', promise2)
+          promise2.then(function(current) {
+
+		        // sort newly combined object data by value
+		        let brands = helpers.combineAll(current) 
 		        let sortedBrands = helpers.sortObj(brands)
 
+		        console.log('THE SORTED BRANDS', sortedBrands.length)
 		        // create cache for front end
 		        cache.brandsCount = sortedBrands.length
 		        cache.brands = []
@@ -183,6 +187,7 @@ const getAllEbayData = (categoryCode, cache) => {
 		            data = []
 		          }
 		        }
+		        // console.log('cache;lkjal;sdkjfasdf', cache.brands.length)
 
 		      	console.log(`SAVING THE ${categories[categoryCode]} and length`, cache.brands.length)
 		        let newCurrentObj = new Current({
@@ -200,11 +205,12 @@ const getAllEbayData = (categoryCode, cache) => {
 
 
 		      })
-		      .catch(function(error) {
-		        console.log('error in promise', error)
+		      .catch((error) => {
+		        console.log('ERROR IN SAVING CACHE AND CURRENT OBJ TO DO, BEFORE EMAIL IS SENT ______________________________', categories[categoryCode], error)
+		        // emailService.sendEmail(`ERROR IN SAVING CACHE AND CURRENT OBJ AT THE END ${categories[categoryCode]}`)
 		      })
 		    })
-		    .catch(function(err){console.log('error', err)})
+		    .catch(function(err){console.log('SUPER ERRORRRRRRRRRRRRRRRRR', err)})
 		  })
 		});
 }
