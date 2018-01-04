@@ -37,17 +37,17 @@ function combineAvgs(current, old) {
 function combineAll(old) {
 	if (!old[0]) {
 	console.log('here###########################################')
-		return;
+		return [];
 	} else {
 	// console.log('AFTER SAVING FROM THE DATABASE****************************************************', old[0].brands)
 		var newObj = Object.assign({}, old[0].brands)
-		console.log('new object @@@@@@@@@', newObj)
+		// console.log('new object @@@@@@@@@', newObj)
 	  for (var i = 1; i < old.length; i++) {
 	    for (var key in old[i].brands) {
 	  	  if (newObj[key]) {
 	  	  	// console.log('aleardy exists', newObj[key].val, old[i].brands[key].val)
 	  	  	newObj[key].val += old[i].brands[key].val;
-	  	  	console.log('ADDED TOGETHER', newObj[key], key, i)
+	  	  	// console.log('ADDED TOGETHER', newObj[key], key, i)
 	  	  	newObj[key].price.push(old[i].brands[key].price[0], old[i].brands[key].price[1])
 	  	  	var arr = newObj[key].price.slice()
 	  	  	arr.sort(function (a, b) {
@@ -69,7 +69,7 @@ function combineAll(old) {
 	  	  }
 	    }
 	  }
-	  console.log('THE NEW OBJECT THAT WAS COMBINED ___________', newObj)
+	  // console.log('THE NEW OBJECT THAT WAS COMBINED ___________', newObj)
     return newObj
 	}
 }
@@ -80,9 +80,10 @@ var createBrandsObj = (result, old) => {
 	// against first element in 'current' array, building
 	// on big array. Then make that the local one
 	var brands = {};
+	// console.log('result.length in createBrandsObj', result.length)
 	result.forEach(v => {
 		// console.log('$$$$$$ THE OLD ARRAY OF OBJECTS $$$$$$$$$$$$ ', old)
-		console.log('$$$$$$$$$$$$$$$$  INSIDE THE HELPER ', v.data.Ack)
+		// console.log('$$$$$$$$$$$$$$$$  INSIDE THE HELPER ', v.data.Ack)
 		if (v.data.Ack !== 'Failure') {
 		  for (let obj of v.data.Item) {
 		    if (obj.ItemSpecifics) {
@@ -133,9 +134,11 @@ var createBrandsObj = (result, old) => {
 		      }
 		    }
 		  }
+	  } else {
+	  	console.log('item was SKIPPED', v.data.Ack)
 	  }
 	})
-	console.log('AFTER CREATION BEFORE SAVING***************************************', brands)
+	// console.log('AFTER CREATION BEFORE SAVING***************************************', Object.keys(brands).length)
 
 	return brands;
 }

@@ -61,11 +61,11 @@ router.get('/category/sweaters', function(req, res) {
 
 router.get('/category/jeans', function(req, res) {
   var dataObj = {
-      data: allCategoriesCache.jeans.brands,
-      pageCount: allCategoriesCache.jeans.brands.length,
-      brandsCount: allCategoriesCache.jeans.brandsCount
+      data: allCategoriesCache.womensJeans.brands,
+      pageCount: allCategoriesCache.womensJeans.brands.length,
+      brandsCount: allCategoriesCache.womensJeans.brandsCount
   }
-  console.log('inside jeans',allCategoriesCache.jeans.brands.length )
+  console.log('inside womensJeans',allCategoriesCache.womensJeans.brands.length )
   res.status(200)
   res.send(dataObj)
 })

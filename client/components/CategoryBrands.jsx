@@ -93,15 +93,6 @@ class CategoryBrands extends React.Component {
     )
   }
 
-  handleCategoryPicked(category) {
-
-    this.props.getBrands(category)
-      .then(() => {
-        this.createPageButtons()
-        this.setState({categoryPicked: category, page: 0})
-      })
-  }
-
 	render () {
 		return (
 			<div>

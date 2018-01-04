@@ -12,9 +12,11 @@ import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
 
 class Main extends React.Component {
 
-	handleClick(category) {
-		this.props.getBrands(category)
-	}
+	// handleClick(category) {
+	// 	console.log('item clicked')
+	// 	this.props.getBrands(category)
+	// }
+	// onClick={this.handleClick.bind(this, `${cats[i].path}`)}
 
 	renderCategories() {
 
@@ -24,7 +26,7 @@ class Main extends React.Component {
 				return (
 					<div key={i} id="mainScreen">
 			   	  <span className="span-homegal">
-			        <Link to={`/womensFashion/${cats[i].path}`} onClick={this.handleClick.bind(this, `${cats[i].path}`)}>
+			        <Link to={`/womensFashion/${cats[i].path}`}>
 		            <div className="polaroid">
 		              <img className="mainImage" src={`${cats[i].img}`}/>
 		              <h2><span>{cats[i].title}</span></h2>

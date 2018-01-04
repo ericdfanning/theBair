@@ -13703,14 +13703,16 @@ var Main = function (_React$Component) {
 	}
 
 	_createClass(Main, [{
-		key: 'handleClick',
-		value: function handleClick(category) {
-			this.props.getBrands(category);
-		}
-	}, {
 		key: 'renderCategories',
+
+
+		// handleClick(category) {
+		// 	console.log('item clicked')
+		// 	this.props.getBrands(category)
+		// }
+		// onClick={this.handleClick.bind(this, `${cats[i].path}`)}
+
 		value: function renderCategories() {
-			var _this2 = this;
 
 			return _react2.default.createElement(
 				'div',
@@ -13724,7 +13726,7 @@ var Main = function (_React$Component) {
 							{ className: 'span-homegal' },
 							_react2.default.createElement(
 								_reactRouterDom.Link,
-								{ to: '/womensFashion/' + _categories2.default[i].path, onClick: _this2.handleClick.bind(_this2, '' + _categories2.default[i].path) },
+								{ to: '/womensFashion/' + _categories2.default[i].path },
 								_react2.default.createElement(
 									'div',
 									{ className: 'polaroid' },
@@ -31825,16 +31827,6 @@ var CategoryBrands = function (_React$Component) {
           _react2.default.createElement('i', { className: 'fa fa-chevron-right fa-fw chevron', 'aria-hidden': 'true' })
         )
       );
-    }
-  }, {
-    key: 'handleCategoryPicked',
-    value: function handleCategoryPicked(category) {
-      var _this3 = this;
-
-      this.props.getBrands(category).then(function () {
-        _this3.createPageButtons();
-        _this3.setState({ categoryPicked: category, page: 0 });
-      });
     }
   }, {
     key: 'render',

@@ -123,12 +123,15 @@ const getAllEbayData = (categoryCode, cache) => {
 		      // Since eBay only allows fetching 20 items at a time, async loop over all items 20 at a time
 		      for (let i = 0; i <= filtered.length; i++) {
 		        if (ids.length === 20 || i === filtered.length) {
-		          console.log('every 20', i)
+		          // console.log('every 20', i)
 		          items.push(await axios.get(idsUrl + ids.join(',')));
 		          ids = [];
 		          ids.push(filtered[i]);
 		        } else {
 		          ids.push(filtered[i]);
+		        }
+		        if (i === filtered.length) {
+		        	console.log('finished for loop for api calls with IDs. i finished on', i)
 		        }
 		      }
 		      return items;
@@ -138,43 +141,43 @@ const getAllEbayData = (categoryCode, cache) => {
 		    	// Other info details I may use in the future
 			      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
 			      // Get EndTime - let date = new Date(obj.EndTime) date.toLocaleDateString()	
-
-		      let brands = helpers.createBrandsObj(result)
-
+			    // console.log('THE FETCHED RESULTS ARE ---', Array.isArray(result))
+		      let currentlyFetchedBrands = helpers.createBrandsObj(result)
+		      // console.log('brands after ---- ', typeof currentlyFetchedBrands, Array.isArray(currentlyFetchedBrands), 'key count', Object.keys(currentlyFetchedBrands).length)
 	      	// create object to save to DB
-	      	if (brands.current !== undefined) {
-		        // let newCategoryObj = new Category({
-		        //   created: new Date(),
-		        //   category: categoryCode,
-		        //   brands: brands
-		        // })
-		        // // Save newly queried items from eBay to DB (not the combined object data from the helpers).
-		        // newCategoryObj.save(function(err, data) {
-		        //   if (err) {
-		        //     console.log('Failed to create newly combined object data');
-		        //   } 
-		        // });
+	      	if (Object.keys(currentlyFetchedBrands).length > 0) {
+
+	      		console.log('currentlyFetchedBrands is NOT empty')
+
+		        let newCategoryObj = new Category({
+		          created: new Date(),
+		          category: categoryCode,
+		          brands: currentlyFetchedBrands
+		        })
+		        // Save newly queried items from eBay to DB (not the combined object data from the helpers).
+		        newCategoryObj.save(function(err, data) {
+		          if (err) {
+		            console.log('Failed to create newly combined object data');
+		          } 
+		        });
+	        } else {
+	        	console.log('ITS EMPTY_____NOTHING WAS SAVED')
 	        }
 
 	        // Make query for all save category objects
-          let query = Category.find({category: categoryCode}, function(err, currentBrands) {
-            if (err) {
-            	console.log('failed to find in Category')
-            } else {
-            	console.log(';lkjad;lfkja;lkdjf;lakjsdf', currentBrands.length)
-            }
-          })
+          let query = Category.find({category: categoryCode}, function(err, savedBrands) {})
 
           let promise2 = query.exec();
           // execute the promise
-          console.log('is this a promise????', promise2)
-          promise2.then(function(current) {
+          // console.log('is this a promise????', promise2)
+          promise2.then(function(savedCurrentBrands) {
 
 		        // sort newly combined object data by value
-		        let brands = helpers.combineAll(current) 
-		        let sortedBrands = helpers.sortObj(brands)
+		        // console.log('MONGO QUERY DATA LENGTH', savedCurrentBrands.length)
+		        let combinedBrands = helpers.combineAll(savedCurrentBrands) //combine saved data
+						let sortedBrands = helpers.sortObj(combinedBrands)
 
-		        console.log('THE SORTED BRANDS', sortedBrands.length)
+		        // console.log('THE SORTED BRANDS', sortedBrands.length)
 		        // create cache for front end
 		        cache.brandsCount = sortedBrands.length
 		        cache.brands = []
@@ -187,28 +190,26 @@ const getAllEbayData = (categoryCode, cache) => {
 		            data = []
 		          }
 		        }
-		        // console.log('cache;lkjal;sdkjfasdf', cache.brands.length)
 
-		      	console.log(`SAVING THE ${categories[categoryCode]} and length`, cache.brands.length)
-		        let newCurrentObj = new Current({
-		          category: categoryCode,
-		          info: cache,
-		          created: new Date()
-		        })
+		        if (Object.keys(currentlyFetchedBrands).length > 0) {
+		        	console.log(`SAVING THE ${categories[categoryCode]} and length`, cache.brands.length)
+			        let newCurrentObj = new Current({
+			          category: categoryCode,
+			          info: cache,
+			          created: new Date()
+			        })
 
-		        newCurrentObj.save(function(err, data) {
-		          if (err) {
-		            console.log('Major creation fail');
-		          } 
-		          console.log('********* FINISHED *********')
-		        });
-
-
+			        newCurrentObj.save(function(err, data) {
+			          if (err) {
+			            console.log('Major creation fail');
+			          } 
+			          console.log('********* FINISHED *********')
+			        });
+		        } else {
+		        	console.log(`NO CURRENT INFO ADDED FOR ___________________${categories[categoryCode]}`, cache.brands.length)
+		        }
 		      })
-		      .catch((error) => {
-		        console.log('ERROR IN SAVING CACHE AND CURRENT OBJ TO DO, BEFORE EMAIL IS SENT ______________________________', categories[categoryCode], error)
-		        // emailService.sendEmail(`ERROR IN SAVING CACHE AND CURRENT OBJ AT THE END ${categories[categoryCode]}`)
-		      })
+		      .catch(() => console.log('ERROR IS PROMISE TWO'))
 		    })
 		    .catch(function(err){console.log('SUPER ERRORRRRRRRRRRRRRRRRR', err)})
 		  })
