@@ -31,7 +31,19 @@ class CategoryBrands extends React.Component {
       topsAndBlouses: 'Tops & Blouses',
       flats: 'Flats',
       sweaters: 'Sweaters',
-      jeans: 'Jeans'
+      jeans: 'Jeans', 
+      womansCoatsJackets: 'Coats & Jackets',
+      heels: 'Heels',
+      womansSandals: 'Woman\'s Sandals',
+      mensJeans: 'Men\'s Jeans',
+      mensSweaters: 'Men\'s Sweaters',
+      mensDressShirts: 'Men\'s Dress Shirts',
+      mensCasualShirts: 'Mens Casual Shirts',
+      mensTshirts: 'Men\'s T-Shirts',
+      mensBlazors: 'Mens Blazors & Sport Coats',
+      ties: 'Ties',
+      mensDressFormalShoes: 'Men\'s Dress & Formal Shoes',
+      mensCasualShoes: 'Men\'s Casual Shoes'
     }
     
     this.setState({categoryPicked: categories[this.props.match.params.category]})

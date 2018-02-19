@@ -1,17 +1,19 @@
-const APP_ID = require('../server/ebay.config').APP_ID
-
 const Promise = require('mpromise');
 const helpers = require('../helpers');
 const _ = require('underscore-node');
 const ebay = require('ebay-api');
 const axios = require('axios');
-
+const APP_ID = require('../server/ebay.config').APP_ID
 let emailService = require('../server/emailService/emailService.js');
 
+// ******* START: Exports from other files
 const Category = require('../schema').Category
 const ItemIds = require('../schema').ItemIds
 const Current = require('../schema').Current
-
+const categoryUrlCreator = require('./categoryGetter').url
+const categoryGetter = require('./categoryGetter')
+const getBrandNamesAsync = require('./idsGetter')
+// ******** END
 // let otherOptions = {
 //   freeShipping: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&',
 //   sortByPrice: 'itemFilter(1).name=FreeShippingOnly&itemFilter(1).value=true&'
@@ -39,29 +41,9 @@ const categories = { // this object used only for console logging during develop
 }
 
 const getAllEbayData = (categoryCode, cache) => {
-	console.log('category', categoryCode, cache)
-	let url = `http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findCompletedItems&` +
-	  `SERVICE-VERSION=1.13.0&SECURITY-APPNAME=${APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&` + 
-	  `categoryId=${categoryCode}&` +
-	  `outputSelector=SellingStatus&` + 
-	  `outputSelector=AspectHistogram&` + 
-	  `paginationInput.entriesPerPage=100&` + 
-	  `itemFilter(0).name=Condition&itemFilter(0).value=3000&` +
-	  `itemFilter(1).name=SoldItemsOnly&itemFilter(1).value=true&` +
-	  `paginationInput.pageNumber=` 
+	// console.log('category', categoryCode, cache)
 
-	async function getSoldListingsAsync(){
-	    // The await keyword saves us from having to write a .then() block.
-	    let data = []
-	    for (let i = 2; i > 0; i--) {
-	      console.log('@@@@@@@@@@@', i, 'category ----- ', categoryCode)
-	      data.push(await axios.get(url + i));
-	    }
-
-	    return data;
-	}
-
-	getSoldListingsAsync()
+	categoryGetter(categoryCode)
 	  .then( function(result) {
 		    // get selling price 
 		    // result[0].data.findCompletedItemsResponse[0].searchResult[0].item[0].sellingStatus[0].convertedCurrentPrice[0].__value__
@@ -77,7 +59,7 @@ const getAllEbayData = (categoryCode, cache) => {
 		    let finalIdList = _.uniq(ids)
 		    return finalIdList
 		})
-		.catch(function(err){console.log('error', err)})
+		.catch(function(err){console.log('-------FIRST CATCH ERROR TO GET CATEGORIES --------------------------', err)})
 		.then(function(result) { // ******* GET ORIGINAL LISTING INFO FOR ITEMS JUST RETRIEVED FROM ABOVE ASYNC FUNCTION********
 		  
 		  let filtered = []
@@ -107,37 +89,8 @@ const getAllEbayData = (categoryCode, cache) => {
 		      } 
 		    });
 
-
-		  let idsUrl = `http://open.api.ebay.com/shopping?` +
-		    `callname=GetMultipleItems&` +
-		    `responseencoding=JSON&` +
-		    `appid=${APP_ID}&` +
-		    `siteid=0&` +
-		    `version=967&` +
-		    `IncludeSelector=ItemSpecifics&` +
-		    `ItemID=`
-
-		    async function getBrandNamesAsync(){
-		      let items = []
-		      let ids = []
-		      // Since eBay only allows fetching 20 items at a time, async loop over all items 20 at a time
-		      for (let i = 0; i <= filtered.length; i++) {
-		        if (ids.length === 20 || i === filtered.length) {
-		          // console.log('every 20', i)
-		          items.push(await axios.get(idsUrl + ids.join(',')));
-		          ids = [];
-		          ids.push(filtered[i]);
-		        } else {
-		          ids.push(filtered[i]);
-		        }
-		        if (i === filtered.length) {
-		        	console.log('finished for loop for api calls with IDs. i finished on', i)
-		        }
-		      }
-		      return items;
-		    }
-
-		    getBrandNamesAsync().then(function(result) {
+	    	getBrandNamesAsync(filtered)
+	    		.then(function(result) {
 		    	// Other info details I may use in the future
 			      // Get price - obj.ConvertedCurrentPrice.Value from w/in first for loop
 			      // Get EndTime - let date = new Date(obj.EndTime) date.toLocaleDateString()	
