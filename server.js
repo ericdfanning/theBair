@@ -5,7 +5,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const router = require('./server/routes.js');
-const helpers = require('./helpers');
 const cors = require('cors');
 const cron = require('./cronScan.js');
 const cron2 = require('./server/emailService/emailCronJob.js');

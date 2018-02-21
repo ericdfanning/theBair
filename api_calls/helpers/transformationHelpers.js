@@ -1,5 +1,6 @@
+const _ = require('underscore-node');
 
-var unique = (array, newBatch) => {
+const unique = (array, newBatch) => {
 	var arr = []
 	// console.log('newBatch', array.length)
 	for (let i = 0; i < array.length; i++) {
@@ -17,7 +18,7 @@ var unique = (array, newBatch) => {
 	return filtered
 }
 
-function combineAvgs(current, old) {
+const combineAvgs = (current, old) => {
 	if (!old) {
 		return current
 	} else {
@@ -34,9 +35,9 @@ function combineAvgs(current, old) {
 
 }
 
-function combineAll(old) {
+const combineAll = (old) => {
 	if (!old[0]) {
-	console.log('here###########################################')
+	console.log('cant combine all ###########################################')
 		return [];
 	} else {
 	// console.log('AFTER SAVING FROM THE DATABASE****************************************************', old[0].brands)
@@ -53,15 +54,16 @@ function combineAll(old) {
 	  	  	arr.sort(function (a, b) {
 	    			return a - b;
 	  			})
-	  			arr = arr.filter(v => v !== 0)
-	  			newObj[key].price = []
 	  			if (arr.length === 1) {
 	  				arr.unshift(0)
+	  			} else {
+	  				arr = arr.filter(v => v !== 0)
 	  			}
+	  			newObj[key].price = []
 	  			newObj[key].price.push(arr[0], arr[arr.length - 1])
-	  			if (newObj[key].name === 'LULAROE') {
-	  			  // console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
-	  			}
+	  			// if (newObj[key].name === 'LULAROE') {
+	  			//   // console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
+	  			// }
 	  			combineAvgs(newObj[key].avgs, old[i].brands[key].avgs)
 	  			// newObj[key].avg = Object.assign({}, combineAvgs(newObj[key].avgs, old[i].brands[key].avgs))
 	  	  } else {
@@ -74,7 +76,7 @@ function combineAll(old) {
 	}
 }
 
-var createBrandsObj = (result, old) => {
+const createBrandsObj = (result, old) => {
 	// add new item values to current property keys
 	// iterate through 'current' array and check prop keys
 	// against first element in 'current' array, building
@@ -143,7 +145,7 @@ var createBrandsObj = (result, old) => {
 	return brands;
 }
 
-var sortObj = (brands) => {
+const sortObj = (brands) => {
   // put each brands summary into an array
   var sortedBrands = []
   for (let key in brands) {
@@ -170,10 +172,23 @@ var sortObj = (brands) => {
   return sortedBrands
 }
 
+const getOnlyEndedWithSalesIDS = (result) => { // gets listing ids 
+	let ids = []
+	result.forEach(v => {
+	  for (let obj of v.data.findCompletedItemsResponse[0].searchResult[0].item) {
+	    if (obj.sellingStatus[0].sellingState[0] === 'EndedWithSales') {
+	      ids.push(obj.itemId[0])
+	    } 
+	  }
+	})
+	let finalIdList = _.uniq(ids)
+	return finalIdList
+}
+
 module.exports.createBrandsObj = createBrandsObj;
 module.exports.combineAll = combineAll;
 module.exports.unique = unique;
 module.exports.sortObj = sortObj;
-
+module.exports.getOnlyEndedWithSalesIDS = getOnlyEndedWithSalesIDS;
 
 
