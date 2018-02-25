@@ -36,9 +36,9 @@ exports.sendEmail = (errorEmail) => {
 
   let options = {
     from: mailOptions.from,
-    subject: errorEmail ? 'there was an error saving to cache for the bair': mailOptions.subject,
-    to: errorEmail ? adminEmail: rolesEmail,
-    html: errorEmail ? `<div>Error saving ${errorEmail}</div>`: template(dataObj),
+    subject: mailOptions.subject, //errorEmail ? 'there was an error saving to cache for the bair': 
+    to: rolesEmail,
+    html: template(dataObj), //errorEmail ? `<div>Error saving ${errorEmail}</div>`: 
     attachments: [{
       filename: 'thebair.png',
       path: bearImage,
