@@ -12,7 +12,7 @@ const createMongoPromiseQuery = (categoryCode, Table) => {
 	return query.exec();
 }
 
-const createAndSaveItemIdsBlob = (categoryCode, filteredIDS) => {
+const createAndSaveItemsIdBlob = (categoryCode, filteredIDS) => {
 	let newItemIds = new ItemIds({
 	  created: new Date(),
 	  category: categoryCode,
@@ -57,6 +57,6 @@ const createAndSaveCurrentBlob = (categoryCode, cache) => {
 }
 
 module.exports.createMongoPromiseQuery = createMongoPromiseQuery;
-module.exports.createAndSaveItemIdsBlob = createAndSaveItemIdsBlob;
+module.exports.createAndSaveItemsIdBlob = createAndSaveItemsIdBlob;
 module.exports.createAndSaveCategoryBlob = createAndSaveCategoryBlob;
 module.exports.createAndSaveCurrentBlob = createAndSaveCurrentBlob;

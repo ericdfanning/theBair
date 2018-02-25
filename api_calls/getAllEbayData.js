@@ -37,7 +37,7 @@ const getAllEbayData = (categoryCode, cache) => {
 
 		    createAndSaveItemsIdBlob(categoryCode, filteredIDS);
 
-	    	getBrandNamesAsync(filtered)
+	    	getBrandNamesAsync(filteredIDS)
 	    		.then(function(result) {
 	
 			      let currentlyFetchedBrands = createBrandsObj(result)

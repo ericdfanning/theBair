@@ -108,7 +108,6 @@ class CategoryBrands extends React.Component {
 	render () {
 		return (
 			<div>
-
         <div className="container-fluid">
           <div className="row col-12"> 
           {this.state.pageNumTags.length !== 0 && 
