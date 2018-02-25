@@ -15,10 +15,10 @@ async function getSoldListingsAsync(categoryCode) {
 
     // The await keyword saves us from having to write a .then() block.
     let data = []
-    for (let i = 2; i > 0; i--) {
-      // if (i%20 === 0) {
+    for (let i = 100; i > 0; i--) {
+      if (i%50 === 0) {
         console.log('@@@@@@@@@@@', i, 'category ----- ', categoryCode)
-      // }
+      }
       data.push(await axios.get(url + i));
     }
 
