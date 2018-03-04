@@ -16,5 +16,3 @@ module.exports.gettersHousing = () => {
     counter = 0
   }
 };
-
-module.exports.gettersHousing()
