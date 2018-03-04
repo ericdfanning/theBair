@@ -11,11 +11,10 @@ const makeQuery = function(x){
   	  promise.then( (current) => {
   	    allCategoriesCache[categoryListArray[x].name].brands = current[current.length - 1].info[0].brands
   	    allCategoriesCache[categoryListArray[x].name].brandsCount = current[current.length - 1].info[0].brandsCount
-  	    console.log('done getting mongo stuff')
   	    makeQuery(x+1);
   	  })
   	  .catch( err => {
-  	  	console.log(`!!!!! Something went wrong in initial startup mongo query for ${categoryListArray[x].name}`, err)
+  	  	console.log(`!!!!! Something went wrong in initial startup mongo query for ${categoryListArray[x].id}`, err)
   	  	makeQuery(x+1);
   	  })
   }
