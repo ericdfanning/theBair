@@ -76,7 +76,7 @@ const combineAll = (old) => {
 	}
 }
 
-const createBrandsObj = (result, old) => {
+const createBrandsObj = (result) => {
 	// add new item values to current property keys
 	// iterate through 'current' array and check prop keys
 	// against first element in 'current' array, building
