@@ -1,5 +1,6 @@
-const getAllEbayData = require('../api_calls/getAllEbayData.js');
 const allCategoriesCache = require('../cache/allCategoriesCache.js');
+const { Current } = require('../schema');
+const { createCurrentCategoryQuery } = require('../api_calls/helpers/mongoHelpers');
 
 const categories = {
   dresses: '63861',
@@ -22,19 +23,17 @@ const categories = {
   // mensCasualShoes: '24087'
 }
 
-// Set the cache on server start
-
-
-// fetch all categories on start of server/reboot of server
 for (let key in categories) {
-  getAllEbayData(categories[key], allCategoriesCache[key])
-}
 
-// function used by cron to fetch all categories once a day
-const gettersHousing = () => {
-  for (let key in categories) {
-    getAllEbayData(categories[key], allCategoriesCache[key])
-  }
-}
+	let promise = createCurrentCategoryQuery(categories[key])
 
-module.exports = gettersHousing
+  promise.then( (current) => {
+    console.log('RESPONSE FROM MONGO', current[current.length - 1].info)
+    allCategoriesCache[key].brands = current[current.length - 1].info.brands
+    allCategoriesCache[key].brandsCount = current[current.length - 1].info.brandsCount
+  })
+  .catch( err => {
+  	console.log(`!!!!! Something went wrong retrieving ${key} for initial setting of cache`)
+  })
+
+}

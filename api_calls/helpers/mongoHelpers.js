@@ -1,5 +1,18 @@
 const { ItemIds, Category, Current } = require('../../schema');
 
+const createCurrentCategoryQuery = categoryCode => {
+
+	// app.get('/testing', (req, res) => {
+	  let query = Current.find({category: categoryCode}, function(err, currentBrands) {
+	    if (err) {
+	      console.log('failed to find in Category')
+	    }
+	  })
+
+	  const promise = query.exec();
+	  return promise
+}
+
 const createMongoPromiseQuery = (categoryCode, Table) => {
 	// build query to get previously fetched item ids from mongo DB
 	let query = Table.find({category: categoryCode}, function(err, result) {
@@ -60,3 +73,4 @@ module.exports.createMongoPromiseQuery = createMongoPromiseQuery;
 module.exports.createAndSaveItemsIdBlob = createAndSaveItemsIdBlob;
 module.exports.createAndSaveCategoryBlob = createAndSaveCategoryBlob;
 module.exports.createAndSaveCurrentBlob = createAndSaveCurrentBlob;
+module.exports.createCurrentCategoryQuery = createCurrentCategoryQuery;
