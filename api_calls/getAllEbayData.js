@@ -7,10 +7,9 @@ let emailService = require('../server/emailService/emailService.js');
 const { getOnlyEndedWithSalesIDS, unique, createBrandsObj, combineAll, sortObj } = require('./helpers/transformationHelpers');
 const { createMongoPromiseQuery, createAndSaveItemsIdBlob, createAndSaveCategoryBlob, createAndSaveCurrentBlob } = require('./helpers/mongoHelpers');
 const { ItemIds, Category, Current } = require('../schema');
-const categoryUrlCreator = require('./categoryGetter').url;
-const categoryGetter = require('./categoryGetter');
+const getSoldListingsAsync = require('./categoryGetter');
 const getBrandNamesAsync = require('./idsGetter');
-const categories = require('./categoriesList');
+const { categoryListObj } = require('./categoriesList');
 // ******** END
 
 // let otherOptions = {
@@ -20,13 +19,13 @@ const categories = require('./categoriesList');
 
 const getAllEbayData = (categoryCode, cache) => {
 	// console.log('category', categoryCode, cache)
-
-	categoryGetter(categoryCode)
+	console.log('STARTING ANOTHER GETTER CALL', categoryCode)
+	getSoldListingsAsync(categoryCode)
 	  .then( function(result) {
 		    // get selling price: result[0].data.findCompletedItemsResponse[0].searchResult[0].item[0].sellingStatus[0].convertedCurrentPrice[0].__value__
 		    return getOnlyEndedWithSalesIDS(result)
 		})
-		.catch(function(err){console.log('-------FIRST CATCH ERROR TO GET CATEGORIES & IDS--------------------------')})
+		.catch(function(err){console.log('-------FIRST CATCH ERROR TO GET CATEGORIES & IDS--------------------------'); return err})
 		.then(function(result) { // ******* GET ORIGINAL LISTING INFO FOR ITEMS JUST RETRIEVED FROM ABOVE ASYNC FUNCTION********
 		  
 		  let idsPromise = createMongoPromiseQuery(categoryCode, ItemIds);
@@ -71,17 +70,22 @@ const getAllEbayData = (categoryCode, cache) => {
 			        }
 
 			        if (Object.keys(currentlyFetchedBrands).length > 0) {
-			        	console.log(`SAVING THE ${categories[categoryCode]} and length`, cache.brands.length)
+			        	console.log(`SAVING THE ${categoryListObj[categoryCode]} and length`, cache.brands.length)
 			        	createAndSaveCurrentBlob(categoryCode, cache);
 							} else {
-			        	console.log(`NO CURRENT INFO ADDED FOR ________${categories[categoryCode]}`, cache.brands.length, '. Using old cache')
+			        	console.log(`NO CURRENT INFO ADDED FOR ________${categoryListObj[categoryCode]}`, cache.brands.length, '. Using old cache')
 			        }
+			        return 'done';
 			      })
-			      .catch((err) => console.log('ERROR IS CATEGORIES FROM MONGODB ITEM RETRIEVAL PROMISE'))
+			      .catch((err) => {console.log('ERROR IS CATEGORIES FROM MONGODB ITEM RETRIEVAL PROMISE'); return 'done with error';})
 			    })
-			    .catch(function(err){console.log('ERROR CALLING EBAY API TO GET BRAND NAMES BY ID')})
+			    .catch(function(err){console.log('ERROR CALLING EBAY API TO GET BRAND NAMES BY ID'); return 'done with error';})
 		  })
-		});
+		})
+		.catch( err => {
+			console.log('FAILED SECOND MAIN CATEGORY GETTER')
+			return 'done with error';
+		})
 }
 
 module.exports = getAllEbayData

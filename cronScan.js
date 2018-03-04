@@ -1,6 +1,6 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
-var gettersHousing = require('./server/makeInitialAPICall')
+var { gettersHousing } = require('./server/makeInitialAPICall')
 var express = require('express');
 var app = express();
 

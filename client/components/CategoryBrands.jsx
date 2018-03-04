@@ -18,7 +18,8 @@ class CategoryBrands extends React.Component {
       page: 0,
       morePages: true,
       lessPages: false,
-      categoryPicked: ''
+      categoryPicked: '',
+      loading: true 
 		}
 	}
 
@@ -86,7 +87,7 @@ class CategoryBrands extends React.Component {
         buttons = []
       }
     }
-    this.setState({pageNumTags: tags.slice()})
+    this.setState({pageNumTags: tags.slice(), loading: false})
   }
 
   renderPageButtons() {
@@ -118,9 +119,9 @@ class CategoryBrands extends React.Component {
               <div className="col-12"> {this.renderPageButtons()} </div>
             </div>
           }
+          {this.state.loading && <div className="paginationAndBrandCount"><img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif" /></div>}
           </div>
         </div>
-        
         {this.props.data && this.state.pageNumTags.length !== 0 && <Title data={this.props.data[this.state.page]}/>}
 			</div>
 		)

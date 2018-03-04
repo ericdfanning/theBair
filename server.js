@@ -7,7 +7,7 @@ const router = require('./server/routes.js');
 const cors = require('cors');
 const cron = require('./cronScan.js');
 const cron2 = require('./server/emailService/emailCronJob.js');
-// const makeInitialAPICalls = require('./server/makeInitialAPICall.js');
+const makeInitialAPICalls = require('./server/makeInitialAPICall.js');
 const makeInitialMongoQueryToSetCache = require('./server/makeInitialMongoQueryToSetCache');
 
 const port = 8000
