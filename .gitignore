@@ -6,4 +6,4 @@ server/emailService/email.config.js
 
 server/ebay.config.js
 
-dist/
+/dist
