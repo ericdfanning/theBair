@@ -1,8 +1,8 @@
 const CronJob = require('cron').CronJob;
 const Category = require('./schema').Category;
-var { gettersHousing } = require('./server/makeInitialAPICall')
-var express = require('express');
-var app = express();
+const { gettersHousing } = require('./server/makeInitialAPICall')
+const express = require('express');
+const app = express();
 
 (function() {
   // **** This will run to find any stored category results that are older than 2 weeks and remove it
