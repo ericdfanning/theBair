@@ -4,7 +4,7 @@ const APP_ID = require('../server/ebay.config').APP_ID
 let emailService = require('../server/emailService/emailService.js');
 
 // ******* START: Exports from other files
-const { getOnlyEndedWithSalesIDS, unique, createBrandsObj, combineAll, sortObj } = require('./helpers/transformationHelpers');
+const { getOnlyEndedWithSalesIDS, unique, createBrandsObj, combineAll, sortObj, addToSearchObj } = require('./helpers/transformationHelpers');
 const { createMongoPromiseQuery, createAndSaveItemsIdBlob, createAndSaveCategoryBlob, createAndSaveCurrentBlob } = require('./helpers/mongoHelpers');
 const { ItemIds, Category, Current } = require('../schema');
 const getSoldListingsAsync = require('./categoryGetter');
@@ -35,10 +35,10 @@ const getAllEbayData = (categoryCode, cache) => {
 		    let filteredIDS = unique(ids, result) || [];
 
 		    createAndSaveItemsIdBlob(categoryCode, filteredIDS);
-
+		    console.log('FILTERED LENGTH OF IDS ARRAY', filteredIDS.length)
 	    	getBrandNamesAsync(filteredIDS)
 	    		.then(function(result) {
-	
+						console.log('length before going in', result.length)
 			      let currentlyFetchedBrands = createBrandsObj(result)
 		      	// create object to save to DB
 		      	if (Object.keys(currentlyFetchedBrands).length > 0) {
@@ -69,17 +69,20 @@ const getAllEbayData = (categoryCode, cache) => {
 			          }
 			        }
 
+			        // create searchable global object
+
 			        if (Object.keys(currentlyFetchedBrands).length > 0) {
 			        	console.log(`SAVING THE ${categoryListObj[categoryCode]} and length`, cache.brands.length)
 			        	createAndSaveCurrentBlob(categoryCode, cache);
+			          addToSearchObj(categoryCode, sortedBrands)
 							} else {
 			        	console.log(`NO CURRENT INFO ADDED FOR ________${categoryListObj[categoryCode]}`, cache.brands.length, '. Using old cache')
 			        }
 			        return 'done';
 			      })
-			      .catch((err) => {console.log('ERROR IS CATEGORIES FROM MONGODB ITEM RETRIEVAL PROMISE'); return 'done with error';})
+			      .catch((err) => {console.log('ERROR IN CATEGORIES FROM MONGODB ITEM RETRIEVAL PROMISE', err); return 'done with error';})
 			    })
-			    .catch(function(err){console.log('ERROR CALLING EBAY API TO GET BRAND NAMES BY ID'); return 'done with error';})
+			    .catch(function(err){console.log('ERROR CALLING EBAY API TO GET BRAND NAMES BY ID', err); return 'done with error';})
 		  })
 		})
 		.catch( err => {

@@ -1,7 +1,30 @@
-var router = require('express').Router();
-var allCategoriesCache = require('../cache/allCategoriesCache.js');
-var gettersHousing = require('../server.js');
-var path = require('path');
+const router = require('express').Router();
+const allCategoriesCache = require('../cache/allCategoriesCache.js');
+const gettersHousing = require('../server.js');
+const path = require('path');
+const { searchAllObj } = require('../../cache/allCategoriesCache');
+
+
+const { Current } = require('../schema');
+const createMongoPromiseQuery = (categoryCode, Table) => {
+  // build query to get previously fetched item ids from mongo DB
+  let query = Table.find({ sort: { 'created' : -1 } }, function(err, result) {
+    if (err) {
+      console.log(`there was an error retrieving previous elements from ${Table} table in MongoDB.`)
+    }
+  })
+
+// `.exec()` gives you a fully-fledged promise
+  return query.exec();
+}
+
+router.get('/test', function(req, res) {
+  let result = 
+  res.status(200)
+  res.send(dataObj)
+
+
+})
 
 router.get('/category/dresses', function(req, res) {
 

@@ -15,14 +15,14 @@ async function getSoldListingsAsync(categoryCode) {
 
     // The await keyword saves us from having to write a .then() block.
     let data = []
-    for (let i = 100; i > 0; i--) {
+    for (let i = 6; i > 4; i--) {
 	    if (i%2 === 0) {
 	      iterationString += ' ' + i
 	    }
 	    if (i%20 === 0) {
 	      console.log(iterationString, 'category ----- ', categoryCode)
 	    }
-	    if (i === 20) {
+	    if (i === 1) {
 	    	try {
 	    		const { throttleCB } = require('../server/makeInitialAPICall.js');
 	    		throttleCB()

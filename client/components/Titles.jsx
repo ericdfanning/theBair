@@ -35,28 +35,37 @@ class Titles extends Component {
 		  averageData: '',
 		  topBrand: '',
 		  page: 1,
-		  mobileDetails: false
-
+		  mobileDetails: false,
+		  showPics: false,
+		  pics: []
 		}
 
 		this.renderItem = this.renderItem.bind(this)
 	}
 
 	openModal(item) {
-		  	var keysArr = Object.keys(item.avgs)
-		  	var avgs = item.avgs
-		  	var div = (
-		  		<div>
-		  			{keysArr.map((v, i) => {
-		  				return <div key={i} style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
-		  			})}
-		  		</div>
-		  	)
+		let picsArr = []
+		for (let key in item.pics) {
+			picsArr.push(item.pics[key])
+		}
+		// console.log('PICS ARRAY', picsArr)
+  	var keysArr = Object.keys(item.avgs)
+  	var avgs = item.avgs
+  	var picsButton = (<button onClick={()=>{this.setState({showPics: true})}}> See Pics </button>)
+  	var div = (
+  		<div>
+  			{keysArr.map((v, i) => {
+  				return <div key={i} style={{width: "100%", borderBottom: "1px solid lightgray"}}><h5 style={{paddingLeft: "20px"}}>{avgs[v]} {picsArr[i] ? picsButton: null}<span className="moneyFont" style={{float: "right", marginRight: "20px"}}>{'$' + (Number(v) - 4) + ' - ' + '$' + Number(v)}</span></h5></div>
+  			})}
+  		</div>
+  	)
+
 		!this.props.isMobile ?
 		  	this.setState({
 		  		averageData: div,
 		  		itemClicked: item,
 		  		modalIsOpen: true,
+		  		pics: picsArr
 		  	})
 	  :
 		  this.setState({
@@ -104,6 +113,22 @@ class Titles extends Component {
 		this.setState({mobileDetails: !this.state.mobileDetails})
 	}
 
+	renderPics(picsArr) {
+		return (
+  		<div>
+  			{picsArr.map((arr) => {
+  				return (
+			  		<div>
+			  			{arr.map((p, i) => {
+			  				return <div key={i} style={{width: "100%", borderBottom: "1px solid lightgray"}}><img src={p}/></div>
+			  			})}
+			  		</div>
+					)
+  			})}
+  		</div>
+		)
+	}
+
 	render() {
 		return (
 			<div >
@@ -123,6 +148,9 @@ class Titles extends Component {
 				    style={customStyles}
 				    contentLabel="Payment Modal"
 				  > 
+				  {this.state.showPics ?
+				  	this.renderPics(this.state.pics)
+				  	:
 				   <div className="brandsInfo">
 				     <h4 style={{paddingLeft: "20px"}}>Name: {this.state.itemClicked.name}</h4>
 				     <h4 style={{paddingLeft: "20px"}}>Number Sold: {this.state.itemClicked.val}</h4>
@@ -134,6 +162,7 @@ class Titles extends Component {
 				      {this.state.averageData}
 				     </div>
 				   </div>
+				 }
 
 				  </Modal>
 				  </div>

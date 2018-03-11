@@ -14,8 +14,8 @@ async function getBrandNamesAsync(filtered){
   let items = []
   let ids = []
   // Since eBay only allows fetching 20 items at a time, async loop over all items 20 at a time
-  for (let i = 0; i <= filtered.length; i++) {
-    if (ids.length === 20 || i === filtered.length) {
+  for (let i = 0; i < filtered.length; i++) {
+    if (ids.length === 20 || i === filtered.length - 1) {
       // console.log('every 20', i)
       items.push(await axios.get(idsUrl + ids.join(',')));
       ids = [];
@@ -23,7 +23,7 @@ async function getBrandNamesAsync(filtered){
     } else {
       ids.push(filtered[i]);
     }
-    if (i === filtered.length) {
+    if (i === filtered.length - 1) {
     	console.log('finished for loop for api calls with IDs. i finished on', i)
     }
   }

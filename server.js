@@ -10,8 +10,6 @@ const cron2 = require('./server/emailService/emailCronJob.js');
 const { gettersHousing } = require('./server/makeInitialAPICall.js');
 // const makeInitialMongoQueryToSetCache = require('./server/makeInitialMongoQueryToSetCache');
 
-gettersHousing()
-
 const port = 8000
 app.set('port', port);
 app.listen(app.get('port'), function() {
@@ -30,9 +28,11 @@ app.use(cors());
 
 app.use('/', router);
 
+gettersHousing()
 // var Category = require('./schema').Category
 // var ItemIds = require('./schema').ItemIds
 // })
+
 
 
 

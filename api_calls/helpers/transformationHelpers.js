@@ -1,4 +1,12 @@
 const _ = require('underscore-node');
+const { searchAllObj } = require('../../cache/allCategoriesCache');
+
+const addToSearchObj = (categoryCode, sortedBrands) => {
+	// sortedBrands is an array of objects. Each object is a unique brand name
+  for (let brandObj of sortedBrands) {
+  	searchAllObj[categoryCode][brandObj.name] = brandObj
+  }
+}
 
 const unique = (array, newBatch) => {
 	var arr = []
@@ -38,8 +46,8 @@ const combineAvgs = (current, old) => {
 const combineAll = (old) => {
 	if (!old[0]) {
 	console.log('cant combine all ###########################################')
-		return [];
-	} else {
+		old = [[{brands: {}}]];
+	}
 	// console.log('AFTER SAVING FROM THE DATABASE****************************************************', old[0].brands)
 		var newObj = Object.assign({}, old[0].brands)
 		// console.log('new object @@@@@@@@@', newObj)
@@ -64,6 +72,11 @@ const combineAll = (old) => {
 	  			// if (newObj[key].name === 'LULAROE') {
 	  			//   // console.log('AVERAGES OF BOTH', newObj[key].name, newObj[key].val, newObj[key].avgs, '^^^^', old[i].brands[key].avgs)
 	  			// }
+	  			if (old[i].brands[key].pics && !newObj[key].pics) {
+	  				newObj[key].pics = {...old[i].brands[key].pics}
+	  			} else if (old[i].brands[key].pics && newObj[key].pics) {
+	  				newObj[key].pics = {...newObj[key].pics, ...old[i].brands[key].pics}
+	  			}
 	  			combineAvgs(newObj[key].avgs, old[i].brands[key].avgs)
 	  			// newObj[key].avg = Object.assign({}, combineAvgs(newObj[key].avgs, old[i].brands[key].avgs))
 	  	  } else {
@@ -73,7 +86,6 @@ const combineAll = (old) => {
 	  }
 	  // console.log('THE NEW OBJECT THAT WAS COMBINED ___________', newObj)
     return newObj
-	}
 }
 
 const createBrandsObj = (result) => {
@@ -85,7 +97,7 @@ const createBrandsObj = (result) => {
 	// console.log('result.length in createBrandsObj', result.length)
 	result.forEach(v => {
 		// console.log('$$$$$$ THE OLD ARRAY OF OBJECTS $$$$$$$$$$$$ ', old)
-		// console.log('$$$$$$$$$$$$$$$$  INSIDE THE HELPER ', v.data.Ack)
+		console.log('$$$$$$$$$$$$$$$$  INSIDE THE HELPER ', v.data.Ack)
 		if (v.data.Ack !== 'Failure') {
 		  for (let obj of v.data.Item) {
 		    if (obj.ItemSpecifics) {
@@ -113,22 +125,32 @@ const createBrandsObj = (result) => {
 		            for (var i = 0; i <= price; i+=5, max1 = i) {}
 		            if (brands[temp].avgs[max1]) {
 		            	brands[temp].avgs[max1] += 1
+		            	if (brands[temp].pics && brands[temp].pics[max1].length < 50) {
+		            	  brands[temp].pics[max1].push(obj.GalleryURL)
+		            	}
 		            } else {
 		            	brands[temp].avgs[max1] = 1
+		            	brands[temp].pics[max1] = []
+		            	brands[temp].pics[max1].push(obj.GalleryURL)
 		            }
 		          } else {
 		          	if (temp !== 'UNBRANDED' && temp !== 'UNKNOWN') {
 			            brands[temp] = {
 			              name: n.Value[0].toUpperCase(),
-			              val: 1, endTime, price: [0, price], avgs: {}
+			              val: 1, endTime, price: [0, price], avgs: {}, pics: {}
 			            };
 			            //check and set average price ranges in $5 increments
 			            var max2 = 0
 			            for (var i = 0; i <= price; i+=5, max2 = i) {}
 			            if (brands[temp].avgs[max2]) {
 			            	brands[temp].avgs[max2] += 1
+			            	if (brands[temp].pics && brands[temp].pics[max2].length < 50) {
+			            	  brands[temp].pics[max2].push(obj.GalleryURL)
+			            	}
 			            } else {
 			            	brands[temp].avgs[max2] = 1
+			            	brands[temp].pics[max2] = []
+			            	brands[temp].pics[max2].push(obj.GalleryURL)
 			            }
 		            }
 		          }
@@ -141,7 +163,7 @@ const createBrandsObj = (result) => {
 	  }
 	})
 	// console.log('AFTER CREATION BEFORE SAVING***************************************', Object.keys(brands).length)
-
+	console.log('FINISHED CREATE BRANDS OBJECT IN TRANSFORMATION')
 	return brands;
 }
 
@@ -190,5 +212,6 @@ module.exports.combineAll = combineAll;
 module.exports.unique = unique;
 module.exports.sortObj = sortObj;
 module.exports.getOnlyEndedWithSalesIDS = getOnlyEndedWithSalesIDS;
+module.exports.addToSearchObj = addToSearchObj;
 
 
