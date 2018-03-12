@@ -11,9 +11,22 @@
 	width: 300px;
 	margin-top: 20px;
 	margin-right: 20px;
-	border-radius: 20px;	
+	border-radius: 2px;
 	background-color: white;
 }
+
+.searchResults {
+	width: 300px;
+	border: 1px solid lightgray;
+}
+
+.searchResultItem {
+	width: 300px;
+	padding-left: 10px;
+	border-top: 1px solid lightgray;
+	word-break: break-word;
+}
+
 .search input:focus {
 	outline: none;
 }
@@ -164,7 +177,7 @@ html {
 		border-radius: 3px;
 	}
 
-	.searchBar {
+	/*.searchBar {
 		width: 85%;
 		border: 1px solid lightgray;
 		border-radius: 5px;
@@ -173,7 +186,7 @@ html {
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-
+*/
 	.navbarMain {
 		width: 100%;
 		text-align: right;
@@ -289,7 +302,7 @@ html {
 		border-radius: 3px;
 	}
 
-	.searchBar {
+	/*.searchBar {
 		width: 85%;
 		border: 1px solid #657CA9;
 		border-radius: 5px;
@@ -298,7 +311,7 @@ html {
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-
+*/
 
 	.navbarMain {
 		width: 100%;
@@ -425,7 +438,7 @@ html {
 		border-bottom: 1px solid #FCFCFC;
 	}
 
-	.searchBar {
+	/*.searchBar {
 		width: 20%;
 		float: right;
 		margin-left: 10px !important;
@@ -434,7 +447,7 @@ html {
 		margin-bottom: 5px;
 		border-radius: 2px solid #657CA9;
 	}
-
+*/
   .navbarMain {
   	width: 100%;
   	text-align: right;
@@ -559,7 +572,7 @@ html {
 		border-bottom: 1px solid #FCFCFC;
 	}
 
-	.searchBar {
+	/*.searchBar {
 		width: 20%;
 		float: right;
 		margin-left: 10px;
@@ -568,7 +581,7 @@ html {
 		margin-bottom: 5px;
 		border-radius: 2px solid #657CA9;
 		background-color: #FEFEFE;
-	}
+	*/}
 
 	.navbarMain {
 		width: 100%;
@@ -694,7 +707,7 @@ html {
 		border-bottom: 1px solid #FCFCFC;
 	}
 
-	.searchBar {
+	/*.searchBar {
 		width: 20%;
 		float: right;
 		margin-left: 10px;
@@ -703,7 +716,7 @@ html {
 		margin-bottom: 5px;
 		border-radius: 1px solid #657CA9;
 		background-color: #FEFEFE;
-	}
+	*/}
 
   .navbarMain {
   	width: 100%;

@@ -1,10 +1,21 @@
 const _ = require('underscore-node');
-const { searchAllObj } = require('../../cache/allCategoriesCache');
+const { searchAllObj, searchAllArr } = require('../../cache/allCategoriesCache');
+const { categoriesPretty } = require('../categoriesList');
 
 const addToSearchObj = (categoryCode, sortedBrands) => {
 	// sortedBrands is an array of objects. Each object is a unique brand name
+  var count = 0
   for (let brandObj of sortedBrands) {
-  	searchAllObj[categoryCode][brandObj.name] = brandObj
+  	// if (!searchAllObj[brandObj.name]) {
+  	// 	searchAllArr.push(brandObj.name)
+  	// }
+  	const categoryName = categoriesPretty[categoryCode]
+  	if (searchAllObj[brandObj.name]) {
+  		searchAllObj[brandObj.name][categoryName] = brandObj
+  	} else {
+  		searchAllObj[brandObj.name] = {}
+  		searchAllObj[brandObj.name][categoryName] = brandObj
+  	}
   }
 }
 

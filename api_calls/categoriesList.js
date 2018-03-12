@@ -21,9 +21,9 @@ const categoriesPretty = {
 
 const categories = {
   dresses: '63861',
-  // womansCoatsJackets: '63862',
-  // womensTshirts: '63869',
-  // topsAndBlouses: '53159',
+  womansCoatsJackets: '63862',
+  womensTshirts: '63869',
+  topsAndBlouses: '53159',
 //   flats: '45333',
 //   heels: '55793',
 //   womansSandals: '62107',
@@ -47,4 +47,4 @@ for (let key in categories) {
 }
 
 module.exports.categoryListArray = catNums;
-module.exports.categoryListObj = categoriesPretty;
+module.exports.categoriesPretty = categoriesPretty;

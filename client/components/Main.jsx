@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import cats from '../categories'
 
 import { getBrands } from '../actions/womensFashion/getWomensBrands.js';
-
-
+import { getSearchItems } from '../actions/getSearchItems.js';
 
 class Main extends React.Component {
 
@@ -17,6 +16,10 @@ class Main extends React.Component {
 	// 	this.props.getBrands(category)
 	// }
 	// onClick={this.handleClick.bind(this, `${cats[i].path}`)}
+
+	componentWillMount() {
+		this.props.getSearchItems()
+	}
 
 	renderCategories() {
 
@@ -62,7 +65,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({getBrands}, dispatch)
+  return bindActionCreators({getBrands, getSearchItems}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

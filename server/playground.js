@@ -4,4 +4,6 @@ var obj = {
 	'three': 'ooski'
 }
 
-console.log(obj.[0])
+var arr = [{name: 'lularoe', cat: 'dresses'}, {name: 'lularoe', cat: 'blouses'}]
+
+console.log(arr.indexOf({name: 'lularoe', cat: 'dresses'}))

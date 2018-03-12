@@ -9,7 +9,7 @@ const { createMongoPromiseQuery, createAndSaveItemsIdBlob, createAndSaveCategory
 const { ItemIds, Category, Current } = require('../schema');
 const getSoldListingsAsync = require('./categoryGetter');
 const getBrandNamesAsync = require('./idsGetter');
-const { categoryListObj } = require('./categoriesList');
+const { categoriesPretty } = require('./categoriesList');
 // ******** END
 
 // let otherOptions = {
@@ -72,11 +72,11 @@ const getAllEbayData = (categoryCode, cache) => {
 			        // create searchable global object
 
 			        if (Object.keys(currentlyFetchedBrands).length > 0) {
-			        	console.log(`SAVING THE ${categoryListObj[categoryCode]} and length`, cache.brands.length)
+			        	console.log(`SAVING THE ${categoriesPretty[categoryCode]} and length`, cache.brands.length)
 			        	createAndSaveCurrentBlob(categoryCode, cache);
 			          addToSearchObj(categoryCode, sortedBrands)
 							} else {
-			        	console.log(`NO CURRENT INFO ADDED FOR ________${categoryListObj[categoryCode]}`, cache.brands.length, '. Using old cache')
+			        	console.log(`NO CURRENT INFO ADDED FOR ________${categoriesPretty[categoryCode]}`, cache.brands.length, '. Using old cache')
 			        }
 			        return 'done';
 			      })
